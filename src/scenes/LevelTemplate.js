@@ -1,7 +1,12 @@
 
 export default class LevelTemplate extends Phaser.Scene{
+    /**@type {boolean} First false and then set to true when scene is entered for the first time*/
     firstInitialized = false;
+
+    /**@type {string} A string of a random hex value used to set the background color*/
     backgroundColor;
+
+    /**@type {Phaser.Math.Vector2} The coordinate of the scene on the map*/
     coordinate;
     
     constructor(name, coordinate){
@@ -10,18 +15,24 @@ export default class LevelTemplate extends Phaser.Scene{
     }
 
     create(){
+        // anything in here will only be called when the scene is first entered
         if (!this.firstInitialized){
+            // get a random
             this.backgroundColor = this.getRandomHexColor();
+            this.firstInitialized = true;
         }
-        // console.log(this);
+
+        // set the background color to the randomly generated hex value
         this.cameras.main.setBackgroundColor(this.backgroundColor);
-        // this.cameras.main.backgroundColor = new Phaser.Display.Color(Phaser.Math.Between(0, 255),Phaser.Math.Between(0, 255),Phaser.Math.Between(0, 255),1);
+
+        // get the cursor buttons ready
         this.cursors = this.input.keyboard.createCursorKeys();
-        
-        this.firstInitialized = true;
     }
 
     update(){
+
+        // switch to the scene that is above, below, to the right, or to the left of the current scene
+        // with the arrow keys
         if (this.cursors){
             if(Phaser.Input.Keyboard.JustDown(this.cursors.up)){
                 // console.log(this.coordinate);
@@ -46,7 +57,7 @@ export default class LevelTemplate extends Phaser.Scene{
             }
         }
     }
-
+    /**Get a string of a random hex value*/
     getRandomHexColor() {
         let letters = '0123456789ABCDEF';
         let hexColor = '#';

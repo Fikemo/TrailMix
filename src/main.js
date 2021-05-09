@@ -1,4 +1,3 @@
-import LevelTemplate from './scenes/LevelTemplate.js';
 import Menu from './scenes/Menu.js';
 
 let config = {
@@ -16,11 +15,13 @@ let config = {
     }
 }
 
+/**@type {Phaser.Game} */
 let game = new Phaser.Game(config);
-game.mapDimensions = new Phaser.Math.Vector2(2,2);
 
+game.mapDimensions = new Phaser.Math.Vector2(2,2);
 game.map = [];
 
+// creat an empty 2d array with the dimensions of game.mapDimensions
 for (let i = 0; i < game.mapDimensions.x; i++){
     game.map.push([]);
     for (let j = 0; j < game.mapDimensions.y; j++){
@@ -28,8 +29,9 @@ for (let i = 0; i < game.mapDimensions.x; i++){
     }
 }
 
+// add the game to the window
+// this will make the game instance available in the console in the inspector
+// so you can type things like 'game' or 'console.table(game.map)' whenever you want
 window.game = game;
-
-console.log(game);
 
 export default game;
