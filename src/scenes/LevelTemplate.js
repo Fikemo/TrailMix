@@ -58,24 +58,31 @@ export default class LevelTemplate extends Phaser.Scene{
                     //this.scene.start('level_0_0');
                     console.log('(0,-1)');
                     
+                    // this uses the game map array to load the next scene. This is prefferable
+                    this.scene.start(this.game.map[this.coordinate.x][this.coordinate.y - 1].scene.key);
                 }
             } else if (Phaser.Input.Keyboard.JustDown(this.cursors.down)){
                 // console.log(this.coordinate);
                 if (this.coordinate && this.coordinate.y < this.game.mapDimensions.y - 1){
-                    this.scene.start(`level_${this.coordinate.x}_${this.coordinate.y + 1}`);
-                    console.log('(0,1)');
+                    //this.scene.start(`level_${this.coordinate.x}_${this.coordinate.y + 1}`);
+                    //console.log('(0,1)');
+                    // alternatively this uses the appropriate scene name to load the next scene.
+                    // This is unprefferable because there may be a change or a mistake that makes it so the scene name doesn't match up with where it is on the map
+                    this.scene.start(`level_${this.coordinate.x}_${this.coordinate.y + 1}`)
                 }
             } else if (Phaser.Input.Keyboard.JustDown(this.cursors.right)){
                 // console.log(this.coordinate);
                 if (this.coordinate && this.coordinate.x < this.game.mapDimensions.x - 1){
-                    this.scene.start(`level_${this.coordinate.x + 1}_${this.coordinate.y}`);
-                    console.log('(1,1)');
+                    //this.scene.start(`level_${this.coordinate.x + 1}_${this.coordinate.y}`);
+                    //console.log('(1,1)');
+                    this.scene.start(this.game.map[this.coordinate.x + 1][this.coordinate.y].scene.key);
                 }
             } else if (Phaser.Input.Keyboard.JustDown(this.cursors.left)){
                 // console.log(this.coordinate);
                 if (this.coordinate && this.coordinate.x > 0){
-                    this.scene.start(`level_${this.coordinate.x - 1}_${this.coordinate.y}`);
-                    console.log('(-1,0)');
+                    //this.scene.start(`level_${this.coordinate.x - 1}_${this.coordinate.y}`);
+                    //console.log('(-1,0)');
+                    this.scene.start(this.game.map[this.coordinate.x - 1][this.coordinate.y].scene.key);
                 }
             }
         }
