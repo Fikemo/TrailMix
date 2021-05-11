@@ -37,6 +37,7 @@ export default class Menu extends Phaser.Scene {
         //start the scene at (0,0) if it exists, which it should if the loop above ran correctly
         if (this.scene.get('level_0_0')){
             this.scene.start('level_0_0');
+            console.log('(0,0)');
         }
     }
 

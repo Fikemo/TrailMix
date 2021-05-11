@@ -1,4 +1,5 @@
-
+//import LevelTemplate2 from './scenes/level_0_0.js'
+//import game from "../main.js";
 export default class LevelTemplate extends Phaser.Scene{
     /**@type {boolean} First false and then set to true when scene is entered for the first time*/
     firstInitialized = false;
@@ -14,13 +15,28 @@ export default class LevelTemplate extends Phaser.Scene{
         this.coordinate = coordinate;
     }
 
+    preload() {
+        
+        // set load path
+        //this.load.path = './assets/';
+
+        this.load.image('blushie','./assets/blooshie.png');
+        
+    }
+
     create(){
         // anything in here will only be called when the scene is first entered
-        if (!this.firstInitialized){
+        //if (!this.firstInitialized){
             // get a random
             this.backgroundColor = this.getRandomHexColor();
+            //temporary floor
+            this.add.rectangle(0, 550, 700, 100, 0xFFF555).setOrigin(0,0);
+            //temporary player
+            this.add.image(32,500,'blushie').setOrigin(0,0);
+            //this.player = new Player(this, this.PLAYER_SPAWN_POS.x, this.PLAYER_SPAWN_POS.y, 'blushie');
+            //console.log(this.player);
             this.firstInitialized = true;
-        }
+        //}
 
         // set the background color to the randomly generated hex value
         this.cameras.main.setBackgroundColor(this.backgroundColor);
@@ -38,21 +54,28 @@ export default class LevelTemplate extends Phaser.Scene{
                 // console.log(this.coordinate);
                 if (this.coordinate && this.coordinate.y > 0){
                     this.scene.start(`level_${this.coordinate.x}_${this.coordinate.y - 1}`)
+                    //this.add.rectangle(0, 0, 100, 100, 0xFFFFFF).setOrigin(0,0);
+                    //this.scene.start('level_0_0');
+                    console.log('(0,-1)');
+                    
                 }
             } else if (Phaser.Input.Keyboard.JustDown(this.cursors.down)){
                 // console.log(this.coordinate);
                 if (this.coordinate && this.coordinate.y < this.game.mapDimensions.y - 1){
-                    this.scene.start(`level_${this.coordinate.x}_${this.coordinate.y + 1}`)
+                    this.scene.start(`level_${this.coordinate.x}_${this.coordinate.y + 1}`);
+                    console.log('(0,1)');
                 }
             } else if (Phaser.Input.Keyboard.JustDown(this.cursors.right)){
                 // console.log(this.coordinate);
                 if (this.coordinate && this.coordinate.x < this.game.mapDimensions.x - 1){
-                    this.scene.start(`level_${this.coordinate.x + 1}_${this.coordinate.y}`)
+                    this.scene.start(`level_${this.coordinate.x + 1}_${this.coordinate.y}`);
+                    console.log('(1,1)');
                 }
             } else if (Phaser.Input.Keyboard.JustDown(this.cursors.left)){
                 // console.log(this.coordinate);
                 if (this.coordinate && this.coordinate.x > 0){
-                    this.scene.start(`level_${this.coordinate.x - 1}_${this.coordinate.y}`)
+                    this.scene.start(`level_${this.coordinate.x - 1}_${this.coordinate.y}`);
+                    console.log('(-1,0)');
                 }
             }
         }
