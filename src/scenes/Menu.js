@@ -5,6 +5,11 @@ export default class Menu extends Phaser.Scene {
         super('menuScene');
     }
 
+    preload(){
+        this.load.image('inventoryBackground', './assets/images/inventoryBackground.png');
+        this.load.image('emptyMapNode', './assets/images/emptyMapNode.png');
+    }
+
     create(){
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -35,9 +40,11 @@ export default class Menu extends Phaser.Scene {
         console.table(this.game.map);
 
         //start the scene at (0,0) if it exists, which it should if the loop above ran correctly
-        if (this.scene.get('level_0_0')){
-            this.scene.start('level_0_0');
-        }
+        // if (this.scene.get('level_0_0')){
+        //     this.scene.start('level_0_0');
+        // }
+
+        this.scene.start('inventoryScene');
     }
 
     update(time, delta){

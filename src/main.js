@@ -1,9 +1,10 @@
+import Inventory from './scenes/Inventory.js';
 import Menu from './scenes/Menu.js';
 
 let config = {
     width: 640,
     height: 640,
-    scene: [Menu],
+    scene: [Menu, Inventory],
     physics: {
         default: 'arcade',
         arcade: {

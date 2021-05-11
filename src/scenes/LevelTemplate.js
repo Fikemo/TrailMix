@@ -24,6 +24,7 @@ export default class LevelTemplate extends Phaser.Scene{
 
         // set the background color to the randomly generated hex value
         this.cameras.main.setBackgroundColor(this.backgroundColor);
+        this.cameras.main.setSize(this.scale.width, 480);
 
         // get the cursor buttons ready
         this.cursors = this.input.keyboard.createCursorKeys();
