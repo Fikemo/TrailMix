@@ -1,10 +1,11 @@
-import Inventory from './scenes/Inventory.js';
+import GameManager from './scenes/GameManager.js';
 import Menu from './scenes/Menu.js';
+import Load from './scenes/Load.js';
 
 let config = {
     width: 640,
     height: 640,
-    scene: [Menu, Inventory],
+    scene: [Load, Menu, GameManager],
     physics: {
         default: 'arcade',
         arcade: {
@@ -13,13 +14,14 @@ let config = {
             },
             debug: true,
         }
-    }
+    },
+    antiAlias: false,
 }
 
 /**@type {Phaser.Game} */
 let game = new Phaser.Game(config);
 
-game.mapDimensions = new Phaser.Math.Vector2(2,2);
+game.mapDimensions = new Phaser.Math.Vector2(10,5);
 game.map = [];
 
 // creat an empty 2d array with the dimensions of game.mapDimensions
