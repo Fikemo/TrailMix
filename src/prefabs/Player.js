@@ -1,42 +1,124 @@
 import { State, StateMachine } from "../../lib/StateMachine.js";
+export default class Player extends Phaser.Physics.Arcade.Sprite{
+    
+    // Special getting and setting functions for current health and max health
+    // #cH and #mH are private vairables to the Player class
+    // use player.currentHealth and player.maxHealth outside of this class to get and set the values
+    // For example, simply use player.maxHealth = 2 or player.currentHealth--
+    // whenever you get currentHealth, it will return #cH, same with maxHealth and #mH
+    // whenever you set currentHealth, it will set #cH to the new value and set UINeedsUpdate to true since the UI will need to be updated due to this change
+    /**@type {number} */
+    #cH;
+    get currentHealth() {return this.#cH};
+    set currentHealth(value) {
+        this.#cH = value;
+        this.UINeedsUpdate = true;
+    }
+    /**@type {number} */
+    #mH;
+    get maxHealth() {return this.#mH};
+    set maxHealth(value) {
+        this.#mH = value;
+        this.UINeedsUpdate = true;
+    }
 
-constructor(scene, x, y, texture)
-{
-    super(scene, x, y, texture);
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
+    #s;
+    get score() {return this.#s};
+    set score(value) {
+        this.#s = value;
+        this.UINeedsUpdate = true;
+    }
+    
 
-    // this.anims.play('ninja', true);
-    this.isGrounded = false;
-    this.health = 5;
-    this.invicible = false;
-    this.jumpsRemaining = 0;
-    this.fsm = scene.playerFSM;
+    constructor(scene, x, y, texture){
+        super(scene, x, y, texture);
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.currentHealth = 3;
+        this.maxHealth = 3;
+        this.UINeedsUpdate = true;
+        this.moveSpeed = 2;
+        
+
+       /* this.FSM = new StateMachine('running', {
+            running: new RunningState(),
+            jumping: new JumpingState(),
+           // attacking: new AttackingState(),
+            //attackingInAir: new AttackingInAirState(),
+           // hurt: new HurtState(),
+           // dead: new DeadState(),
+        },[scene, this]);
+
+        
+
+        // this.attackHitbox = new PlayerAttackHitbox(scene, x + this.width, y + this.height);
+        /*this.attackHitbox = new PlayerSecondaryHitbox(scene, this, x + this.width, y + this.height, 40, 84, this.body.width,this.body.height - (this.body.halfHeight + 84 / 2), undefined, 'slash');
+        this.attackHitbox.attacking = false;
+        this.attackHitbox.successfulHit = false;
+        this.attackHitbox.alpha = 0;
+        this.damageHitbox = new PlayerSecondaryHitbox(scene, this, x, y, 40, 60, this.body.halfWidth - 8, this.body.halfHeight - 30, 0x0000FF);
+        */
+        this.grounded = false;
+        this.invincible = false;
+        this.maxJumps = 1;
+        this.jumpsRemaining = this.maxJumps;
+        this.score = 0;
+        this.setOrigin(0,0);
+
+        this.body.overlapX = 32;
+    }
+
+    update(){
+        if(!this.isFiring) {
+            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+                this.x -= this.moveSpeed;
+            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+                this.x += this.moveSpeed;
+            }
+
+        }
+    }
 }
+      /*  this.FSM.step();
 
+        // update the attack hitbox
+        this.attackHitbox.update();
+
+        // update damage hitbox
+        this.damageHitbox.update();
+    }
+
+    takeDamage(damage){
+        if (!this.invincible && !this.attackHitbox.attacking){
+            this.currentHealth -= damage;
+            this.FSM.transition('hurt');
+        }
+    }
+}
 
 class RunningState extends State {
 enter(scene, player){
-    player.anims.play('blushie', true);
+    player.load.image('blushie', true);
     // console.log(player.invicible);
-    if (player.invicible){
-        // TODO: No magic numbers
-        this.invicibleTimer = scene.time.delayedCall(1000, () => {player.invicible = false;});
     }
-}
+
 
 execute(scene, player){
-    const { left, right, up, down, space, shift } = scene.cursors;
+    const { keyA, keyD } = scene.cursors;
 
+    if(keyA.isDown) {
+        this.x -= this.moveSpeed;
+    } else if (keyD.isDown) {
+        this.x += this.moveSpeed;
+    }
     // trasition to jump
-    if (Phaser.Input.Keyboard.JustDown(space)){
+    //if (Phaser.Input.Keyboard.JustDown(left,right)){
         // console.log('jump initiated');
         // TODO: No magic numbers
-        player.jumpsRemaining = 1;
-        this.stateMachine.transition('jumping');
+       // player.jumpsRemaining = 1;
+        //this.stateMachine.transition('jumping');
         return;
     }
-}
 }
 
 class JumpingState extends State {
@@ -70,4 +152,4 @@ execute(scene, player){
     }
 }
 }
-export { RunningState, JumpingState }
+export { RunningState, JumpingState }*/
