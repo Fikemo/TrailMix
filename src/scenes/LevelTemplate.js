@@ -42,20 +42,23 @@ export default class LevelTemplate extends Phaser.Scene{
             this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
             this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
             this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-            this. moveSpeed = 200;
+            this. moveSpeed = 400;
             this.backgroundColor = this.getRandomHexColor();
-            this.PLAYER_SPAWN_POS = new Phaser.Math.Vector2(120, this.scale.height / 2);
+            this.PLAYER_SPAWN_POS = new Phaser.Math.Vector2(60, 120);
            
             this.player = new Player(this, this.PLAYER_SPAWN_POS.x, this.PLAYER_SPAWN_POS.y, 'blushie');
             this.physics.add.collider(this.player, this.groundHitbox);
-            this.player.setCollideWorldBounds(true);
-            this.groundHitbox = this.physics.add.sprite( this.TILE_SIZE, this.TILE_SIZE);
+            
+            this.groundHitbox = this.physics.add.sprite(0,0);
             this.groundHitbox.body.setImmovable(true);
             this.groundHitbox.body.setAllowGravity(false);
-            this.groundHitbox.body.setSize(this.TILE_SIZE, this.TILE_SIZE, false);
-            this.groundHitbox.setOrigin(0);
+            this.groundHitbox.body.setSize(600, 100, false);
+            this.groundHitbox.setOrigin(0,-15);
+            //this.physics.add.collider(this.player, this.groundHitbox);
+            this.player.setCollideWorldBounds(true);
+            this.physics.add.collider(this.player, this.groundHitbox);
     
-        this.groundTiles = this.add.sprite(100, 600, this.scale.width, this.TILE_SIZE).setOrigin(0);
+        //this.groundTiles = this.add.sprite(600, 600, this.scale.width, 32).setOrigin(0);
             this.firstInitialized = true;
         }
 

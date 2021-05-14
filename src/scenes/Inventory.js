@@ -9,7 +9,7 @@ export default class Inventory extends Phaser.Scene{
 
         this.mapPos = new Phaser.Math.Vector2(164,488);
 
-        this.mapGroup = this.add.group();
+       this.mapGroup = this.add.group();
         for (let i = 0; i < this.game.mapDimensions.y; i++){
             let nodeY = this.mapPos.y + (16 * i);
             for (let j = 0; j < this.game.mapDimensions.x; j++){
