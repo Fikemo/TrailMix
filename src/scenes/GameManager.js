@@ -1,178 +1,286 @@
-import DirectionalScene from "./DirectionalScene.js";
+import BaseScene from "./BaseScene.js";
+import TestRight from "./TestRight.js";
+import TestUpDown from "./TestUpDown.js";
+import TestDownLeft from "./TestDownLeft.js";
 
 export default class GameManager extends Phaser.Scene{
     firstInitialized = false;
-    active = true;
 
     constructor(){
         super("gameManagerScene");
+
+        this.sceneInventory = [];
+        this.sceneInventoryMax = 6;
+        this.sceneInventoryUI = [];
+        this.sceneInventoryUIPos = new Phaser.Math.Vector2(40,40);
+
+        this.miniMapUIPos = new Phaser.Math.Vector2(164, 488);
+
+        this.sceneID = 0;
+        this.currentScene = null;
+
+        this.firstInitialized = false;
     }
 
-    init(){
-        if (!this.firstInitialized){
+    init(data){
+        if (!!!this.firstInitialized){
+            if (this.game.gameManager){
+                console.error("More that one instance of GameManager has been created");
+            } else {
+                this.game.gameManager = this;
+            }
+
+            this.sceneInventory = [];
+            this.sceneInventoryMax = 6;
+            this.sceneInventoryUI = [];
+
+            this.miniMapUI = [];
+
+            this.sceneID = 0;
+            this.currentScene = null;
+
             this.firstInitialized = true;
         }
-
-        this.active = true;
     }
 
-    create(){
-        // add the background
-        this.add.image(0,0,"inventoryBackground").setOrigin(0);
-
-        // add cursor keys
+    create(data){
+        this.active = true;
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.keyEscape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
-        // initialize room menu
-        this.menuGroup = this.add.group();
-        let nameIndex = 0;
-        let menuFrameNames = this.textures.get("mapNodes_enlarged").getFrameNames();
-        for (let i = 0; i < 4; i++){
-            let iconX = 40 + (36 * i);
-            for (let j = 0; j < 4; j++){
-                let iconY = 40 + (36 * j);
-                let currentIcon = this.add.sprite(iconX, iconY, "mapNodes_enlarged",menuFrameNames[nameIndex]).setInteractive().setOrigin(0);
+        this.add.sprite(0,0,"inventoryBackground").setOrigin(0);
 
-                currentIcon.sceneConfig = {};
-                currentIcon.sceneConfig.north = menuFrameNames[nameIndex].includes("_n");
-                currentIcon.sceneConfig.east = menuFrameNames[nameIndex].includes("_e");
-                currentIcon.sceneConfig.south = menuFrameNames[nameIndex].includes("_s");
-                currentIcon.sceneConfig.west = menuFrameNames[nameIndex].includes("_w");
+        this.createSceneInventoryUI();
+        this.createMiniMapUI();
+        console.log(this.miniMapUI);
 
-                currentIcon.name = menuFrameNames[nameIndex];
+        this.addSceneToInventory(this.createSceneOfClass(TestRight));
+        this.addSceneToInventory(this.createSceneOfClass(TestDownLeft));
+        this.addSceneToInventory(this.createSceneOfClass(TestUpDown));
 
-                this.menuGroup.add(currentIcon);
-                nameIndex++;
-            }
-        }
-
-        // console.log(this.menuGroup.getChildren());
-
-        // selected icon frame and selected icon
-        this.selectedIconFrame = this.add.sprite(0,0,"selectedNode_enlarged").setOrigin(0);
-        this.selectedIcon = this.menuGroup.getChildren()[0];
-        this.setSelectedIconFramePosition();
-
-        // create confirm button
-        this.confirmButton = this.add.sprite(500,400,"confirmButton").setOrigin(0).setInteractive();
-
-        // create mini map
-        this.mapPos = new Phaser.Math.Vector2(164, 488);
-        this.mapGroup = this.add.group();
-        for (let i = 0; i < this.game.mapDimensions.y; i++){
-            let nodeY = this.mapPos.y + (16 * i);
-            for (let j = 0; j < this.game.mapDimensions.x; j++){
-                let nodeX = this.mapPos.x + (16 * j);
-                let mapNode = this.add.sprite(nodeX, nodeY, "mapNodes", "node_void").setInteractive().setOrigin(0);
-                mapNode.sceneConfig = {};
-                this.setMapNodeSceneConfig(mapNode, new Phaser.Math.Vector2(j,i));
-                this.mapGroup.add(mapNode);
-            }
-        }
-
-        // set the first level to a locked default level
-        let firstNode =  this.mapGroup.getChildren()[0];
-        firstNode.setFrame("node_e");
-        this.setMapNodeSceneConfig(firstNode, undefined, true);
-
-        // clicking on things functionality
-        this.input.on("gameobjectdown", (pointer, gameObject, event) => {
-
-            // selection menu
-            if (this.menuGroup.contains(gameObject) && this.active){
-                this.onMenuItemClicked(pointer, gameObject, event);
-            }
-
-            // map
-            if (this.mapGroup.contains(gameObject) && this.active){
-                this.onMapNodeClicked(pointer, gameObject, event);
-            }
-
-            // confirm button
-            if (gameObject == this.confirmButton){
-                this.onConfirmClicked();
-            }
-
-        }, this);
+        this.initializeForGameStart();
+        
+        this.uiNeedsUpdate = true;
     }
 
     update(time, delta){
+        if (this.uiNeedsUpdate){
+            this.updateUI();
+            this.uiNeedsUpdate = false;
+        }
 
-    }
+        if (Phaser.Input.Keyboard.JustDown(this.keyEscape)){
+            if (this.active){
 
-    setSelectedIconFramePosition(){
-        if (this.selectedIconFrame && this.selectedIcon){
-            this.selectedIconFrame.setPosition(this.selectedIcon.x - 4, this.selectedIcon.y - 4);
+                this.scene.resume(this.currentScene);
+                this.scene.sendToBack(this);
+
+                this.active = false;
+            } else {
+
+                this.scene.pause(this.currentScene);
+                this.scene.bringToTop(this);
+
+                this.active = true;
+            }
         }
     }
 
-    onMenuItemClicked(pointer, menuItem, event){
-        this.selectedIcon = menuItem;
-        this.setSelectedIconFramePosition();
-    }
+    createSceneInventoryUI(){
+        this.sceneInventoryUIGroup = this.add.group();
+        let row = 0;
+        let column = 0;
 
-    onMapNodeClicked(pointer, mapNode, event){
-        if (!mapNode.sceneConfig || mapNode.sceneConfig.locked) return;
-        mapNode.setFrame(this.selectedIcon.name);
-        mapNode.sceneConfig.north = this.selectedIcon.sceneConfig.north;
-        mapNode.sceneConfig.east = this.selectedIcon.sceneConfig.east;
-        mapNode.sceneConfig.south = this.selectedIcon.sceneConfig.south;
-        mapNode.sceneConfig.west = this.selectedIcon.sceneConfig.west;
-        console.log(mapNode.sceneConfig);
-    }
+        // TODO: turn the icons into prefabs instead of just sprites
+        for (let i = 0; i < this.sceneInventoryMax; i++){
+            let iconX = this.sceneInventoryUIPos.x + (36 * column);
+            let iconY = this.sceneInventoryUIPos.y + (36 * row);
 
-    setMapNodeSceneConfig(mapNode, coordinate = null, locked = false){
-        if (!mapNode.sceneConfig) return;
-        mapNode.sceneConfig.north = mapNode.frame.name.includes("_n");
-        mapNode.sceneConfig.east = mapNode.frame.name.includes("_e");
-        mapNode.sceneConfig.south = mapNode.frame.name.includes("_s");
-        mapNode.sceneConfig.west = mapNode.frame.name.includes("_w");
-        mapNode.sceneConfig.coordinate = coordinate == null ? mapNode.sceneConfig.coordinate : coordinate;
-        mapNode.sceneConfig.locked = locked;
-    }
+            let icon = this.add.sprite(iconX, iconY, "mapNodes_enlarged", "node_void").setInteractive().setOrigin(0);
 
-    onConfirmClicked(){
-        console.log("confirm");
-        this.active = false;
+            icon.on("pointerdown", (pointer, localX, localY, event) => {
+                if (this.active){
+                    this.setSelectedSceneIcon(icon);
+                }
+            },this)
 
-        this.mapGroup.getChildren().forEach(node => {
-            if (!node.frame.name.includes("_void")){
-                let sceneToAdd = new DirectionalScene(node.sceneConfig, this);
+            icon.index = i;
+            this.sceneInventoryUI[i] = icon;
+            this.sceneInventoryUIGroup.add(icon);
 
-                this.game.scene.add(`level_${node.sceneConfig.coordinate.x}_${node.sceneConfig.coordinate.y}`, sceneToAdd, false);
-
-                this.game.map[node.sceneConfig.coordinate.x][node.sceneConfig.coordinate.y] = sceneToAdd;
-            } else {
-                this.game.map[node.sceneConfig.coordinate.x][node.sceneConfig.coordinate.y] = null;
+            column++;
+            if (column > 2){
+                column = 0;
+                row++;
             }
-            
-        })
+        }
+
+        this.selectedSceneIcon = this.sceneInventoryUI[0];
+        this.selectedSceneIconFrame = this.add.sprite(this.sceneInventoryUIPos.x - 4, this.sceneInventoryUIPos.y - 4, "selectedNode_enlarged").setOrigin(0);
     }
 
-    goUp(scene){
+    setSelectedSceneIcon(icon){
+        // console.log(icon);
+        this.selectedSceneIcon = icon;
+        this.setSelectedSceneIconFramePosition();
+    }
+
+    setSelectedSceneIconFramePosition(){
+        this.selectedSceneIconFrame.setPosition(
+            this.selectedSceneIcon.x - 4,
+            this.selectedSceneIcon.y - 4
+        );
+    }
+
+    createMiniMapUI(){
+        this.miniMapUIGroup = this.add.group();
+        for (let i = 0; i < this.game.mapDimensions.x; i++){
+            this.miniMapUI.push([]);
+        }
+
+        // TODO: Make the map icons prefabs
+        for (let i = 0; i < this.game.mapDimensions.y; i++){
+            let iconY = this.miniMapUIPos.y + (16 * i);
+            for (let j = 0; j < this.game.mapDimensions.x; j++){
+                let iconX = this.miniMapUIPos.x + (16 * j);
+                let icon = this.add.sprite(iconX, iconY, "mapNodes", "node_void").setInteractive().setOrigin(0);
+                icon.coordinate = new Phaser.Math.Vector2(j, i);
+                icon.on("pointerdown",(pointer, localX, localY, event) => {
+                    if (this.active) this.putSelectedSceneOnMap(icon);
+                },this);
+                this.miniMapUI[j].push(icon);
+                this.miniMapUIGroup.add(icon);
+            }
+        }
+    }
+
+    putSelectedSceneOnMap(icon, overwrite = false){
+        let coordinate = new Phaser.Math.Vector2(icon.coordinate.x, icon.coordinate.y);
+        let spaceFree = this.game.map[coordinate.x][coordinate.y] == null;
+
+        let sceneToPlace = this.sceneInventory[this.selectedSceneIcon.index];
+        if (spaceFree && sceneToPlace){
+            this.removeSceneFromInventory(sceneToPlace);
+            // this.game.map[coordinate.x][coordinate.y] = sceneToPlace;
+            this.setSceneOnMap(sceneToPlace, coordinate.x, coordinate.y);
+        }
+        this.uiNeedsUpdate = true;
+    }
+
+    setSceneOnMap(scene, x, y){
+        this.game.map[x][y] = scene;
+        scene.coordinate.x = x;
+        scene.coordinate.y = y;
         console.log(scene);
-        // check that the scene exists and that it has a sceneConfig
-        if (!scene || !scene.sceneConfig) return;
+        return scene;
+    }
 
-        // check that the scene isn't at the top of the map
-        if (scene.sceneConfig.y - 1 <= 0) return;
+    updateUI(){
+        // update the scene inventory
+        for (let i = 0; i < this.sceneInventoryUI.length; i++){
+            let frameName = "node_void";
+            let currentScene = this.sceneInventory[i];
+            if (currentScene) frameName = currentScene.iconName;
+            this.sceneInventoryUI[i].setFrame(frameName);
+        }
 
-        // check that the scene's north is open
-        if (!!!scene.sceneConfig.north) return;
+        // update the minimap
+        for (let i = 0; i < this.game.map.length; i++){
+            for (let j = 0; j < this.game.map[i].length; j++){
+                let frameName = "node_void";
+                let currentScene = this.game.map[i][j];
+                if (currentScene) frameName = currentScene.iconName;
+                this.miniMapUI[i][j].setFrame(frameName);
+            }
+        }
+    }
 
-        // get the scene that is above (to the north) of this one
-        let aboveScene = this.game.map[scene.sceneConfig.coordinate.x][scene.sceneConfig.coordinate.y - 1];
+    createSceneOfClass(sceneClass){
+        this.sceneID++;
+        let key = sceneClass.name + "_" + this.sceneID;
+        let newScene = new sceneClass(key, this);
+        this.game.scene.add(key, newScene);
+        return newScene;
+    }
 
-        // chagne scenes
-        if (aboveScene != null && aboveScene.sceneConfig != null && aboveScene.sceneConfig.south){
-            // TODO:
-            // swap out the scenes
+    resetScene(scene){
+        let key = scene.key;
+        let sceneClass = scene.constructor;
+        this.game.scene.remove(scene);
+        let newScene = new sceneClass(key, this);
+        this.game.scene.add(key, newScene);
+        return newScene;
+    }
 
-            // shutdown the current scene
+    addSceneToInventory(scene){
+        this.sceneInventory.push(scene);
+        this.uiNeedsUpdate = true;
+        return scene;
+    }
 
-            // launch the above scene
+    removeSceneFromInventory(scene){
+        let sceneIndex = this.sceneInventory.indexOf(scene);
+        if(sceneIndex == -1) return null;
+        let sceneRemoved = this.sceneInventory.splice(sceneIndex, 1)[0]
+        this.uiNeedsUpdate = true;
+        return sceneRemoved;
+    }
 
-            // set above scene to the current scene
-        };
+    clearMap(returnToInventory = true){
+        for (let i = 0; i < this.game.mapDimensions.x; i ++){
+            for (let j = 0; j < this.game.mapDimensions.y; j++){
+                let foundScene = this.game.map[i][j];
+                if (foundScene != null){
+                    if (returnToInventory) {
+                        foundScene = this.resetScene(foundScene);
+                        this.addSceneToInventory(foundScene);
+                    }
+                    this.game.map[i][j] = null;
+                }
+            }
+        }
+        this.uiNeedsUpdate = true;
+    }
+
+    initializeForGameStart(){
+        this.startingScene = this.createSceneOfClass(TestRight);
+        this.currentScene = this.startingScene;
+        this.setSceneOnMap(this.startingScene, 0, 0);
+
+        this.launchSceneAt(0,0);
+
+        this.uiNeedsUpdate = true;
+    }
+
+    launchSceneAt(x, y){
+        if (x < 0 || x >= this.game.mapDimensions.x || y < 0 || y >= this.game.mapDimensions.y) return null;
+        let sceneToLaunch = this.game.map[x][y];
+        if (sceneToLaunch){
+            this.scene.stop(this.currentScene);
+            this.scene.launch(sceneToLaunch);
+            this.currentScene = sceneToLaunch;
+            this.active = false;
+        }
+        return sceneToLaunch;
+    }
+
+    destroyScene(scene){
+        this.game.scene.remove(scene.key);
+    }
+
+    goUp(){
+        this.launchSceneAt(this.currentScene.coordinate.x, this.currentScene.coordinate.y - 1);
+    }
+
+    goRight(){
+        this.launchSceneAt(this.currentScene.coordinate.x + 1, this.currentScene.coordinate.y);
+    }
+
+    goDown(){
+        this.launchSceneAt(this.currentScene.coordinate.x, this.currentScene.coordinate.y + 1);
+    }
+
+    goLeft(){
+        this.launchSceneAt(this.currentScene.coordinate.x - 1, this.currentScene.coordinate.y);
     }
 }

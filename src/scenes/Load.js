@@ -23,7 +23,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("emptyMapNode", "emptyMapNode.png");
         this.load.image("confirmButton", "confirmButton.png");
 
-        // this.load.bitmapFont("upheaval", "upheaval_tt_(brk)_regular_100.png", "upheaval_tt_(brk)_regular_100.xml");
+        this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
 
         // load sounds
         this.load.path = "./assets/sounds/"

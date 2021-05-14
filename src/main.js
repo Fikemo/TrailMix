@@ -1,6 +1,7 @@
 import GameManager from './scenes/GameManager.js';
 import Menu from './scenes/Menu.js';
 import Load from './scenes/Load.js';
+// import fonts from "../assets/images/webfontkit-20210512-142138/stylesheet.css";
 
 let config = {
     width: 640,
@@ -16,6 +17,7 @@ let config = {
         }
     },
     antiAlias: false,
+    pixelArt: true,
 }
 
 /**@type {Phaser.Game} */
