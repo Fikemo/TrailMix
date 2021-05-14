@@ -25,6 +25,8 @@ export default class TestRight extends BaseScene{
         this.leftWall = this.add.graphics();
         this.setWall(this.leftWall, 0, 0, 16, 480);
 
+        this.add.text(0,0,this.coordinate.x + ", " + this.coordinate.y);
+
     }
 
     update(time, delta){

@@ -23,6 +23,8 @@ export default class TestDownLeft extends BaseScene{
         this.rightWall = this.add.graphics();
         this.setWall(this.rightWall, this.scale.width - 16, 0, 16, this.scale.height);
 
+        this.add.text(0,0,this.coordinate.x + ", " + this.coordinate.y);
+
     }
 
     update(time, delta){
@@ -31,7 +33,7 @@ export default class TestDownLeft extends BaseScene{
             this.gameManager.goLeft();
         }
         else if (Phaser.Input.Keyboard.JustDown(this.cursors.down)){
-            // console.log("attempting to go down");
+            console.log("attempting to go down");
             this.gameManager.goDown();
         }
     }

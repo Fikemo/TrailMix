@@ -1,6 +1,9 @@
 import GameManager from './scenes/GameManager.js';
 import Menu from './scenes/Menu.js';
 import Load from './scenes/Load.js';
+import TestRight from './scenes/TestRight.js';
+import TestDownLeft from './scenes/TestDownLeft.js';
+import TestUpDown from './scenes/TestUpDown.js';
 // import fonts from "../assets/images/webfontkit-20210512-142138/stylesheet.css";
 
 let config = {
@@ -25,6 +28,11 @@ let game = new Phaser.Game(config);
 
 game.mapDimensions = new Phaser.Math.Vector2(10,5);
 game.map = [];
+game.allSceneTypes = [
+    TestRight,
+    TestDownLeft,
+    TestUpDown,
+]
 
 // creat an empty 2d array with the dimensions of game.mapDimensions
 for (let i = 0; i < game.mapDimensions.x; i++){
