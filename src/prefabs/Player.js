@@ -59,26 +59,51 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.damageHitbox = new PlayerSecondaryHitbox(scene, this, x, y, 40, 60, this.body.halfWidth - 8, this.body.halfHeight - 30, 0x0000FF);
         */
         this.grounded = false;
-        this.invincible = false;
+        //this.invincible = false;
         this.maxJumps = 1;
         this.jumpsRemaining = this.maxJumps;
         this.score = 0;
         this.setOrigin(0,0);
-
-        this.body.overlapX = 32;
+        this.cursors = this.scene.input.keyboard.createCursorKeys();
+        this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.moveSpeed = 400;
     }
 
     update(){
-        if(!this.isFiring) {
-            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
-                this.x -= this.moveSpeed;
-            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
-                this.x += this.moveSpeed;
-            }
+    //player movement
+    if (this.cursors) {
 
+        if (this.keyA.isDown){
+            //this.player.setVelocityX -= this.moveSpeed;
+            this.setVelocityX(-this.moveSpeed);
+            // console.log('left');
+            //this.player.anims.play('move');
+            this.setFlip(true, false);
+        }
+        else if (this.keyD.isDown){
+            this.setVelocityX(this.moveSpeed);
+            //this.player.setVelocityX += this.moveSpeed;
+            this.setFlip();
+            //this.player.anims.play('move');
+            // console.log('right');
+        }
+        else if (Phaser.Input.Keyboard.JustUp(this.keyA)){
+            this.setVelocityX(0);
+        }
+        else if (Phaser.Input.Keyboard.JustUp(this.keyD)){
+            this.setVelocityX(0);
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.keySpace) && this.body.touching.down){
+            this.setVelocityY(-this.moveSpeed);
+            // console.log('jump');
         }
     }
+    }
 }
+//attempt of state machine
       /*  this.FSM.step();
 
         // update the attack hitbox

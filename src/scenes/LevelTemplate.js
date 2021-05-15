@@ -42,7 +42,7 @@ export default class LevelTemplate extends Phaser.Scene{
             this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
             this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
             this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-            this. moveSpeed = 400;
+            this.moveSpeed = 400;
             this.backgroundColor = this.getRandomHexColor();
             this.PLAYER_SPAWN_POS = new Phaser.Math.Vector2(60, 120);
            
@@ -83,8 +83,7 @@ export default class LevelTemplate extends Phaser.Scene{
     
     update(){
 
-        // switch to the scene that is above, below, to the right, or to the left of the current scene
-        // with the arrow keys
+        //player movement
         if (this.cursors) {
             if (Phaser.Input.Keyboard.JustDown(this.keyA)){
                 //this.player.setVelocityX -= this.moveSpeed;
@@ -114,7 +113,9 @@ export default class LevelTemplate extends Phaser.Scene{
                 this.player.setVelocityY(-this.moveSpeed);
             }
         }
-
+        
+        // switch to the scene that is above, below, to the right, or to the left of the current scene
+        // with the arrow keys
         if (this.cursors){
             if(Phaser.Input.Keyboard.JustDown(this.cursors.up)){
                 // console.log(this.coordinate);

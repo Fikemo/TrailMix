@@ -2,6 +2,7 @@ import BaseScene from "./BaseScene.js";
 import TestRight from "./TestRight.js";
 import TestUpDown from "./TestUpDown.js";
 import TestDownLeft from "./TestDownLeft.js";
+import TestPlayer from "./TestPlayer.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -80,7 +81,7 @@ export default class GameManager extends Phaser.Scene{
     }
 
     initializeMapForGameStart(){
-        this.startingScene = this.createSceneOfClass(TestRight);
+        this.startingScene = this.createSceneOfClass(TestPlayer);
         this.activeScene = this.startingScene;
         this.setSceneOnMap(this.startingScene, 0, 0);
 
@@ -262,10 +263,13 @@ export default class GameManager extends Phaser.Scene{
     }
 
     launchSceneAt(x, y){
+        // make sure that the coordinate is on the map
         if (x < 0 || x >= this.game.mapDimensions.x || y < 0 || y >= this.game.mapDimensions.y) return null;
 
         console.log(x + " " + y);
+        // get the the value on the map at (x,y) (could be null, or a scene)
         let sceneToLaunch = this.game.map[x][y];
+        // check that the scene is not null
         if (sceneToLaunch){
             this.scene.stop(this.activeScene);
             this.scene.launch(sceneToLaunch);
