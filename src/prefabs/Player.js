@@ -1,4 +1,6 @@
+import Load from "../scenes/Load.js"
 import { State, StateMachine } from "../../lib/StateMachine.js";
+
 export default class Player extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture){
         super(scene,x,y,texture);
@@ -23,6 +25,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
+        //this.load.audio('sfx_jump', 'JumpSound.wav');
+        //this.jfx = this.sound.add('startMenu_bgm', {volume: 0.2, loop: true});
+        //console.log('aboiii');
+
     update(time, delta){
         this.body.setAccelerationX(0);
         this.body.setDragX(this.DRAG);
@@ -46,6 +52,14 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         if (this.canJump && Phaser.Input.Keyboard.DownDuration(this.keySpace, 250)){
             console.log("jumping");
             this.body.setVelocityY(this.JUMP_VEL);
+            //this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.1});
+            //this.sfx_jump.play();
+            //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
+            //this.jfx.play();
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.keySpace)) {
+            this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.15});
+            this.sfx_jump.play();
         }
 
         if (Phaser.Input.Keyboard.JustUp(this.keySpace)){

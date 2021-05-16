@@ -13,6 +13,12 @@ export default class Load extends Phaser.Scene {
         this.load.on("complete", () => {
             loadingBar.destroy();
         })
+        // load in sound assets
+        this.load.path = "./assets/";
+        this.load.audio('startMenu_bgm', 'texture03.wav');
+        this.load.audio('sfx_jump', 'JumpSound.wav');
+        //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
+
         // load images, spritesheets, and atlases
         this.load.path = "./assets/images/";
         
