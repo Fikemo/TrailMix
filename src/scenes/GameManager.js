@@ -1,3 +1,4 @@
+import createEvent from "../../lib/events.js";
 import BaseScene from "./BaseScene.js";
 import TestRight from "./TestRight.js";
 import TestUpDown from "./TestUpDown.js";
@@ -8,6 +9,10 @@ export default class GameManager extends Phaser.Scene{
     constructor(){
         super("gameManagerScene");
         this.firstInitialized = false;
+
+        this.events = {
+            inventoryUpdate: createEvent()
+        }
     }
 
     init(data){
@@ -28,9 +33,9 @@ export default class GameManager extends Phaser.Scene{
             this.sceneInventoryUI.width = 5;
             this.sceneInventoryUI.position = new Phaser.Math.Vector2(40, 40);
     
-            this.miniMapUI = [];
-            this.miniMapUI.width = this.game.mapDimensions.x;
-            this.miniMapUI.position = new Phaser.Math.Vector2(164, 488);
+            this.mapUI = [];
+            this.mapUI.width = this.game.mapDimensions.x;
+            this.mapUI.position = new Phaser.Math.Vector2(164, 488);
     
             this.sceneID = 0;
             this.selectedScene = null;
@@ -52,13 +57,17 @@ export default class GameManager extends Phaser.Scene{
 
         // create the UI
         this.createSceneInventoryUI();
-        this.createMiniMapUI();
+        this.createmapUI();
 
         this.randomlyFillSceneInventory();
 
         this.initializeMapForGameStart();
 
         console.log("GameManager Initialized");
+    }
+
+    testEvent(){
+        console.log("event tigered");
     }
 
     update(time, delta){
@@ -99,13 +108,13 @@ export default class GameManager extends Phaser.Scene{
             this.sceneInventoryUI[i].setFrame(frameName);
         }
 
-        // update the minimap
+        // update the map
         for (let i = 0; i < this.game.map.length; i++){
             for (let j = 0; j < this.game.map[i].length; j++){
                 let frameName = "node_void";
                 let currentScene = this.game.map[i][j];
                 if (currentScene) frameName = currentScene.iconName;
-                this.miniMapUI[i][j].setFrame(frameName);
+                this.mapUI[i][j].setFrame(frameName);
             }
         }
     }
@@ -161,16 +170,16 @@ export default class GameManager extends Phaser.Scene{
     }
 
     // Mini Map
-    createMiniMapUI(){
+    createmapUI(){
         for (let i = 0; i < this.game.mapDimensions.x; i++){
-            this.miniMapUI.push([]);
+            this.mapUI.push([]);
         }
 
         // TODO: Make the map icons prefabs instead of just sprites
         for (let i = 0; i < this.game.mapDimensions.y; i++){
             for (let j = 0; j < this.game.mapDimensions.x; j++){
-                let iconX = this.miniMapUI.position.x + (20 * j);
-                let iconY = this.miniMapUI.position.y + (20 * i);
+                let iconX = this.mapUI.position.x + (20 * j);
+                let iconY = this.mapUI.position.y + (20 * i);
 
                 let icon = this.add.sprite(iconX, iconY, "mapNodes", "node_void").setInteractive().setOrigin(0);
                 icon.coordinate = new Phaser.Math.Vector2(j, i);
@@ -179,7 +188,7 @@ export default class GameManager extends Phaser.Scene{
                         this.putSelectedSceneOnMap(icon);
                     }
                 }, this);
-                this.miniMapUI[j].push(icon);
+                this.mapUI[j].push(icon);
             }
         }
     }
@@ -266,7 +275,7 @@ export default class GameManager extends Phaser.Scene{
         // make sure that the coordinate is on the map
         if (x < 0 || x >= this.game.mapDimensions.x || y < 0 || y >= this.game.mapDimensions.y) return null;
 
-        console.log(x + " " + y);
+        // console.log(x + " " + y);
         // get the the value on the map at (x,y) (could be null, or a scene)
         let sceneToLaunch = this.game.map[x][y];
         // check that the scene is not null
