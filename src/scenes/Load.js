@@ -13,13 +13,8 @@ export default class Load extends Phaser.Scene {
         this.load.on("complete", () => {
             loadingBar.destroy();
         })
-        // load in sound assets
-        this.load.path = "./assets/";
-        this.load.audio('startMenu_bgm', 'texture03.wav');
-        this.load.audio('sfx_jump', 'JumpSound.wav');
-        //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
 
-        // load images, spritesheets, and atlases
+        // load images, spritesheets, tilemaps, and atlases
         this.load.path = "./assets/images/";
         
         this.load.atlas("mapNodes", "mapNodes.png", "mapNodes.json");
@@ -29,12 +24,22 @@ export default class Load extends Phaser.Scene {
         this.load.image("emptyMapNode", "emptyMapNode.png");
         this.load.image("confirmButton", "confirmButton.png");
 
+        this.load.atlas("mapIcons", "mapIcons.png", "mapIcons.json");
+        this.load.atlas("mapIcons_enlarged", "mapIcons_enlarged.png", "mapIcons_enlarged.json");
+        this.load.image("selectedMapIconFrame", "selectedMapIconFrame.png");
+
         this.load.image('blushie','blushie.png');
 
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
 
+        this.load.image("tileset", "basic_tileset.png");
+        this.load.tilemapTiledJSON("tilemapJSON", "testTileMap.json");
+
         // load sounds
         this.load.path = "./assets/sounds/"
+        this.load.audio('startMenu_bgm', 'texture03.wav');
+        this.load.audio('sfx_jump', 'JumpSound.wav');
+        //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
     }
 
     create(){

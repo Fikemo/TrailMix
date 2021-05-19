@@ -1,4 +1,10 @@
 import createEvent from "../../lib/events.js";
+import BaseScene from "./BaseScene.js";
+import TestRight from "./TestRight.js";
+import TestUpDown from "./TestUpDown.js";
+import TestDownLeft from "./TestDownLeft.js";
+import TestPlayer from "./TestPlayer.js";
+import BasicUpRightDownLeft from "./BasicUpRightDownLeft.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -12,8 +18,8 @@ export default class GameManager extends Phaser.Scene{
 
     init(data){
         if (!!!this.firstInitialized){
-            if (this.game.gameManager && this.gameManager != this){
-                console.error("Another instance of GameManager has bee started! There hsould only ever be one!");
+            if (this.game.gameManager && this.game.gameManager != this){
+                console.error("Another instance of GameManager has been started! There should only ever bee one!");
             } else {
                 this.game.gameManager = this;
             }
@@ -22,23 +28,16 @@ export default class GameManager extends Phaser.Scene{
 
             //**An array of scenes that are available in the inventory menu */
             this.sceneInventory = [];
-            this.sceneInventory.max = 25;
-
-            //**An array of the UI icons to represent the scene inventory */
+            this.sceneInventory.max = 15;
+            
             this.sceneInventoryUI = [];
             this.sceneInventoryUI.width = 5;
-            this.sceneInventoryUI.position = new Phaser.Math.Vector2(48, 44);
-            this.sceneInventoryUI.iconSize = 56;
-            this.sceneInventoryUI.padding = {width: 48, height: 88};
-
-            //** */
+            this.sceneInventoryUI.position = new Phaser.Math.Vector2(40, 40);
+    
             this.mapUI = [];
             this.mapUI.width = this.game.mapDimensions.x;
-            this.mapUI.position = new Phaser.Math.Vector2(256 + 4 * 4, 776 + 4 * 4);
-            this.mapUI.iconSize = 28;
-            this.mapUI.padding = 4;
-
-            //** */
+            this.mapUI.position = new Phaser.Math.Vector2(164, 488);
+    
             this.sceneID = 0;
             this.selectedScene = null;
             this.activeScene = null;
@@ -55,22 +54,30 @@ export default class GameManager extends Phaser.Scene{
         this.keyEscape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         // add background
-        this.add.sprite(0,0,"inventoryBackground").setOrigin(0,0);
+        this.add.sprite(0,0, "inventoryBackground").setOrigin(0);
 
         // create the UI
         this.createSceneInventoryUI();
-        this.createMapUI();
+        this.createmapUI();
 
-        // FIXME: Randomly fill the scene inventory. This should be replaced with something that isn't so random
         this.randomlyFillSceneInventory();
-        
+
         this.initializeMapForGameStart();
+
+        console.log("GameManager Initialized");
+    }
+
+    testEvent(){
+        console.log("event tigered");
     }
 
     update(time, delta){
+        if (this.uiNeedsUpdate){
+            this.updateUI();
+        }
 
+        // input
         if (Phaser.Input.Keyboard.JustDown(this.keyEscape)){
-            // console.log(this.active);
             if (this.active){
                 this.scene.resume(this.activeScene);
                 this.scene.sendToBack(this);
@@ -81,14 +88,10 @@ export default class GameManager extends Phaser.Scene{
                 this.active = true;
             }
         }
-
-        if (this.uiNeedsUpdate){
-            this.updateUI();
-        }
     }
 
     initializeMapForGameStart(){
-        this.startingScene = this.createSceneOfClass(this.game.startingSceneType);
+        this.startingScene = this.createSceneOfClass(BasicUpRightDownLeft);
         this.activeScene = this.startingScene;
         this.setSceneOnMap(this.startingScene, 0, 0);
 
@@ -100,7 +103,7 @@ export default class GameManager extends Phaser.Scene{
     updateUI(){
         // update the scene inventory
         for (let i = 0; i < this.sceneInventoryUI.length; i++){
-            let frameName = "icon_void";
+            let frameName = "node_void";
             let currentScene = this.sceneInventory[i];
             if (currentScene) frameName = currentScene.iconName;
             this.sceneInventoryUI[i].setFrame(frameName);
@@ -109,7 +112,7 @@ export default class GameManager extends Phaser.Scene{
         // update the map
         for (let i = 0; i < this.game.map.length; i++){
             for (let j = 0; j < this.game.map[i].length; j++){
-                let frameName = "icon_void";
+                let frameName = "node_void";
                 let currentScene = this.game.map[i][j];
                 if (currentScene) frameName = currentScene.iconName;
                 this.mapUI[i][j].setFrame(frameName);
@@ -124,30 +127,29 @@ export default class GameManager extends Phaser.Scene{
 
         // TODO: turn the icons into prefabs instead of just sprites
         for (let i = 0; i < this.sceneInventory.max; i++){
-            let iconX = this.sceneInventoryUI.position.x + ((this.sceneInventoryUI.iconSize + this.sceneInventoryUI.padding.width) * column);
-            let iconY = this.sceneInventoryUI.position.y + ((this.sceneInventoryUI.iconSize + this.sceneInventoryUI.padding.height) * row);
 
-            let icon = this.add.sprite(iconX, iconY, "mapIcons_enlarged", "icon_void").setInteractive().setOrigin(0);
+            let iconX = this.sceneInventoryUI.position.x + (36 * column);
+            let iconY = this.sceneInventoryUI.position.y + (36 * row);
+
+            let icon = this.add.sprite(iconX, iconY, "mapNodes_enlarged", "node_void").setInteractive().setOrigin(0);
 
             icon.on("pointerdown", (pointer, localX, localY, event) => {
                 if (this.active){
-                    // console.log(icon);
                     this.setSelectedSceneIcon(icon);
                 }
-            }, this);
+            }, this)
             icon.index = i;
             this.sceneInventoryUI[i] = icon;
 
             column++;
             if (column >= this.sceneInventoryUI.width){
                 column = 0;
-                row++;
+                row ++;
             }
         }
-
-        // set default selection at scene start
+        
         this.selectedSceneIcon = this.sceneInventoryUI[0];
-        this.selectedSceneIconFrame = this.add.sprite(this.sceneInventoryUI.position.x - 4, this.sceneInventoryUI.position.y - 4, "selectedMapIconFrame").setOrigin(0);
+        this.selectedSceneIconFrame = this.add.sprite(this.sceneInventoryUI.position.x - 4, this.sceneInventoryUI.position.y - 4, "selectedNode_enlarged").setOrigin(0);
     }
 
     setSelectedSceneIcon(icon){
@@ -158,6 +160,7 @@ export default class GameManager extends Phaser.Scene{
 
     setSelectedScene(){
         this.selectedScene = this.sceneInventory[this.selectedSceneIcon.index];
+        console.log(this.selectedScene);
     }
 
     setSelectedSceneIconFramePosition(){
@@ -168,22 +171,21 @@ export default class GameManager extends Phaser.Scene{
     }
 
     // Mini Map
-    createMapUI(){
-        // initialize x axis in the mapUI array
+    createmapUI(){
         for (let i = 0; i < this.game.mapDimensions.x; i++){
             this.mapUI.push([]);
         }
 
+        // TODO: Make the map icons prefabs instead of just sprites
         for (let i = 0; i < this.game.mapDimensions.y; i++){
             for (let j = 0; j < this.game.mapDimensions.x; j++){
-                let iconX = this.mapUI.position.x + (this.mapUI.iconSize + this.mapUI.padding) * j;
-                let iconY = this.mapUI.position.y + (this.mapUI.iconSize + this.mapUI.padding) * i;
+                let iconX = this.mapUI.position.x + (20 * j);
+                let iconY = this.mapUI.position.y + (20 * i);
 
-                let icon = this.add.sprite(iconX, iconY, "mapIcons", "icon_void").setInteractive().setOrigin(0);
+                let icon = this.add.sprite(iconX, iconY, "mapNodes", "node_void").setInteractive().setOrigin(0);
                 icon.coordinate = new Phaser.Math.Vector2(j, i);
                 icon.on("pointerdown", (pointer, localX, localY, event) => {
-                    if(this.active){
-                        // console.log(icon);
+                    if (this.active){
                         this.putSelectedSceneOnMap(icon);
                     }
                 }, this);
@@ -209,56 +211,8 @@ export default class GameManager extends Phaser.Scene{
         this.game.map[x][y] = scene;
         scene.coordinate.x = x;
         scene.coordinate.y = y;
-        this.setSurroundingScenes(scene);
+        console.log(scene);
         return scene;
-    }
-
-    setSurroundingScenes(scene){
-
-        // TODO: More checks. Reset to locked
-        let adjacentScene = null;
-
-        // up
-        adjacentScene = this.getSceneAtLocal(scene, 0, -1);
-        if (adjacentScene){
-            if (scene.up && adjacentScene.down){
-                scene.upLocked = false;
-                adjacentScene.downLocked = false;
-            }
-        }
-
-        // right
-        adjacentScene = this.getSceneAtLocal(scene, 1, 0);
-        if (adjacentScene){
-            if (scene.right && adjacentScene.left){
-                scene.rightLocked = false;
-                adjacentScene.leftLocked = false;
-            }
-        }
-
-        // down
-        adjacentScene = this.getSceneAtLocal(scene, 0, 1);
-        if (adjacentScene){
-            if (scene.down && adjacentScene.up){
-                scene.downLocked = false;
-                adjacentScene.upLocked = false;
-            }
-        }
-
-        // left
-        adjacentScene = this.getSceneAtLocal(scene, -1, 0);
-        if (adjacentScene){
-            if (scene.left && adjacentScene.right){
-                scene.leftLocked = false;
-                adjacentScene.rightLocked = false;
-            }
-        }
-    }
-
-    getSceneAtLocal(scene, localX, localY){
-        if (scene.coordinate.x + localX < 0 || scene.coordinate.x + localX >= this.game.mapDimensions.x || scene.coordinate.y + localY < 0 || scene.coordinate.y + localY >= this.game.mapDimensions.y) return null;
-
-        return this.game.map[scene.coordinate.x + localX][scene.coordinate.y + localY];
     }
 
     createSceneOfClass(sceneClass){
@@ -285,9 +239,9 @@ export default class GameManager extends Phaser.Scene{
     }
 
     randomlyFillSceneInventory(){
-        for(let i = 0; i < this.sceneInventory.max; i++){
-            if (!this.sceneInventory[i]){
-                let sceneToAdd = this.createSceneOfClass(this.game.allSceneTypes[Phaser.Math.Between(0, this.game.allSceneTypes.length - 1)]);
+        for (let i = 0; i < this.sceneInventory.max; i++){
+            if (this.sceneInventory[i] == undefined){
+                let sceneToAdd = this.createSceneOfClass(this.game.allSceneTypes[Phaser.Math.Between(0,this.game.allSceneTypes.length - 1)]);
                 this.addSceneToInventory(sceneToAdd);
             }
         }
@@ -322,9 +276,10 @@ export default class GameManager extends Phaser.Scene{
         // make sure that the coordinate is on the map
         if (x < 0 || x >= this.game.mapDimensions.x || y < 0 || y >= this.game.mapDimensions.y) return null;
 
-        // get the value on the map at (x,y) (could be null, or a scene)
+        // console.log(x + " " + y);
+        // get the the value on the map at (x,y) (could be null, or a scene)
         let sceneToLaunch = this.game.map[x][y];
-        // check that the scene exists
+        // check that the scene is not null
         if (sceneToLaunch){
             this.scene.stop(this.activeScene);
             this.scene.launch(sceneToLaunch);
