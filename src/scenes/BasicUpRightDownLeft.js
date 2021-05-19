@@ -38,7 +38,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
         this.upDoorLayer.setCollisionByProperty({collides: true});
 
         const p1Spawn = map.findObject("playerSpawn", obj => obj.name === "playerSpawn");
-        console.log(p1Spawn);
+        // console.log(p1Spawn);
         this.player = new Player(this, p1Spawn.x, p1Spawn.y, "blushie");
         // this.collider = this.physics.add.collider(this.player, [this.blockLayer, this.leftDoorLayer, this.rightDoorLayer, this.downDoorLayer, this.upDoorLayer]);
 
@@ -52,7 +52,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
 
         
 
-        console.log(this.rightDoorCollider);
+        // console.log(this.rightDoorCollider);
     }
 
     update(time, delta){
@@ -84,8 +84,6 @@ export default class BasicUpRightDownLeft extends BaseScene{
             this.gameManager.goLeft();
         }
     }
-
-    removeCollider
 
     setDoorLocked(door, locked){
 
