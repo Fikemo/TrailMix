@@ -57,7 +57,7 @@ export default class BaseScene extends Phaser.Scene{
     }
 
     create(){
-        this.cameras.main.setSize(this.scale.width, 768);
+        this.cameras.main.setSize(this.scale.width, this.game.roomHeight);
         // console.log(this);
     }
 }

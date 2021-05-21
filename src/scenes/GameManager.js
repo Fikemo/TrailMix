@@ -1,4 +1,5 @@
 import createEvent from "../../lib/events.js";
+import BasicUpRightDownLeft from "./BasicUpRightDownLeft.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -27,21 +28,35 @@ export default class GameManager extends Phaser.Scene{
             //**An array of the UI icons to represent the scene inventory */
             this.sceneInventoryUI = [];
             this.sceneInventoryUI.width = 5;
-            this.sceneInventoryUI.position = new Phaser.Math.Vector2(48, 44);
-            this.sceneInventoryUI.iconSize = 56;
-            this.sceneInventoryUI.padding = {width: 48, height: 88};
+            this.sceneInventoryUI.position = new Phaser.Math.Vector2(34, 72);
+            this.sceneInventoryUI.iconSize = 48;
+            this.sceneInventoryUI.padding = {width: 48, height: 48};
+
+            //** */
+            this.map = [];
+            this.map.width = 20;
+            this.map.height = 6;
+            // initialize an empty map
+            for (let x = 0; x < this.map.width; x++){
+                this.map.push([]);
+                for (let y = 0; y < this.map.height; y++){
+                    this.map[x].push(null);
+                }
+            }
 
             //** */
             this.mapUI = [];
-            this.mapUI.width = this.game.mapDimensions.x;
-            this.mapUI.position = new Phaser.Math.Vector2(256 + 4 * 4, 776 + 4 * 4);
-            this.mapUI.iconSize = 28;
+            this.mapUI.width = this.map.width;
+            this.mapUI.position = new Phaser.Math.Vector2(202, 586);
+            this.mapUI.iconSize = 24;
             this.mapUI.padding = 4;
 
             //** */
             this.sceneID = 0;
             this.selectedScene = null;
             this.activeScene = null;
+            this.startingSceneType = BasicUpRightDownLeft;
+            this.availableSceneTypes = [BasicUpRightDownLeft];
 
             this.uiNeedsUpdate = true;
 
@@ -55,7 +70,7 @@ export default class GameManager extends Phaser.Scene{
         this.keyEscape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         // add background
-        this.add.sprite(0,0,"inventoryBackground").setOrigin(0,0);
+        this.add.sprite(0,0,"gameManagerBackground").setOrigin(0,0);
 
         // create the UI
         this.createSceneInventoryUI();
@@ -88,7 +103,7 @@ export default class GameManager extends Phaser.Scene{
     }
 
     initializeMapForGameStart(){
-        this.startingScene = this.createSceneOfClass(this.game.startingSceneType);
+        this.startingScene = this.createSceneOfClass(this.startingSceneType);
         this.activeScene = this.startingScene;
         this.setSceneOnMap(this.startingScene, 0, 0);
 
@@ -107,10 +122,10 @@ export default class GameManager extends Phaser.Scene{
         }
 
         // update the map
-        for (let i = 0; i < this.game.map.length; i++){
-            for (let j = 0; j < this.game.map[i].length; j++){
+        for (let i = 0; i < this.map.width; i++){
+            for (let j = 0; j < this.map.height; j++){
                 let frameName = "icon_void";
-                let currentScene = this.game.map[i][j];
+                let currentScene = this.map[i][j];
                 if (currentScene) frameName = currentScene.iconName;
                 this.mapUI[i][j].setFrame(frameName);
             }
@@ -127,7 +142,7 @@ export default class GameManager extends Phaser.Scene{
             let iconX = this.sceneInventoryUI.position.x + ((this.sceneInventoryUI.iconSize + this.sceneInventoryUI.padding.width) * column);
             let iconY = this.sceneInventoryUI.position.y + ((this.sceneInventoryUI.iconSize + this.sceneInventoryUI.padding.height) * row);
 
-            let icon = this.add.sprite(iconX, iconY, "mapIcons_enlarged", "icon_void").setInteractive().setOrigin(0);
+            let icon = this.add.sprite(iconX, iconY, "inventoryIcons", "icon_void").setInteractive().setOrigin(0);
 
             icon.on("pointerdown", (pointer, localX, localY, event) => {
                 if (this.active){
@@ -147,7 +162,7 @@ export default class GameManager extends Phaser.Scene{
 
         // set default selection at scene start
         this.selectedSceneIcon = this.sceneInventoryUI[0];
-        this.selectedSceneIconFrame = this.add.sprite(this.sceneInventoryUI.position.x - 4, this.sceneInventoryUI.position.y - 4, "selectedMapIconFrame").setOrigin(0);
+        this.selectedSceneIconFrame = this.add.sprite(this.sceneInventoryUI.position.x - 4, this.sceneInventoryUI.position.y - 4, "selectedInventoryIconFrame").setOrigin(0);
     }
 
     setSelectedSceneIcon(icon){
@@ -170,12 +185,12 @@ export default class GameManager extends Phaser.Scene{
     // Mini Map
     createMapUI(){
         // initialize x axis in the mapUI array
-        for (let i = 0; i < this.game.mapDimensions.x; i++){
+        for (let i = 0; i < this.map.width; i++){
             this.mapUI.push([]);
         }
 
-        for (let i = 0; i < this.game.mapDimensions.y; i++){
-            for (let j = 0; j < this.game.mapDimensions.x; j++){
+        for (let i = 0; i < this.map.height; i++){
+            for (let j = 0; j < this.map.width; j++){
                 let iconX = this.mapUI.position.x + (this.mapUI.iconSize + this.mapUI.padding) * j;
                 let iconY = this.mapUI.position.y + (this.mapUI.iconSize + this.mapUI.padding) * i;
 
@@ -196,7 +211,7 @@ export default class GameManager extends Phaser.Scene{
         let x = icon.coordinate.x;
         let y = icon.coordinate.y;
 
-        let spaceToPlaceIn = this.game.map[x][y];
+        let spaceToPlaceIn = this.map[x][y];
         let sceneToPlace = this.sceneInventory[this.selectedSceneIcon.index];
         if (spaceToPlaceIn == null && sceneToPlace){
             this.removeSceneFromInventory(sceneToPlace);
@@ -206,9 +221,10 @@ export default class GameManager extends Phaser.Scene{
     }
 
     setSceneOnMap(scene, x, y){
-        this.game.map[x][y] = scene;
+        this.map[x][y] = scene;
         scene.coordinate.x = x;
         scene.coordinate.y = y;
+        // console.log(scene);
         this.setSurroundingScenes(scene);
         return scene;
     }
@@ -256,9 +272,9 @@ export default class GameManager extends Phaser.Scene{
     }
 
     getSceneAtLocal(scene, localX, localY){
-        if (scene.coordinate.x + localX < 0 || scene.coordinate.x + localX >= this.game.mapDimensions.x || scene.coordinate.y + localY < 0 || scene.coordinate.y + localY >= this.game.mapDimensions.y) return null;
+        if (scene.coordinate.x + localX < 0 || scene.coordinate.x + localX >= this.map.width || scene.coordinate.y + localY < 0 || scene.coordinate.y + localY >= this.map.height) return null;
 
-        return this.game.map[scene.coordinate.x + localX][scene.coordinate.y + localY];
+        return this.map[scene.coordinate.x + localX][scene.coordinate.y + localY];
     }
 
     createSceneOfClass(sceneClass){
@@ -287,7 +303,7 @@ export default class GameManager extends Phaser.Scene{
     randomlyFillSceneInventory(){
         for(let i = 0; i < this.sceneInventory.max; i++){
             if (!this.sceneInventory[i]){
-                let sceneToAdd = this.createSceneOfClass(this.game.allSceneTypes[Phaser.Math.Between(0, this.game.allSceneTypes.length - 1)]);
+                let sceneToAdd = this.createSceneOfClass(this.availableSceneTypes[Phaser.Math.Between(0, this.availableSceneTypes.length - 1)]);
                 this.addSceneToInventory(sceneToAdd);
             }
         }
@@ -303,31 +319,31 @@ export default class GameManager extends Phaser.Scene{
     }
 
     clearMap(returnToInventory = true){
-        // for (let i = 0; i < this.game.mapDimensions.x; i ++){
-        //     for (let j = 0; j < this.game.mapDimensions.y; j++){
-        //         let foundScene = this.game.map[i][j];
+        // for (let i = 0; i < this.map.width; i ++){
+        //     for (let j = 0; j < this.map.height; j++){
+        //         let foundScene = this.map[i][j];
         //         if (foundScene != null){
         //             if (returnToInventory) {
         //                 foundScene = this.resetScene(foundScene);
         //                 this.addSceneToInventory(foundScene);
         //             }
-        //             this.game.map[i][j] = null;
+        //             this.map[i][j] = null;
         //         }
         //     }
         // }
         // this.uiNeedsUpdate = true;
     }
 
-    launchSceneAt(x, y){
+    launchSceneAt(x, y, cameFrom = null){
         // make sure that the coordinate is on the map
-        if (x < 0 || x >= this.game.mapDimensions.x || y < 0 || y >= this.game.mapDimensions.y) return null;
+        if (x < 0 || x >= this.map.width || y < 0 || y >= this.map.height) return null;
 
         // get the value on the map at (x,y) (could be null, or a scene)
-        let sceneToLaunch = this.game.map[x][y];
+        let sceneToLaunch = this.map[x][y];
         // check that the scene exists
         if (sceneToLaunch){
             this.scene.stop(this.activeScene);
-            this.scene.launch(sceneToLaunch);
+            this.scene.launch(sceneToLaunch, cameFrom);
             this.activeScene = sceneToLaunch;
             this.active = false;
         }
@@ -340,28 +356,32 @@ export default class GameManager extends Phaser.Scene{
     goUp(){
         this.launchSceneAt(
             this.activeScene.coordinate.x,
-            this.activeScene.coordinate.y - 1
+            this.activeScene.coordinate.y - 1,
+            "up"
         );
     }
 
     goRight(){
         this.launchSceneAt(
             this.activeScene.coordinate.x + 1,
-            this.activeScene.coordinate.y
+            this.activeScene.coordinate.y,
+            "right"
         );
     }
 
     goDown(){
         this.launchSceneAt(
             this.activeScene.coordinate.x, 
-            this.activeScene.coordinate.y + 1
+            this.activeScene.coordinate.y + 1,
+            "down"
         );
     }
 
     goLeft(){
         this.launchSceneAt(
             this.activeScene.coordinate.x - 1, 
-            this.activeScene.coordinate.y
+            this.activeScene.coordinate.y,
+            "left"
         );
     }
 }

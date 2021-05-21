@@ -13,18 +13,24 @@ export default class BasicUpRightDownLeft extends BaseScene{
         this.setIcon();
     }
 
+    init(data){
+        this.data.cameFrom = data;
+        console.log(this.data);
+        // console.log(this.stats.player);
+    }
+
     create(data){
         super.create();
 
         this.cameras.main.setBackgroundColor(0x666666);
         
         if (this.coordinate.x == 0 && this.coordinate.y == 0){
-            this.add.text(150,260, "A and D to move\n\nSpace to jump\n\nESC to open and close the Inventory Menu\n\nClick an icon in the Inventory Menu and then click on the map in the bottom right to place a room").setAlign('center').setColor("white").setWordWrapWidth(200).setFontSize(20).setFontStyle("bold");
+            this.add.text(100,160, "A and D to move\n\nSpace to jump\n\nESC to open and close the Inventory Menu\n\nClick an icon in the Inventory Menu and then click on the map in the bottom right to place a room").setAlign('center').setColor("white").setWordWrapWidth(200).setFontSize(20).setFontStyle("bold");
         }
 
-        const map = this.add.tilemap("tilemapJSON");
+        const map = this.add.tilemap("basicUpRightDownLeftJSON");
         // addTilesetImage(<name of tileset>, <image to use>)
-        const tileset = map.addTilesetImage("basic_tileset", "tileset");
+        const tileset = map.addTilesetImage("basicTileSet", "basicTileSet");
         this.blockLayer = map.createLayer("blocks", tileset, 0, 0);
         this.leftDoorLayer = map.createLayer("leftDoor", tileset, 0, 0);
         this.rightDoorLayer = map.createLayer("rightDoor", tileset, 0, 0);
@@ -37,9 +43,30 @@ export default class BasicUpRightDownLeft extends BaseScene{
         this.downDoorLayer.setCollisionByProperty({collides: true});
         this.upDoorLayer.setCollisionByProperty({collides: true});
 
-        const p1Spawn = map.findObject("playerSpawn", obj => obj.name === "playerSpawn");
+        const p1Spawn = map.findObject("playerSpawns", obj => obj.name === "playerSpawn");
+        const p1SpawnUp = map.findObject("playerSpawns", obj => obj.name === "playerSpawnUp");
         // console.log(p1Spawn);
-        this.player = new Player(this, p1Spawn.x, p1Spawn.y, "blushie");
+
+        let playerSpawn;
+        switch(this.data.cameFrom){
+            case "up":
+                playerSpawn = map.findObject("playerSpawns", obj => obj.name === "playerSpawnDown");
+            break;
+            case "right":
+                playerSpawn = map.findObject("playerSpawns", obj => obj.name === "playerSpawnLeft");
+            break;
+            case "down":
+                playerSpawn = map.findObject("playerSpawns", obj => obj.name === "playerSpawnUp");
+            break;
+            case "left":
+                playerSpawn = map.findObject("playerSpawns", obj => obj.name === "playerSpawnRight");
+            break;
+            default:
+                playerSpawn = map.findObject("playerSpawns", obj => obj.name === "playerSpawn");
+        }
+
+        this.player = new Player(this, playerSpawn.x, playerSpawn.y, "blushie");
+        console.log(this.player);
         // this.collider = this.physics.add.collider(this.player, [this.blockLayer, this.leftDoorLayer, this.rightDoorLayer, this.downDoorLayer, this.upDoorLayer]);
 
         this.blockCollider = this.physics.add.collider(this.player, this.blockLayer);
@@ -48,7 +75,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
         this.downDoorCollider = this.physics.add.collider(this.player, this.downDoorLayer);
         this.leftDoorCollider = this.physics.add.collider(this.player, this.leftDoorLayer);
 
-        this.add.text(20,20,this.coordinate.x + ", " + this.coordinate.y).setColor("black").setFontSize(20).setFontStyle("bold");
+        this.add.text(10,10,this.coordinate.x + ", " + this.coordinate.y).setColor("black").setFontSize(20).setFontStyle("bold");
 
         
 
@@ -71,7 +98,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
         this.leftDoorCollider.active = this.leftLocked;
         this.leftDoorLayer.alpha = this.leftLocked;
 
-        if (this.player.y <= 0 + this.player.width / 2){
+        if (this.player.y <= 0 - this.player.width / 2){
             this.gameManager.goUp();
         }
         if (this.player.x >= this.scale.width - this.player.width / 2){
@@ -80,7 +107,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
         if (this.player.y >= this.scale.height * 0.75 - this.player.height / 2){
             this.gameManager.goDown();
         }
-        if (this.player.x <= 0 + this.player.width / 2){
+        if (this.player.x <= 0 - this.player.width / 2){
             this.gameManager.goLeft();
         }
     }

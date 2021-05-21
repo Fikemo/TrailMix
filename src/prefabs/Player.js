@@ -13,6 +13,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
 
         this.JUMP_VEL = -500
+        this.jumping = false;
 
         this.DRAG = 1500;
 
@@ -48,21 +49,27 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
 
         this.grounded = this.body.touching.down || this.body.blocked.down;
 
-        if (this.grounded) this.canJump = true;
+        // if (this.grounded) this.canJump = true;
 
-        if (this.canJump && Phaser.Input.Keyboard.DownDuration(this.keySpace, 250)){
+        // FIXME: Implement a state machine for the player
+
+        if ((this.grounded || this.jumping) && Phaser.Input.Keyboard.DownDuration(this.keySpace, 300)){
             // console.log("jumping");
             this.body.setVelocityY(this.JUMP_VEL);
+            this.jumping = true;
             //this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.1});
             //this.sfx_jump.play();
             //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
             //this.jfx.play();
+        } else {
+            this.jumping = false;
         }
         if (Phaser.Input.Keyboard.JustDown(this.keySpace) && this.canJump) {
             this.sfx_jump.play();
         }
 
         if (Phaser.Input.Keyboard.JustUp(this.keySpace)){
+            console.log("space released");
             this.canJump = false;
         }
     }
