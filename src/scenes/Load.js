@@ -16,24 +16,19 @@ export default class Load extends Phaser.Scene {
 
         // load images, spritesheets, tilemaps, and atlases
         this.load.path = "./assets/images/";
-        
-        this.load.atlas("mapNodes", "mapNodes.png", "mapNodes.json");
-        this.load.atlas("mapNodes_enlarged", "mapNodes_enlarged.png", "mapNodes_enlarged.json");
-        this.load.image("selectedNode_enlarged", "selectedNode_enlarged.png");
-        this.load.image("inventoryBackground", "inventoryBackground.png");
-        this.load.image("emptyMapNode", "emptyMapNode.png");
-        this.load.image("confirmButton", "confirmButton.png");
+
+        this.load.image("gameManagerBackground", "gameManagerBackground.png");
 
         this.load.atlas("mapIcons", "mapIcons.png", "mapIcons.json");
-        this.load.atlas("mapIcons_enlarged", "mapIcons_enlarged.png", "mapIcons_enlarged.json");
-        this.load.image("selectedMapIconFrame", "selectedMapIconFrame.png");
+        this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
+        this.load.image("selectedInventoryIconFrame", "inventoryIconFrame.png");
 
-        this.load.image('blushie','blushie.png');
+        this.load.image("blushie", "blushie.png");
+
+        this.load.image("basicTileSet", "basicTileSet.png");
+        this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
 
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
-
-        this.load.image("tileset", "basic_tileset.png");
-        this.load.tilemapTiledJSON("tilemapJSON", "testTileMap.json");
 
         // load sounds
         this.load.path = "./assets/sounds/"
