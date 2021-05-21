@@ -19,7 +19,7 @@ let config = {
     },
     //antiAlias: false,
     pixelArt: true,
-    zoom: 0.75,
+    // zoom: 0.75,
     roundPixels: true,
 }
 
