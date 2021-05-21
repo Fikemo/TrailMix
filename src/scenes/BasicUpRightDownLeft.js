@@ -1,5 +1,6 @@
 import BaseScene from "./BaseScene.js";
 import Player from "../prefabs/Player.js";
+import Blushie from "../prefabs/Blushie.js";
 
 export default class BasicUpRightDownLeft extends BaseScene{
     constructor(key, gameManager){
@@ -40,6 +41,9 @@ export default class BasicUpRightDownLeft extends BaseScene{
         const p1Spawn = map.findObject("playerSpawn", obj => obj.name === "playerSpawn");
         // console.log(p1Spawn);
         this.player = new Player(this, p1Spawn.x, p1Spawn.y, "blushie");
+
+        //spawn a blushie
+        this.blushie = new Blushie(this, p1Spawn.x + 500, p1Spawn.y, "blushie");
         // this.collider = this.physics.add.collider(this.player, [this.blockLayer, this.leftDoorLayer, this.rightDoorLayer, this.downDoorLayer, this.upDoorLayer]);
 
         this.blockCollider = this.physics.add.collider(this.player, this.blockLayer);
@@ -47,6 +51,12 @@ export default class BasicUpRightDownLeft extends BaseScene{
         this.rightDoorCollider = this.physics.add.collider(this.player, this.rightDoorLayer);
         this.downDoorCollider = this.physics.add.collider(this.player, this.downDoorLayer);
         this.leftDoorCollider = this.physics.add.collider(this.player, this.leftDoorLayer);
+
+        this.blockCollider = this.physics.add.collider(this.blushie, this.blockLayer);
+        this.upDoorCollider = this.physics.add.collider(this.blushie, this.upDoorLayer);
+        this.rightDoorCollider = this.physics.add.collider(this.blushie, this.rightDoorLayer);
+        this.downDoorCollider = this.physics.add.collider(this.blushie, this.downDoorLayer);
+        this.leftDoorCollider = this.physics.add.collider(this.blushie, this.leftDoorLayer);
 
         this.add.text(20,20,this.coordinate.x + ", " + this.coordinate.y).setColor("black").setFontSize(20).setFontStyle("bold");
 
@@ -57,6 +67,8 @@ export default class BasicUpRightDownLeft extends BaseScene{
 
     update(time, delta){
         this.player.update();
+        this.blushie.update();
+
         this.leftDoorCollider.active = false;
 
         this.upDoorCollider.active = this.upLocked;
