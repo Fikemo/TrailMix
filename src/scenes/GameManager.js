@@ -334,7 +334,7 @@ export default class GameManager extends Phaser.Scene{
         // this.uiNeedsUpdate = true;
     }
 
-    launchSceneAt(x, y, cameFrom = null){
+    launchSceneAt(x, y, data = {}){
         // make sure that the coordinate is on the map
         if (x < 0 || x >= this.map.width || y < 0 || y >= this.map.height) return null;
 
@@ -343,7 +343,7 @@ export default class GameManager extends Phaser.Scene{
         // check that the scene exists
         if (sceneToLaunch){
             this.scene.stop(this.activeScene);
-            this.scene.launch(sceneToLaunch, cameFrom);
+            this.scene.launch(sceneToLaunch, data);
             this.activeScene = sceneToLaunch;
             this.active = false;
         }
@@ -353,35 +353,39 @@ export default class GameManager extends Phaser.Scene{
         this.game.scene.remove(scene.key);
     }
 
-    goUp(){
+    goUp(data = {}){
+        data.cameFrom = "up";
         this.launchSceneAt(
             this.activeScene.coordinate.x,
             this.activeScene.coordinate.y - 1,
-            "up"
+            data
         );
     }
 
-    goRight(){
+    goRight(data = {}){
+        data.cameFrom = "right";
         this.launchSceneAt(
             this.activeScene.coordinate.x + 1,
             this.activeScene.coordinate.y,
-            "right"
+            data
         );
     }
 
-    goDown(){
+    goDown(data = {}){
+        data.cameFrom = "down";
         this.launchSceneAt(
             this.activeScene.coordinate.x, 
             this.activeScene.coordinate.y + 1,
-            "down"
+            data
         );
     }
 
-    goLeft(){
+    goLeft(data = {}){
+        data.cameFrom = "left";
         this.launchSceneAt(
             this.activeScene.coordinate.x - 1, 
             this.activeScene.coordinate.y,
-            "left"
+            data
         );
     }
 }
