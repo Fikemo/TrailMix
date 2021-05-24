@@ -26,7 +26,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
         this.cameras.main.setBackgroundColor(0x666666);
         
         if (this.coordinate.x == 0 && this.coordinate.y == 0){
-            this.add.text(100,160, "A and D to move\n\nSpace to jump\n\nESC to open and close the Inventory Menu\n\nClick an icon in the Inventory Menu and then click on the map in the bottom right to place a room").setAlign('center').setColor("white").setWordWrapWidth(200).setFontSize(20).setFontStyle("bold");
+            this.add.text(100,160, "A, S, and D to move\n\nSpace to jump\n\nESC to open and close the Inventory Menu\n\nClick an icon in the Inventory Menu and then click on the map in the bottom right to place a room").setAlign('center').setColor("white").setWordWrapWidth(200).setFontSize(20).setFontStyle("bold");
         }
 
         // create tile layers
