@@ -27,6 +27,8 @@ export default class BasicUpRightDownLeft extends BaseScene{
         
         if (this.coordinate.x == 0 && this.coordinate.y == 0){
             this.add.text(100,160, "A, S, and D to move\n\nSpace to jump\n\nESC to open and close the Inventory Menu\n\nClick an icon in the Inventory Menu and then click on the map in the bottom right to place a room").setAlign('center').setColor("white").setWordWrapWidth(200).setFontSize(20).setFontStyle("bold");
+
+            this.add.text(500,160, "There is currently only one room type.\nMore rooms coming soon!\n\nThis little guy down here is a friendly npc.\nThey're just here to have fun").setAlign('center').setColor("white").setWordWrapWidth(200).setFontSize(20).setFontStyle("bold");
         }
 
         // create tile layers
