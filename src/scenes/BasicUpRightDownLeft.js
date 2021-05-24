@@ -1,6 +1,7 @@
 import BaseScene from "./BaseScene.js";
 import Player from "../prefabs/Player.js";
 import PlatformCollider from "../prefabs/PlatformCollider.js";
+import Blushie from "../prefabs/Blushie.js";
 
 export default class BasicUpRightDownLeft extends BaseScene{
     constructor(key, gameManager){
@@ -98,6 +99,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
                 playerSpawn.y = playerSpawnObject.y;
         }
         this.player = new Player(this, playerSpawn.x, playerSpawn.y, "blushie");
+        this.blushie = new Blushie(this, p1Spawn.x + 500, p1Spawn.y, "blushie");
         if (this.data.lastScene.velocity){
             this.player.setVelocity(this.data.lastScene.velocity.x, this.data.lastScene.velocity.y);
         }
@@ -114,6 +116,12 @@ export default class BasicUpRightDownLeft extends BaseScene{
 
         this.platformCollider = this.physics.add.collider(this.player, this.platformGroup);
 
+        this.physics.add.collider(this.blushie, this.blockLayer);
+        this.physics.add.collider(this.blushie, this.upDoorLayer);
+        this.physics.add.collider(this.blushie, this.rightDoorLayer);
+        this.physics.add.collider(this.blushie, this.downDoorLayer);
+        this.physics.add.collider(this.blushie, this.leftDoorLayer);
+
         this.add.text(10, 10, this.coordinate.x + ", " + this.coordinate.y).setColor("black").setFontSize(20).setFontStyle("bold");
 
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -121,7 +129,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
 
     update(time, delta){
         this.player.update();
-
+        this.blushie.update();
         this.setDoorLocked(this.upDoorCollider, this.upDoorLayer, this.upLocked);
         this.setDoorLocked(this.rightDoorCollider, this.rightDoorLayer, this.rightLocked);
         this.setDoorLocked(this.downDoorCollider, this.downDoorLayer, this.downLocked);
