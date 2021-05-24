@@ -67,7 +67,7 @@ export default class BasicUpRightDownLeft extends BaseScene{
         // set the player's spawn
         let playerSpawnObject;
         let playerSpawn = {x: undefined, y: undefined};
-
+        this.defaultSpawnObject = this.map.findObject("playerSpawns", spawnPoint => spawnPoint.name === "playerSpawn");
         this.upSpawnObject = this.map.findObject("playerSpawns", spawnPoint => spawnPoint.name === "playerSpawnUp");
         this.rightSpawnObject = this.map.findObject("playerSpawns", spawnPoint => spawnPoint.name === "playerSpawnRight");
         this.downSpawnObject = this.map.findObject("playerSpawns", spawnPoint => spawnPoint.name === "playerSpawnDown");
@@ -99,7 +99,6 @@ export default class BasicUpRightDownLeft extends BaseScene{
                 playerSpawn.y = playerSpawnObject.y;
         }
         this.player = new Player(this, playerSpawn.x, playerSpawn.y, "blushie");
-        this.blushie = new Blushie(this, p1Spawn.x + 500, p1Spawn.y, "blushie");
         if (this.data.lastScene.velocity){
             this.player.setVelocity(this.data.lastScene.velocity.x, this.data.lastScene.velocity.y);
         }
@@ -116,6 +115,8 @@ export default class BasicUpRightDownLeft extends BaseScene{
 
         this.platformCollider = this.physics.add.collider(this.player, this.platformGroup);
 
+
+        this.blushie = new Blushie(this, this.defaultSpawnObject.x + 500, this.defaultSpawnObject.y, "blushie");
         this.physics.add.collider(this.blushie, this.blockLayer);
         this.physics.add.collider(this.blushie, this.upDoorLayer);
         this.physics.add.collider(this.blushie, this.rightDoorLayer);
