@@ -478,11 +478,6 @@
                          "name":"collides",
                          "type":"bool",
                          "value":false
-                        }, 
-                        {
-                         "name":"platform",
-                         "type":"bool",
-                         "value":true
                         }],
                  "type":"platform"
                 }],

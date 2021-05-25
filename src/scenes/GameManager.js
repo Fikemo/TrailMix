@@ -1,5 +1,6 @@
 import createEvent from "../../lib/events.js";
 import BasicUpRightDownLeft from "./BasicUpRightDownLeft.js";
+import BasicRightLeft from "./BasicRightLeft.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -56,7 +57,10 @@ export default class GameManager extends Phaser.Scene{
             this.selectedScene = null;
             this.activeScene = null;
             this.startingSceneType = BasicUpRightDownLeft;
-            this.availableSceneTypes = [BasicUpRightDownLeft];
+            // optionally, you can set the starting scene to be the scene you want to test to speed things up
+            // eg. this.startingSceneType = BasicRightLeft
+            // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE THOUGH
+            this.availableSceneTypes = [BasicUpRightDownLeft, BasicRightLeft];
 
             this.uiNeedsUpdate = true;
 

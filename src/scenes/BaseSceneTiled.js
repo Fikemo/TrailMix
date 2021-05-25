@@ -4,9 +4,6 @@ import BaseScene from "./BaseScene.js";
 export default class BaseSceneTiled extends BaseScene{
     constructor(key, gameManager){
         super(key, gameManager);
-
-
-
         this.setIcon();
     }
 
