@@ -25,6 +25,12 @@ export default class BaseScene extends Phaser.Scene{
         this.iconName = "node_void";
 
         this.difficulty = 0;
+<<<<<<< Updated upstream
+=======
+
+        // TODO: Find another way to update which doors need to be unlocked
+        this.locksUpdated = false;
+>>>>>>> Stashed changes
     }
 
     setIcon(){

@@ -204,6 +204,65 @@ export default class GameManager extends Phaser.Scene{
         return scene;
     }
 
+<<<<<<< Updated upstream
+=======
+    setSurroundingScenes(scene){
+
+        // TODO: More checks. Reset to locked
+        let adjacentScene = null;
+
+        // up
+        adjacentScene = this.getSceneAtLocal(scene, 0, -1);
+        if (adjacentScene){
+            if (scene.up && adjacentScene.down){
+                scene.upLocked = false;
+                adjacentScene.downLocked = false;
+                scene.locksUpdated = true;
+                adjacentScene.locksUpdated = true;
+            }
+        }
+
+        // right
+        adjacentScene = this.getSceneAtLocal(scene, 1, 0);
+        if (adjacentScene){
+            if (scene.right && adjacentScene.left){
+                scene.rightLocked = false;
+                adjacentScene.leftLocked = false;
+                scene.locksUpdated = true;
+                adjacentScene.locksUpdated = true;
+            }
+        }
+
+        // down
+        adjacentScene = this.getSceneAtLocal(scene, 0, 1);
+        if (adjacentScene){
+            if (scene.down && adjacentScene.up){
+                scene.downLocked = false;
+                adjacentScene.upLocked = false;
+                scene.locksUpdated = true;
+                adjacentScene.locksUpdated = true;
+            }
+        }
+
+        // left
+        adjacentScene = this.getSceneAtLocal(scene, -1, 0);
+        if (adjacentScene){
+            if (scene.left && adjacentScene.right){
+                scene.leftLocked = false;
+                adjacentScene.rightLocked = false;
+                scene.locksUpdated = true;
+                adjacentScene.locksUpdated = true;
+            }
+        }
+    }
+
+    getSceneAtLocal(scene, localX, localY){
+        if (scene.coordinate.x + localX < 0 || scene.coordinate.x + localX >= this.map.width || scene.coordinate.y + localY < 0 || scene.coordinate.y + localY >= this.map.height) return null;
+
+        return this.map[scene.coordinate.x + localX][scene.coordinate.y + localY];
+    }
+
+>>>>>>> Stashed changes
     createSceneOfClass(sceneClass){
         this.sceneID++;
         let key = sceneClass.name + "_" + this.sceneID;
