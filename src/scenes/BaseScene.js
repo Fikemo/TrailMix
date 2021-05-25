@@ -22,24 +22,21 @@ export default class BaseScene extends Phaser.Scene{
         this.downLocked = true;
         this.leftLocked = true;
 
-        this.iconName = "node_void";
+        this.iconName = "icon_void";
 
         this.difficulty = 0;
-<<<<<<< Updated upstream
-=======
 
         // TODO: Find another way to update which doors need to be unlocked
-        this.locksUpdated = false;
->>>>>>> Stashed changes
+        this.locksNeedUpdate = false;
     }
 
     setIcon(){
-        let frameName = "node"
+        let frameName = "icon"
         if (this.up) frameName += "_u";
         if (this.right) frameName += "_r";
         if (this.down) frameName += "_d";
         if (this.left) frameName += "_l";
-        this.iconName = frameName != "node" ? frameName : "node_void";
+        this.iconName = frameName != "icon" ? frameName : "icon_void";
     }
 
     setCoordinate(x,y){
@@ -52,8 +49,15 @@ export default class BaseScene extends Phaser.Scene{
         this.coordinate.y = -1;
     }
 
+    setLockedSides(up = false, right = false, down = false, left = false){
+        this.upLocked = up;
+        this.rightLocked = right;
+        this.downLocked = down;
+        this.leftLocked = left;
+    }
+
     create(){
-        this.cameras.main.setSize(this.scale.width, 480);
+        this.cameras.main.setSize(this.scale.width, this.game.roomHeight);
         // console.log(this);
     }
 }
