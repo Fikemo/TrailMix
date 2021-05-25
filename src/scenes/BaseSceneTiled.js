@@ -1,6 +1,4 @@
 import BaseScene from "./BaseScene.js";
-import Player from "../prefabs/Player.js";
-import PlatformCollider from "../prefabs/PlatformCollider.js";
 
 //**This class works under the assumption that there is only one map and one tileset */
 export default class BaseSceneTiled extends BaseScene{
@@ -30,21 +28,10 @@ export default class BaseSceneTiled extends BaseScene{
         // create the tileset
         this.tileset = this.createTileset();
         if (!this.tileset) return;
+
         // create the layers
-        /*
-            this.layers = {
-                <layer>: {
-                    name: <string>,
-                    LayerData: <LayerData>,
-                    TilemapLayer: <TielmapLayer>
-                    colliders: {
-                        <colliderName>: <collider>
-                    }
-                }
-            }
-            colliders will be handled later after the construction of objects that will need to collide
-        */
         this.layers = this.createLayers();
+        if (!this.layers) return;
         // set the tiles in the platforms layer to collide correctly (e.g. only check for 'up' collisions)
         this.setPlatformCollisions();
 
@@ -202,9 +189,6 @@ export default class BaseSceneTiled extends BaseScene{
     }
 
     calculatePlayerSpawnPoint(){
-
-        console.log(this.data);
-
         let pso;
         let ps = {x: undefined, y: undefined};
 
@@ -212,7 +196,6 @@ export default class BaseSceneTiled extends BaseScene{
 
         switch(this.data.lastScene.cameFrom){
             case "up":
-                console.log(this.playerSpawns.playerSpawnDown);
                 pso = this.playerSpawns.playerSpawnDown;
                 if (lspp){
                     ps.x = pso.x - lspp.upOffsetX;
@@ -222,7 +205,6 @@ export default class BaseSceneTiled extends BaseScene{
                 ps.y = pso.y;
             break;
             case "right":
-                console.log(this.playerSpawns.playerSpawnLeft);
                 pso = this.playerSpawns.playerSpawnLeft;
                 ps.x = pso.x;
                 if (lspp){
@@ -232,7 +214,6 @@ export default class BaseSceneTiled extends BaseScene{
                 }
             break;
             case "down":
-                console.log(this.playerSpawns.playerSpawnUp);
                 pso = this.playerSpawns.playerSpawnUp;
                 if (lspp){
                     ps.x = pso.x - lspp.downOffsetX;
@@ -242,7 +223,6 @@ export default class BaseSceneTiled extends BaseScene{
                 ps.y = pso.y;
             break;
             case "left":
-                console.log(this.playerSpawns.playerSpawnRight);
                 pso = this.playerSpawns.playerSpawnRight;
                 ps.x = pso.x;
                 if (lspp){
@@ -252,7 +232,6 @@ export default class BaseSceneTiled extends BaseScene{
                 }
             break;
             default:
-                console.log(this.playerSpawns.playerSpawn);
                 pso = this.playerSpawns.playerSpawn;
                 ps.x = pso.x;
                 ps.y = pso.y;

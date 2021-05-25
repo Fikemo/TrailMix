@@ -69,7 +69,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         }
 
         if (Phaser.Input.Keyboard.JustUp(this.keySpace)){
-            console.log("space released");
+            // console.log("space released");
             this.canJump = false;
         }
     }
