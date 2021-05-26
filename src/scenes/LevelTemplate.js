@@ -46,7 +46,7 @@ export default class LevelTemplate extends Phaser.Scene{
             this.backgroundColor = this.getRandomHexColor();
             this.PLAYER_SPAWN_POS = new Phaser.Math.Vector2(60, 120);
            
-            this.player = new Player(this, this.PLAYER_SPAWN_POS.x, this.PLAYER_SPAWN_POS.y, 'blushie');
+            this.player = new Player(this, this.PLAYER_SPAWN_POS.x, this.PLAYER_SPAWN_POS.y, 'blush');
             this.physics.add.collider(this.player, this.groundHitbox);
             
             this.groundHitbox = this.physics.add.sprite(0,0);

@@ -33,24 +33,26 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.body.setAccelerationX(0);
         this.body.setDragX(this.DRAG);
         if (this.keyA.isDown){
-            // TODO: play moving animation
             this.setFlip(true, false);
+            this.anims.play('moving_blush', true);
             //this.body.acceleration -= this.ACCELERATION;
             this.body.setAccelerationX(this.body.acceleration.x - this.ACCELERATION);
         }
         if (this.keyD.isDown){
-            // TODO: play moving animation
+            this.anims.play('moving_blush', true);
             this.resetFlip();
             //this.body.acceleration -= this.ACCELERATION;
             this.body.setAccelerationX(this.body.acceleration.x + this.ACCELERATION);
         }
-
+     
+       
         this.grounded = this.body.touching.down;
 
         if (this.grounded) this.canJump = true;
 
         if (this.canJump && Phaser.Input.Keyboard.DownDuration(this.keySpace, 250)){
-            console.log("jumping");
+           // console.log("jumping");
+            this.anims.play('jumping_blush', true);
             this.body.setVelocityY(this.JUMP_VEL);
             //this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.1});
             //this.sfx_jump.play();
@@ -58,12 +60,21 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             //this.jfx.play();
         }
         if (Phaser.Input.Keyboard.JustDown(this.keySpace)) {
+            this.anims.play('jumping_blush', true);
             this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.15});
             this.sfx_jump.play();
         }
 
         if (Phaser.Input.Keyboard.JustUp(this.keySpace)){
+            //this.anims.play('jumping_blush', false);
             this.canJump = false;
         }
+
+      /*  if (!this.keyA.isDown){
+            this.anims.play('idle_blush', true);
+        }
+        if (!this.keyD.isDown){
+            this.anims.play('idle_blush', true);
+        } */
     }
 }
