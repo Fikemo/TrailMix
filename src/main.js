@@ -11,8 +11,8 @@ import LevelTemplate from './scenes/LevelTemplate.js';
 // import fonts from "../assets/images/webfontkit-20210512-142138/stylesheet.css";
 
 let config = {
-    width: 640,
-    height: 640,
+    width: 768,
+    height: 768,
     scene: [Load, Credits, Menu, Tutorial, GameManager, End],
     physics: {
         default: 'arcade',
@@ -23,32 +23,21 @@ let config = {
             debug: true,
         }
     },
-    antiAlias: false,
+    //antiAlias: false,
     pixelArt: true,
+    // zoom: 0.75,
+    roundPixels: true,
 }
 
 /**@type {Phaser.Game} */
 let game = new Phaser.Game(config);
-
-game.mapDimensions = new Phaser.Math.Vector2(10,5);
-game.map = [];
-game.allSceneTypes = [
-    TestRight,
-    TestDownLeft,
-    TestUpDown,
-]
-
-// creat an empty 2d array with the dimensions of game.mapDimensions
-for (let i = 0; i < game.mapDimensions.x; i++){
-    game.map.push([]);
-    for (let j = 0; j < game.mapDimensions.y; j++){
-        game.map[i].push(null);
-    }
-}
+game.upscale = 2;
+game.roomHeight = 288 * game.upscale;
+game.tileSize = 16 * game.upscale;
 
 // add the game to the window
 // this will make the game instance available in the console in the inspector
-// so you can type things like 'game' or 'console.table(game.map)' whenever you want
+// so you can type things like 'game'
 window.game = game;
 
 export default game;

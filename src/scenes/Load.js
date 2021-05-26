@@ -13,32 +13,34 @@ export default class Load extends Phaser.Scene {
         this.load.on("complete", () => {
             loadingBar.destroy();
         })
-        // load in sound assets
-        this.load.path = "./assets/";
-        this.load.audio('startMenu_bgm', 'texture03.wav');
-        this.load.audio('sfx_jump', 'JumpSound.wav');
-        //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
 
-        // load images, spritesheets, and atlases
+        // load images, spritesheets, tilemaps, and atlases
         this.load.path = "./assets/images/";
-        
-        this.load.atlas("mapNodes", "mapNodes.png", "mapNodes.json");
-        this.load.atlas("mapNodes_enlarged", "mapNodes_enlarged.png", "mapNodes_enlarged.json");
-        this.load.image("selectedNode_enlarged", "selectedNode_enlarged.png");
-        this.load.image("inventoryBackground", "inventoryBackground.png");
-        this.load.image("emptyMapNode", "emptyMapNode.png");
-        this.load.image("confirmButton", "confirmButton.png");
 
         //this.load.image('blushie','blushie.png');
         this.load.spritesheet('blush', 'moving_blush.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('jump', 'jump_blush.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('sleep', 'idle_blush.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('enemy', 'enemy_walk.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.image("gameManagerBackground", "gameManagerBackground.png");
+
+        this.load.atlas("mapIcons", "mapIcons.png", "mapIcons.json");
+        this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
+        this.load.image("selectedInventoryIconFrame", "inventoryIconFrame.png");
+
+        this.load.image("blushie", "blushie.png");
+
+        this.load.image("basicTileSet", "basicTileSet.png");
+        this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
+        this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
 
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
 
         // load sounds
         this.load.path = "./assets/sounds/"
+        this.load.audio('startMenu_bgm', 'texture03.wav');
+        this.load.audio('sfx_jump', 'JumpSound.wav');
+        //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
     }
 
     create(){

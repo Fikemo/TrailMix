@@ -30,7 +30,7 @@ export default class Menu extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + 100, 'Press SPACE to Start', menuConfig).setOrigin(0.5);
         //this.menuConfig.fontSize = '30px';
         this.add.text(game.config.width/2, game.config.height/2, 'Trail Mix', menuConfig).setOrigin(0.5);
-        this.cursors.space.on('down', () => {this.scene.start('tutorialScene')});
+        this.cursors.space.on('down', () => {this.scene.start('gameManagerScene')});
         //this.scene.start("gameManagerScene");
     }
 
