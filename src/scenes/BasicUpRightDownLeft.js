@@ -30,6 +30,8 @@ export default class BasicUpRightDownLeft extends BaseSceneTiled{
         this.createPlayerColliders();
 
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+
+        this.testDoors = true;
     }
 
     update(time, delta){
@@ -38,7 +40,6 @@ export default class BasicUpRightDownLeft extends BaseSceneTiled{
         if (Phaser.Input.Keyboard.JustDown(this.keyS)){
             this.turnOffPlatformCollisions();
         }
-
         // TODO: Maybe find a better way to check when the doors are open or closed that isn't called every frame
         this.setDoors();
 

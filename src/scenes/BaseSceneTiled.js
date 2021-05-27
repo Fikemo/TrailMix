@@ -160,11 +160,18 @@ export default class BaseSceneTiled extends BaseScene{
         if (!this.doors) return console.error("NO DOORS DEFINED!");
 
         Object.values(this.doors).forEach(door => {
+            // if (this.testDoors){
+            //     console.log(door);
+            //     console.log(this[door.lockName]);
+            // }
             door.tilemapLayer.alpha = this[door.lockName] ? 1 : 0;
             Object.values(door.colliders).forEach(collider => {
-                if (!collider.static) collider.active = this[door.lockedName];
+                // console.log(collider);
+                if (!collider.static) collider.active = this[door.lockName];
             })
         })
+
+        this.testDoors = false;
     }
 
     createPlayerColliders(){
