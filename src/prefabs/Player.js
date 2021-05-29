@@ -20,11 +20,11 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.grounded = false;
         this.invincible = false;
 
-        this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
         this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.15});
+
+        this.debugTimerSet = false;
+        this.keysInitialized = false;
+
     }
 
         //this.load.audio('sfx_jump', 'JumpSound.wav');
@@ -34,6 +34,20 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
     update(time, delta){
         this.body.setAccelerationX(0);
         this.body.setDragX(this.DRAG);
+
+        if (!this.keysInitialized){
+            this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+            this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+            this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+            this.keysInitialized = true;
+        }
+
+        if (!this.debugTimerSet){
+            console.log("updating" + this.keyD.isDown);
+            this.debugTimerSet = true;
+            this.scene.time.delayedCall(1000, () => {this.debugTimerSet = false});
+        }
+
         if (this.keyA.isDown){
             // TODO: play moving animation
             this.setFlip(true, false);
@@ -42,6 +56,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         }
         if (this.keyD.isDown){
             // TODO: play moving animation
+            // console.log("moving right");
             this.resetFlip();
             //this.body.acceleration -= this.ACCELERATION;
             this.body.setAccelerationX(this.body.acceleration.x + this.ACCELERATION);

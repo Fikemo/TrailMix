@@ -24,11 +24,28 @@ export default class Load extends Phaser.Scene {
         this.load.image("selectedInventoryIconFrame", "inventoryIconFrame.png");
 
         this.load.image("blushie", "blushie.png");
+        this.load.image("gun", "gun.png");
+        this.load.image("saw", "circularSaw.png");
+
+        this.load.spritesheet("bullet", "bullet_spritesheet.png", {
+            frameWidth: 14,
+            frameHeight: 14,
+            startFrame: 0,
+            endFrame: 5
+        });
+
+        this.load.spritesheet("mouth", "mouth_spritesheet.png", {
+            frameWidth: 32,
+            frameHeight: 32,
+            startFrame: 0,
+            endFrame: 6,
+        })
 
         this.load.image("basicTileSet", "basicTileSet.png");
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
         this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
         this.load.tilemapTiledJSON("basicDownLeftJSON", "basicDownLeft.json");
+        this.load.tilemapTiledJSON("enemyHazardTestJSON", "enemyHazardTest.json");
 
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
 
@@ -40,6 +57,29 @@ export default class Load extends Phaser.Scene {
     }
 
     create(){
+
+        this.anims.create({
+            key: "bullet",
+            frames: this.anims.generateFrameNumbers("bullet", {
+                start: 0,
+                end: 5,
+                first: 0
+            }),
+            frameRate: 12,
+            repeat: -1,
+        })
+
+        this.anims.create({
+            key: "mouth",
+            frames: this.anims.generateFrameNumbers("mouth", {
+                start: 1,
+                end: 6,
+                first: 0,
+            }),
+            frameRate: 30,
+            repeat: 0,
+        })
+
         this.scene.start("menuScene");
     }
 }

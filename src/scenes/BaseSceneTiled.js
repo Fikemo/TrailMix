@@ -18,7 +18,7 @@ export default class BaseSceneTiled extends BaseScene{
     createStandardLevel(config){
         // create the map
 
-        this.cameras.main.setBackgroundColor(0x666666);
+        this.cameras.main.setBackgroundColor(0xf0e17);
 
         this.map = this.createMap(config.mapJSON);
         if (!this.map) return;
@@ -291,5 +291,11 @@ export default class BaseSceneTiled extends BaseScene{
         if (this.left && this.player.x <= 0 - this.player.width / 2){
             this.gameManager.goLeft(playerState);
         }
+    }
+
+    spawnEnemies(){
+        if (!this.map) return console.log("NO MAP DEFINED!");
+        let enemyObjectLayer = this.map.objects.find(object => object.name == "enemySpawns");
+        console.log(enemyObjectLayer);
     }
 }

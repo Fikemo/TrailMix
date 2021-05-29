@@ -2,6 +2,7 @@ import createEvent from "../../lib/events.js";
 import BasicUpRightDownLeft from "./BasicUpRightDownLeft.js";
 import BasicRightLeft from "./BasicRightLeft.js";
 import BasicDownLeft from "./BasicDownLeft.js";
+import EnemyHazardTest from "./EnemyHazardTest.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -58,7 +59,7 @@ export default class GameManager extends Phaser.Scene{
             this.selectedScene = null;
             this.activeScene = null;
 
-            this.startingSceneType = BasicUpRightDownLeft;
+            this.startingSceneType = EnemyHazardTest;
             // optionally, you can set the starting scene to be the scene you want to test to speed things up
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE THOUGH
@@ -179,6 +180,7 @@ export default class GameManager extends Phaser.Scene{
 
     setSelectedScene(){
         this.selectedScene = this.sceneInventory[this.selectedSceneIcon.index];
+        console.log(this.selectedScene);
     }
 
     setSelectedSceneIconFramePosition(){
