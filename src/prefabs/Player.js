@@ -23,27 +23,18 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.15});
 
         this.debugTimerSet = false;
-        this.keysInitialized = false;
+
+        this.keyA = scene.gameManager.keyA;
+        this.keyD = scene.gameManager.keyD;
+        this.keySpace = scene.gameManager.cursors.space;
 
     }
-
-        //this.load.audio('sfx_jump', 'JumpSound.wav');
-        //this.jfx = this.sound.add('startMenu_bgm', {volume: 0.2, loop: true});
-        //console.log('hi');
 
     update(time, delta){
         this.body.setAccelerationX(0);
         this.body.setDragX(this.DRAG);
 
-        if (!this.keysInitialized){
-            this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-            this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-            this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-            this.keysInitialized = true;
-        }
-
         if (!this.debugTimerSet){
-            console.log("updating" + this.keyD.isDown);
             this.debugTimerSet = true;
             this.scene.time.delayedCall(1000, () => {this.debugTimerSet = false});
         }
