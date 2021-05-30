@@ -26,7 +26,7 @@ export default class Credits extends Phaser.Scene{
         }
 
         // add logo
-        this.add.image(game.config.width/ 2, game.config.height/2 - 60, 'logo');
+        //this.add.image(game.config.width/ 2, game.config.height/2 - 60, 'logo');
         
 
         //add text

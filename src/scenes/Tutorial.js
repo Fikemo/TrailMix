@@ -1,6 +1,6 @@
 import game from "../main.js";
 import Player from "../prefabs/Player.js";
-import Enemy from "../prefabs/Player.js";
+import Enemy from "../prefabs/Enemy.js";
 
 export default class Tutorial extends Phaser.Scene {
     constructor(){
@@ -44,7 +44,7 @@ export default class Tutorial extends Phaser.Scene {
 
         // create the player
         this.PLAYER_SPAWN_POS = new Phaser.Math.Vector2(60, 120);
-        this.player = new Player(this, this.PLAYER_SPAWN_POS.x, this.PLAYER_SPAWN_POS.y, 'blush');
+        this.player = new Player(this, this.PLAYER_SPAWN_POS.x, this.PLAYER_SPAWN_POS.y, 'moving_blush');
         this.player.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, this.groundHitbox);
 
@@ -54,7 +54,7 @@ export default class Tutorial extends Phaser.Scene {
 
         this.cursors.right.on('down', () => {this.scene.start('gameManagerScene')});
 
-        this.enemy.anims.play('enemy_move', true);
+        //this.enemy.anims.play('enemy_move', true);
         
         //this.scene.start("gameManagerScene");
     }
@@ -62,53 +62,6 @@ export default class Tutorial extends Phaser.Scene {
 
     update(time, delta){
         this.player.update();
-
-    //update enemy movement
-       // this.enemy.x += 2;
-
-     /* if (this.enemy.x >= 500)
-      {
-        //this.enemy.x += 2;
-        //this.enemy.x = -100;
-        //this.enemy.anims.play('enemy_move', true);
-
-      }*/
-      /*
-      var bop = false;
-      if (bop == false) {
-          if (this.enemy.x > 500) {
-              bop = true;
-              //this.enemy.x = 0;
-              //continue;
-              //break;
-          }
-          this.enemy.x += 2;
-      }
-       if(bop == true) {
-           if(this.enemy.x < 200) {
-               bop = false;
-               //this.enemy.x = 0
-               //continue;
-               //break;
-               //this.enemy.x -= 2;
-           }
-           this.enemy.x -= 2;
-       }
-        */
-        this.enemy.x += 2;
-       if (this.enemy.x >= 500) {
-            this.enemy.x += 2;
-       }
-       else if(50 <= this.enemy.x <= 200){
-           this.enemy.x -= 2;
-       }
-
-       
-      //  else if(this.enemy.x <= 90) {
-        //    this.enemy.x += 2;
-        //}
-        //this.enemy.x = -100;
-      
-    //this.enemy.update();
+        this.enemy.update();
     }
 }

@@ -28,13 +28,21 @@ export default class Load extends Phaser.Scene {
         this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
         this.load.image("selectedInventoryIconFrame", "inventoryIconFrame.png");
 
-        this.load.image("blushie", "blushie.png");
+        this.load.image("blushie", "blush.png");
 
         this.load.image("basicTileSet", "basicTileSet.png");
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
         this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
 
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
+
+        //LavaLeftRight
+        this.load.image("Lava1", "lavalevels.png");
+        this.load.tilemapTiledJSON("Lava1JSON", "Lava1.json");
+
+        //candyUpDown
+        this.load.image("candyTileset", "candyTileset.png");
+        this.load.tilemapTiledJSON("candylevelJSON", "candylevel.json");
 
         // load sounds
         this.load.path = "./assets/sounds/"
@@ -62,7 +70,7 @@ export default class Load extends Phaser.Scene {
                 //custom frames for smooth transition
                 frames: [0,1,2,3,4,5,6,0],
             }),
-            frameRate: 6,
+            frameRate: 7,
             repeat: 0,
         })
         //create idle animation

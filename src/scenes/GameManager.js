@@ -1,6 +1,8 @@
 import createEvent from "../../lib/events.js";
 import BasicUpRightDownLeft from "./BasicUpRightDownLeft.js";
 import BasicRightLeft from "./BasicRightLeft.js";
+import Lava1 from "./Lava1.js";
+import candylevel from "./candylevel.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -56,11 +58,12 @@ export default class GameManager extends Phaser.Scene{
             this.sceneID = 0;
             this.selectedScene = null;
             this.activeScene = null;
-            this.startingSceneType = BasicUpRightDownLeft;
+            //this.startingSceneType = BasicUpRightDownLeft;
+            this.startingSceneType = BasicRightLeft;
             // optionally, you can set the starting scene to be the scene you want to test to speed things up
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE THOUGH
-            this.availableSceneTypes = [BasicUpRightDownLeft, BasicRightLeft];
+            this.availableSceneTypes = [BasicUpRightDownLeft, Lava1, candylevel, BasicRightLeft];
 
             this.uiNeedsUpdate = true;
 

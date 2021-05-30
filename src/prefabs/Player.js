@@ -32,6 +32,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         //console.log('hi');
 
     update(time, delta){
+        
         this.body.setAccelerationX(0);
         this.body.setDragX(this.DRAG);
         if (this.keyA.isDown){
@@ -40,13 +41,24 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             //this.body.acceleration -= this.ACCELERATION;
             this.body.setAccelerationX(this.body.acceleration.x - this.ACCELERATION);
         }
+
         if (this.keyD.isDown){
             this.anims.play('moving_blush', true);
             this.resetFlip();
             //this.body.acceleration -= this.ACCELERATION;
             this.body.setAccelerationX(this.body.acceleration.x + this.ACCELERATION);
         }
-     
+        /*
+          //set for idle
+          if (this.keyA.isUp){
+            this.anims.play('idle_blush',true);
+        }
+           //set for idle
+           //(isUp) causes moving and jump anims to stop
+           if (this.keyD.isUp){
+            this.anims.play('idle_blush',true);
+        }
+     */
        ////////////////Aubrey
         //this.grounded = this.body.touching.down;
 
@@ -77,11 +89,14 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
            // this.anims.play('jumping_blush', true);
            // this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.15});
         if (Phaser.Input.Keyboard.JustDown(this.keySpace) && this.canJump) {
+            this.anims.play('jumping_blush', true);
             this.sfx_jump.play();
         }
 
         if (Phaser.Input.Keyboard.JustUp(this.keySpace)){
-            //this.anims.play('jumping_blush', false);
+            this.anims.play('jumping_blush', false);
+            //causes jump anims to stop but moving continues
+           // this.anims.play('idle_blush', true);
             // console.log("space released");
             this.canJump = false;
         }

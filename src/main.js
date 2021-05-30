@@ -4,10 +4,10 @@ import Tutorial from './scenes/Tutorial.js';
 import Load from './scenes/Load.js';
 import Credits from './scenes/Credits.js';
 import End from './scenes/End.js';
-import TestRight from './scenes/TestRight.js';
-import TestDownLeft from './scenes/TestDownLeft.js';
-import TestUpDown from './scenes/TestUpDown.js';
-import LevelTemplate from './scenes/LevelTemplate.js';
+//import TestRight from './scenes/TestRight.js';
+//import TestDownLeft from './scenes/TestDownLeft.js';
+//import TestUpDown from './scenes/TestUpDown.js';
+//import LevelTemplate from './scenes/LevelTemplate.js';
 // import fonts from "../assets/images/webfontkit-20210512-142138/stylesheet.css";
 
 let config = {
