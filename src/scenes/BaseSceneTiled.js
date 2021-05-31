@@ -409,7 +409,9 @@ export default class BaseSceneTiled extends BaseScene{
         if (!this.layers) return console.error("NO LAYERS DEFINED");
 
         Object.values(this.layers).forEach(layer => {
-            layer.colliders[colliderName] = this.physics.add.collider(object, layer.tilemapLayer);
+            if (layer.layerData.properties[0] && layer.layerData.properties[0].name == "collides" && layer.layerData.properties[0].value == true){
+                layer.colliders[colliderName] = this.physics.add.collider(object, layer.tilemapLayer);
+            }
         });
 
         console.log(this.layers);

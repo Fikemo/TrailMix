@@ -16,6 +16,12 @@
          "id":1,
          "name":"blocks",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":24,
@@ -28,6 +34,12 @@
          "id":2,
          "name":"platforms",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":24,
@@ -40,6 +52,12 @@
          "id":3,
          "name":"leftDoor",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":24,
@@ -52,6 +70,12 @@
          "id":4,
          "name":"rightDoor",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":24,
@@ -64,6 +88,12 @@
          "id":5,
          "name":"downDoor",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":24,
@@ -348,7 +378,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":9,
+ "nextlayerid":11,
  "nextobjectid":23,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -513,6 +543,15 @@
                 }, 
                 {
                  "id":41,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":42,
                  "properties":[
                         {
                          "name":"collides",
