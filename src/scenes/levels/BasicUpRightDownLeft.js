@@ -1,6 +1,6 @@
-import Player from "../prefabs/Player.js";
-import Blushie from "../prefabs/Blushie.js";
-import BaseSceneTiled from "./BaseSceneTiled.js";
+import Player from "../../prefabs/Player.js";
+import Blushie from "../../prefabs/Blushie.js";
+import BaseSceneTiled from "../BaseSceneTiled.js";
 
 export default class BasicUpRightDownLeft extends BaseSceneTiled{
     constructor(key, gameManager){
