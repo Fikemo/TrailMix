@@ -26,6 +26,5 @@ export default class Test extends BaseSceneTiled{
 
     update(time, delta){
         super.update(time, delta);
-        this.setDoors();
     }
 }
