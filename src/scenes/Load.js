@@ -29,6 +29,9 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
         this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
 
+        this.load.image("waterTileset","waterTileSet.png");
+        this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
+
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
 
         // load sounds
