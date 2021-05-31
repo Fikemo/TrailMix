@@ -14,7 +14,6 @@ export default class Test extends BaseSceneTiled{
     }
 
     create(data){
-        console.log(this);
         super.create();
 
         this.createStandardLevel({
@@ -22,9 +21,5 @@ export default class Test extends BaseSceneTiled{
             backgroundColor: 0xf0e17,
             player: true,
         })
-    }
-
-    update(time, delta){
-        super.update(time, delta);
     }
 }
