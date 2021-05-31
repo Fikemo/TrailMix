@@ -49,10 +49,10 @@ export default class GameManager extends Phaser.Scene{
             //**An array of levels that COULD be in the player's inventory */
             this.availableSceneTypes = [
                 BasicUpRightDownLeft,
-                BasicRightLeft,
-                BasicDownLeft,
-                EnemyHazardTest,
-                NeonUpRightDownLeft
+                // BasicRightLeft,
+                // BasicDownLeft,
+                // EnemyHazardTest,
+                // NeonUpRightDownLeft
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
@@ -342,43 +342,43 @@ export default class GameManager extends Phaser.Scene{
     setSurroundingScenes(scene){
 
         // TODO: More checks. Reset to locked
-        let adjacentScene = null;
+        // let adjacentScene = null;
 
-        // up
-        adjacentScene = this.getSceneAtLocal(scene, 0, -1);
-        if (adjacentScene){
-            if (scene.up && adjacentScene.down){
-                scene.upLocked = false;
-                adjacentScene.downLocked = false;
-            }
-        }
+        // // up
+        // adjacentScene = this.getSceneAtLocal(scene, 0, -1);
+        // if (adjacentScene){
+        //     if (scene.up && adjacentScene.down){
+        //         scene.upLocked = false;
+        //         adjacentScene.downLocked = false;
+        //     }
+        // }
 
-        // right
-        adjacentScene = this.getSceneAtLocal(scene, 1, 0);
-        if (adjacentScene){
-            if (scene.right && adjacentScene.left){
-                scene.rightLocked = false;
-                adjacentScene.leftLocked = false;
-            }
-        }
+        // // right
+        // adjacentScene = this.getSceneAtLocal(scene, 1, 0);
+        // if (adjacentScene){
+        //     if (scene.right && adjacentScene.left){
+        //         scene.rightLocked = false;
+        //         adjacentScene.leftLocked = false;
+        //     }
+        // }
 
-        // down
-        adjacentScene = this.getSceneAtLocal(scene, 0, 1);
-        if (adjacentScene){
-            if (scene.down && adjacentScene.up){
-                scene.downLocked = false;
-                adjacentScene.upLocked = false;
-            }
-        }
+        // // down
+        // adjacentScene = this.getSceneAtLocal(scene, 0, 1);
+        // if (adjacentScene){
+        //     if (scene.down && adjacentScene.up){
+        //         scene.downLocked = false;
+        //         adjacentScene.upLocked = false;
+        //     }
+        // }
 
-        // left
-        adjacentScene = this.getSceneAtLocal(scene, -1, 0);
-        if (adjacentScene){
-            if (scene.left && adjacentScene.right){
-                scene.leftLocked = false;
-                adjacentScene.rightLocked = false;
-            }
-        }
+        // // left
+        // adjacentScene = this.getSceneAtLocal(scene, -1, 0);
+        // if (adjacentScene){
+        //     if (scene.left && adjacentScene.right){
+        //         scene.leftLocked = false;
+        //         adjacentScene.rightLocked = false;
+        //     }
+        // }
     }
 
     //**Get the cell information from the given scene's coordinate */

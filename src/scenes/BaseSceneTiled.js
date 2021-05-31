@@ -31,6 +31,8 @@ export default class BaseSceneTiled extends BaseScene{
             this.player.update();
             this.checkPlayerExit();
         }
+
+        this.setDoors();
     }
 
     createStandardLevel(config){
@@ -67,7 +69,9 @@ export default class BaseSceneTiled extends BaseScene{
         this.spawnEnemies();
 
         // set the hazard layer to use overlaps instead of collisions
-        this.setHazards();
+        if (this.layers.hazards){
+            this.setHazards();
+        }
 
         if (this.player && this.enemyGroup){
             this.physics.add.overlap(this.player,this.enemyGroup, (player, enemy) => {
@@ -232,13 +236,71 @@ export default class BaseSceneTiled extends BaseScene{
 
     setDoors(){
         if (!this.doors) return console.error("NO DOORS DEFINED");
+        // console.log(this.doors);
 
-        Object.values(this.values).forEach(door => {
-            door.tilemapLayer.alpha = this[door.lockName] ? 1 : 0;
-            Object.values(door.colliders).forEach(collider => {
-                collider.active = this[door.lockName];
-            })
-        })
+        // console.log(this.gameManager.getSceneAtLocal(this, -1, 0));
+
+        for(let xOffset = -1; xOffset <= 1; xOffset++){
+            for(let yOffset = -1; yOffset <= 1; yOffset++){
+                if (Math.abs(xOffset) != Math.abs(yOffset)){
+                    let adjacentScene = this.gameManager.getSceneAtLocal(this, xOffset, yOffset);
+                    // console.log(adjacentScene);
+                    if (adjacentScene){
+                        if (this.up && yOffset == -1){
+                            // console.log(this.doors.upDoor);
+                            if (adjacentScene.down){
+                                this.doors.upDoor.colliders.player.active = false;
+                                this.doors.upDoor.tilemapLayer.alpha = 0;
+                            } else {
+                                this.doors.upDoor.colliders.player.active = true;
+                                this.doors.upDoor.tilemapLayer.alpha = 1;
+                            }
+                        }
+
+
+                        if (this.right && xOffset == 1){
+                            // console.log(this.doors.rightDoor);
+                            if (adjacentScene.left){
+                                this.doors.rightDoor.colliders.player.active = false;
+                                this.doors.rightDoor.tilemapLayer.alpha = 0;
+                            } else {
+                                this.doors.rightDoor.colliders.player.active = true;
+                                this.doors.rightDoor.tilemapLayer.alpha = 1;
+                            }
+                        }
+
+                        if (this.down && yOffset == 1){
+                            // console.log(this.doors.downDoor);
+                            if (adjacentScene.up){
+                                this.doors.downDoor.colliders.player.active = false;
+                                this.doors.downDoor.tilemapLayer.alpha = 0;
+                            } else {
+                                this.doors.downDoor.colliders.player.active = true;
+                                this.doors.downDoor.tilemapLayer.alpha = 1;
+                            }
+                        }
+
+                        if (this.left && xOffset == -1){
+                            // console.log(this.doors.leftDoor);
+                            if (adjacentScene.right){
+                                this.doors.leftDoor.colliders.player.active = false;
+                                this.doors.leftDoor.tilemapLayer.alpha = 0;
+                            } else {
+                                this.doors.leftDoor.colliders.player.active = true;
+                                this.doors.leftDoor.tilemapLayer.alpha = 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Object.values(this.values).forEach(door => {
+        //     door.tilemapLayer.alpha = this[door.lockName] ? 1 : 0;
+        //     Object.values(door.colliders).forEach(collider => {
+        //         collider.active = this[door.lockName];
+        //     })
+        // })
     }
 
     // TODO: Currently only works with this.layers
@@ -355,6 +417,41 @@ export default class BaseSceneTiled extends BaseScene{
 
     checkPlayerExit(){
         if (!this.player) return console.error("NO PLAYER DEFINED");
+
+        let playerState = {
+            playerPosition: {
+                x: this.player.x,
+                y: this.player.y,
+                upOffsetX: this.playerSpawns.playerSpawnUp        ?  this.playerSpawns.playerSpawnUp.x    - this.player.x : undefined,
+                rightOffsetY: this.playerSpawns.playerSpawnRight  ?  this.playerSpawns.playerSpawnRight.y - this.player.y : undefined,
+                downOffsetX: this.playerSpawns.playerSpawnDown    ?  this.playerSpawns.playerSpawnDown.x  - this.player.x : undefined,
+                leftOffsetY: this.playerSpawns.playerSpawnLeft    ?  this.playerSpawns.playerSpawnLeft.y  - this.player.y : undefined,
+            },
+            velocity: {
+                x: this.player.body.velocity.x,
+                y: this.player.body.velocity.y,
+            },
+            flip: this.player.flipX
+        }
+        // exit up
+        if (this.up && this.player.y <= 0 - this.player.height / 2){
+            this.gameManager.goUp(playerState);
+        }
+
+        // exit right
+        if (this.right && this.player.x >= this.scale.width - this.player.width / 2){
+            this.gameManager.goRight(playerState);
+        }
+
+        // exit down
+        if (this.down && this.player.y >= this.scale.height * 0.75 - this.player.height / 2){
+            this.gameManager.goDown(playerState);
+        }
+
+        // exit left
+        if (this.left && this.player.x <= 0 - this.player.width / 2){
+            this.gameManager.goLeft(playerState);
+        }
     }
 
     spawnEnemies(){

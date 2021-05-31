@@ -7,7 +7,7 @@ export default class Test extends BaseSceneTiled{
 
         // this.up
         this.right = true;
-        // this.down
+        this.down = true;
         this.left = true;
 
         this.setIcon();
