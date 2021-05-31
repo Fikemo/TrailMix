@@ -1,9 +1,9 @@
-import GameManager from './scenes/GameManager.js';
-import Menu from './scenes/Menu.js';
-import Tutorial from './scenes/Tutorial.js';
 import Load from './scenes/Load.js';
+import Menu from './scenes/Menu.js';
+import GameManager from './scenes/GameManager.js';
 
 let config = {
+    type: Phaser.AUTO,
     width: 768,
     height: 768,
     scene: [Load, Menu, GameManager],
@@ -13,13 +13,11 @@ let config = {
             gravity: {
                 y: 1500,
             },
-            debug: true,
+            // debug: true,
         }
     },
-    //antiAlias: false,
-    pixelArt: true,
-    // zoom: 0.75,
     roundPixels: true,
+    antialias: false,
 }
 
 /**@type {Phaser.Game} */

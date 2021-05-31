@@ -1,5 +1,6 @@
-import BaseSceneTiled from "./BaseSceneTiled.js";
-import Player from "../prefabs/Player.js";
+import BaseSceneTiled from "../BaseSceneTiled.js";
+import Player from "../../prefabs/Player.js";
+import Saw from "../../prefabs/Saw.js";
 
 export default class BasicRightLeft extends BaseSceneTiled{
     constructor (key, gameManager){

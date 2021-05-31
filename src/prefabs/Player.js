@@ -20,20 +20,34 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.grounded = false;
         this.invincible = false;
 
-        this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keySpace = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
         this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.15});
-    }
 
-        //this.load.audio('sfx_jump', 'JumpSound.wav');
-        //this.jfx = this.sound.add('startMenu_bgm', {volume: 0.2, loop: true});
-        //console.log('hi');
+        this.debugTimerSet = false;
+
+        this.keyA = scene.gameManager.keyA;
+        this.keyD = scene.gameManager.keyD;
+        this.keySpace = scene.gameManager.cursors.space;
+
+        this.mouth = scene.add.sprite(x, y, "mouth").setOrigin(0);
+        this.target = 0;
+        this.canShoot = true;
+
+        this.bulletGroup = scene.add.group();
+
+        scene.input.on("pointerdown", (pointer) => {
+            this.shoot(pointer);
+        });
+    }
 
     update(time, delta){
         this.body.setAccelerationX(0);
         this.body.setDragX(this.DRAG);
+
+        if (!this.debugTimerSet){
+            this.debugTimerSet = true;
+            this.scene.time.delayedCall(1000, () => {this.debugTimerSet = false});
+        }
+
         if (this.keyA.isDown){
             // TODO: play moving animation
             this.setFlip(true, false);
@@ -42,6 +56,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         }
         if (this.keyD.isDown){
             // TODO: play moving animation
+            // console.log("moving right");
             this.resetFlip();
             //this.body.acceleration -= this.ACCELERATION;
             this.body.setAccelerationX(this.body.acceleration.x + this.ACCELERATION);
@@ -71,6 +86,41 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         if (Phaser.Input.Keyboard.JustUp(this.keySpace)){
             // console.log("space released");
             this.canJump = false;
+        }
+
+        this.mouth.setPosition(this.x, this.y).setFlip(this.flipX);
+    }
+
+    shoot(pointer){
+        if (this.canShoot){
+            this.mouth.anims.play("mouth");
+    
+            let shootingFrom = {x: this.mouth.x + 16, y: this.mouth.y + 24};
+            let bullet = this.scene.physics.add.sprite(shootingFrom.x, shootingFrom.y, "bullet").setImmovable(true);
+            bullet.damage = 1;
+            bullet.body.setAllowGravity(false);
+            bullet.anims.play("bullet");
+            this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(shootingFrom, pointer)), 500, bullet.body.velocity);
+            bullet.body.setAngularVelocity(400);
+
+            this.bulletGroup.add(bullet);
+
+            this.scene.time.delayedCall(4000, () => {
+                // this.bulletGroup.remove(bullet);
+                bullet.destroy();
+            });
+
+            this.canShoot = false;
+            this.scene.time.delayedCall(250, () => {
+                this.canShoot = true;
+            })
+        }
+    }
+
+    takeDamage(damage){
+        if (!this.invincible){
+            this.invincible = true;
+            this.scene.time.delayedCall(1000, () => {this.invincible = false});
         }
     }
 }
