@@ -28,6 +28,15 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.keyD = scene.gameManager.keyD;
         this.keySpace = scene.gameManager.cursors.space;
 
+        this.mouth = scene.add.sprite(x, y, "mouth").setOrigin(0);
+        this.target = 0;
+        this.canShoot = true;
+
+        this.bulletGroup = scene.add.group();
+
+        scene.input.on("pointerdown", (pointer) => {
+            this.shoot(pointer);
+        });
     }
 
     update(time, delta){
@@ -77,6 +86,41 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         if (Phaser.Input.Keyboard.JustUp(this.keySpace)){
             // console.log("space released");
             this.canJump = false;
+        }
+
+        this.mouth.setPosition(this.x, this.y).setFlip(this.flipX);
+    }
+
+    shoot(pointer){
+        if (this.canShoot){
+            this.mouth.anims.play("mouth");
+    
+            let shootingFrom = {x: this.mouth.x + 16, y: this.mouth.y + 24};
+            let bullet = this.scene.physics.add.sprite(shootingFrom.x, shootingFrom.y, "bullet").setImmovable(true);
+            bullet.damage = 1;
+            bullet.body.setAllowGravity(false);
+            bullet.anims.play("bullet");
+            this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(shootingFrom, pointer)), 500, bullet.body.velocity);
+            bullet.body.setAngularVelocity(400);
+
+            this.bulletGroup.add(bullet);
+
+            this.scene.time.delayedCall(4000, () => {
+                // this.bulletGroup.remove(bullet);
+                bullet.destroy();
+            });
+
+            this.canShoot = false;
+            this.scene.time.delayedCall(250, () => {
+                this.canShoot = true;
+            })
+        }
+    }
+
+    takeDamage(damage){
+        if (!this.invincible){
+            this.invincible = true;
+            this.scene.time.delayedCall(1000, () => {this.invincible = false});
         }
     }
 }

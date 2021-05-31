@@ -73,6 +73,7 @@ export default class BasicDownLeft extends BaseSceneTiled{
     }
 
     update(time, delta){
+        super.update(time, delta);
         this.player.update();
 
         if (Phaser.Input.Keyboard.JustDown(this.keyS)){
@@ -112,6 +113,7 @@ export default class BasicDownLeft extends BaseSceneTiled{
         this.gun.anims.play("mouth");
         let shootingFrom = {x: this.gun.x + 16, y: this.gun.y + 24};
         let bullet = this.physics.add.sprite(shootingFrom.x, shootingFrom.y, "bullet").setImmovable(true);
+        bullet.damage = 1;
         bullet.body.setAllowGravity(false);
         bullet.anims.play("bullet");
         // console.log(Phaser.Math.Angle.BetweenPoints(this.gun, pointer));

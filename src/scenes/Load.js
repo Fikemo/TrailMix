@@ -43,6 +43,12 @@ export default class Load extends Phaser.Scene {
 
         // enemies and hazards
         this.load.image("saw", "circularSaw.png");
+        this.load.spritesheet("redEnemy", "redEnemy_spritesheet.png", {
+            frameWidth: 32,
+            frameHeight: 32,
+            startFrame: 0,
+            endFrame: 2,
+        });
 
         // tilesets
         this.load.image("basicTileSet", "basicTileSet.png");
@@ -52,6 +58,7 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
         this.load.tilemapTiledJSON("basicDownLeftJSON", "basicDownLeft.json");
         this.load.tilemapTiledJSON("enemyHazardTestJSON", "enemyHazardTest.json");
+        this.load.tilemapTiledJSON("testJSON", "test.json");
 
         // fonts
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
@@ -90,6 +97,17 @@ export default class Load extends Phaser.Scene {
             frameRate: 30,
             repeat: 0,
         });
+
+        this.anims.create({
+            key: "redEnemy",
+            frames: this.anims.generateFrameNumbers("redEnemy", {
+                start: 0,
+                end: 2,
+                first: 0
+            }),
+            frameRate: 6,
+            repeat: -1,
+        })
 
         this.scene.start("menuScene");
     }

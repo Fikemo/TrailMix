@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"enemyHazardTest.json"
+        }
+    },
  "height":18,
  "infinite":false,
  "layers":[
@@ -197,7 +205,7 @@
                 {
                  "height":0,
                  "id":12,
-                 "name":"",
+                 "name":"pink",
                  "polyline":[
                         {
                          "x":0,

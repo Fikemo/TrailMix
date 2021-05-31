@@ -4,6 +4,8 @@ import BasicRightLeft from "./levels/BasicRightLeft.js";
 import BasicDownLeft from "./levels/BasicDownLeft.js";
 import EnemyHazardTest from "./levels/EnemyHazardTest.js";
 
+import TestScene from "./levels/Test.js";
+
 // TODO: Add player health
 // TODO: Add player temporary inventory
 
@@ -39,7 +41,7 @@ export default class GameManager extends Phaser.Scene{
             this.active = false;
 
             //**The type of scene that the player will start in */
-            this.startingSceneType = BasicUpRightDownLeft;
+            this.startingSceneType = TestScene;
             // optionally, you can set the starting scene to be the scene you want to test
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
