@@ -29,6 +29,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("selectedInventoryIconFrame", "inventoryIconFrame.png");
 
         this.load.image("blushie", "blush.png");
+        this.load.image("bar", "bar.png");
 
         this.load.image("basicTileSet", "basicTileSet.png");
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
@@ -37,12 +38,12 @@ export default class Load extends Phaser.Scene {
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
 
         //LavaLeftRight
-        this.load.image("Lava1", "lavalevels.png");
-        this.load.tilemapTiledJSON("Lava1JSON", "Lava1.json");
+        this.load.image("LavaLeftRight", "lavalevels.png");
+        this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
 
         //candyUpDown
         this.load.image("candyTileset", "candyTileset.png");
-        this.load.tilemapTiledJSON("candylevelJSON", "candylevel.json");
+        this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
 
         // load sounds
         this.load.path = "./assets/sounds/"
@@ -92,7 +93,7 @@ export default class Load extends Phaser.Scene {
                 end:3,
                 first: 0,
             }),
-            frameRate: 10,
+            frameRate: 6,
             repeat: -1,
         })
 

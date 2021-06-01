@@ -1,9 +1,8 @@
 
 import BaseSceneTiled from "./BaseSceneTiled.js";
 import Player from "../prefabs/Player.js";
-import Enemy from "../prefabs/Player.js";
  
-export default class Lava1 extends BaseSceneTiled{
+export default class LavaLeftRight extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
  
@@ -16,7 +15,7 @@ export default class Lava1 extends BaseSceneTiled{
     }
     create(data){
         super.create();
-        this.createStandardLevel({mapJSON: "Lava1JSON"});
+        this.createStandardLevel({mapJSON: "LavaLeftRightJSON"});
          // get the player spawn point
          let ps = this.calculatePlayerSpawnPoint();
          // create the player
@@ -25,13 +24,7 @@ export default class Lava1 extends BaseSceneTiled{
          this.setPlayerSpawnState();
          // Create the colliders between the player and the blocks and the doors
          this.createPlayerColliders();
-         //this.ENEMY_SPAWN_POS = new Phaser.Math.Vector2(100,430);
-         this.enemy = new Enemy(this, ps.x, ps.y, 'enemy');
-         this.physics.add.collider(this.enemy, this.groundHitbox);
- 
-         this.cursors.right.on('down', () => {this.scene.start('gameManagerScene')});
- 
-         this.enemy.anims.play('enemy_move', true);
+         
  
          // define the key that will be used to turn off the platform collision
          this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);

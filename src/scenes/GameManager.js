@@ -1,8 +1,8 @@
 import createEvent from "../../lib/events.js";
 import BasicUpRightDownLeft from "./BasicUpRightDownLeft.js";
 import BasicRightLeft from "./BasicRightLeft.js";
-import Lava1 from "./Lava1.js";
-import candylevel from "./candylevel.js";
+import LavaLeftRight from "./LavaLeftRight.js";
+import CandyUpDown from "./CandyUpDown.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -63,7 +63,7 @@ export default class GameManager extends Phaser.Scene{
             // optionally, you can set the starting scene to be the scene you want to test to speed things up
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE THOUGH
-            this.availableSceneTypes = [BasicUpRightDownLeft, Lava1, candylevel, BasicRightLeft];
+            this.availableSceneTypes = [BasicUpRightDownLeft, LavaLeftRight, CandyUpDown, BasicRightLeft];
 
             this.uiNeedsUpdate = true;
 
@@ -80,6 +80,7 @@ export default class GameManager extends Phaser.Scene{
         this.add.sprite(0,0,"gameManagerBackground").setOrigin(0,0);
 
         // create the UI
+        this.createHealthUI();
         this.createSceneInventoryUI();
         this.createMapUI();
 
@@ -120,6 +121,8 @@ export default class GameManager extends Phaser.Scene{
     }
 
     updateUI(){
+        //update player health
+      
         // update the scene inventory
         for (let i = 0; i < this.sceneInventoryUI.length; i++){
             let frameName = "icon_void";
@@ -127,7 +130,26 @@ export default class GameManager extends Phaser.Scene{
             if (currentScene) frameName = currentScene.iconName;
             this.sceneInventoryUI[i].setFrame(frameName);
         }
+/*
+        if (this.player.uiNeedsUpdate){
+            console.log('updating ui');
+            for (let i = 0; i < this.backgroundHealth.length; i++){
+                if (i > this.player.maxHealth - 1){
+                    this.backgroundHealth[i].alpha = 0;
+                    this.emptyHealth[i].alpha = 0;
+                } else {
+                    this.backgroundHealth[i].alpha = 1;
+                    this.emptyHealth[i].alpha = 1;
+                }
 
+                if (i > this.player.currentHealth - 1){
+                    this.filledHealth[i].alpha = 0;
+                } else {
+                    this.filledHealth[i].alpha = 1;
+                }
+            }
+        }
+        */
         // update the map
         for (let i = 0; i < this.map.width; i++){
             for (let j = 0; j < this.map.height; j++){
@@ -138,6 +160,7 @@ export default class GameManager extends Phaser.Scene{
             }
         }
     }
+
 
     // Scene Inventory
     createSceneInventoryUI(){
@@ -189,6 +212,24 @@ export default class GameManager extends Phaser.Scene{
         );
     }
 
+    //Create health bar
+    createHealthUI(){
+    let healthbarPos = new Phaser.Math.Vector2(32, 32);
+    let healthBarSegmentWidth = 40;
+    this.backgroundHealth = [];
+    for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        this.backgroundHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i, healthbarPos.y, 'bar').setOrigin(0));
+    }
+    this.emptyHealth = [];
+    for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        this.emptyHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
+    }
+    this.filledHealth = [];
+    for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        this.filledHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
+    }
+    }
+
     // Mini Map
     createMapUI(){
         // initialize x axis in the mapUI array
@@ -210,7 +251,9 @@ export default class GameManager extends Phaser.Scene{
                     }
                 }, this);
                 this.mapUI[j].push(icon);
+           
             }
+            
         }
     }
 

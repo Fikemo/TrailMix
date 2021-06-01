@@ -1,7 +1,7 @@
 import BaseSceneTiled from "./BaseSceneTiled.js";
 import Player from "../prefabs/Player.js";
  
-export default class candylevel extends BaseSceneTiled{
+export default class CandyUpDown extends BaseSceneTiled{
     //candyUpDown
     constructor(key, gameManager){
         super(key, gameManager);
@@ -15,7 +15,7 @@ export default class candylevel extends BaseSceneTiled{
     }
     create(data){
         super.create();
-        this.createStandardLevel({mapJSON: "candylevelJSON"});
+        this.createStandardLevel({mapJSON: "CandyUpDownJSON"});
         //this.createStandardLevel({mapJSON: "candyUpDownJSON"});
          // get the player spawn point
          let ps = this.calculatePlayerSpawnPoint();

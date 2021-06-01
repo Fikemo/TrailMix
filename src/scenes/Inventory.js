@@ -3,11 +3,15 @@ export default class Inventory extends Phaser.Scene{
         super("inventoryScene");
     }
 
+
     create(){
+        
         this.add.image(0,0,'inventoryBackground').setOrigin(0);
+        this.add.image('bar');
         this.scene.launch('level_0_0');
 
         this.mapPos = new Phaser.Math.Vector2(164,488);
+        this.fullWidth = 300
 
        this.mapGroup = this.add.group();
         for (let i = 0; i < this.game.mapDimensions.y; i++){
@@ -24,9 +28,11 @@ export default class Inventory extends Phaser.Scene{
             console.log(gameObject);
             console.log(event);
         })
+    
     }
 
     update(time, delta){
-
+            healthBar.scale.setTo(this.player.health / this.player.maxHealth, 1);
+            console.log('health')
     }
 }
