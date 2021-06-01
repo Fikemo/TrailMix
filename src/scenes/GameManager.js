@@ -3,6 +3,7 @@ import BasicUpRightDownLeft from "./BasicUpRightDownLeft.js";
 import BasicRightLeft from "./BasicRightLeft.js";
 import BasicDownLeft from "./BasicDownLeft.js";
 import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
+import Load from "./Load.js";
 
 export default class GameManager extends Phaser.Scene{
     constructor(){
@@ -72,6 +73,13 @@ export default class GameManager extends Phaser.Scene{
     }
 
     create(data){
+
+        // this.music = this.sound.add('neon_bgm', {volume: 0.1});
+        this.music = {
+            neon: this.sound.add('neon_bgm', {volume: 0.1}),
+        }
+
+
         // inputs
         this.cursors = this.input.keyboard.createCursorKeys();
         this.keyEscape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
@@ -354,6 +362,22 @@ export default class GameManager extends Phaser.Scene{
             this.activeScene = sceneToLaunch;
             this.active = false;
         }
+
+        //this.music = this.sound.add('neon_bgm', {volume: 0.1});
+        // if (this.activeScene && !this.music.isPlaying) {
+        //     console.log('aboiiii!!!');
+        //     this.music.play();
+        // }
+
+        let musicCanPlay = true;
+        Object.values(this.music).forEach(track => { 
+            if (track.isPlaying){
+                musicCanPlay = false;
+            }
+        })
+        if (musicCanPlay && sceneToLaunch.musicKey) {
+            this.music[sceneToLaunch.musicKey].play();
+        }
     }
 
     destroyScene(scene){
@@ -376,6 +400,12 @@ export default class GameManager extends Phaser.Scene{
             this.activeScene.coordinate.y,
             data
         );
+        console.log(this.activeScene);
+        // this.music = this.sound.add('neon_bgm', {volume: 0.1});
+        // if (this.activeScene && !this.music.isPlaying) {
+        //     console.log('aboiiii!!!');
+        //     this.music.play();
+        // }
     }
 
     goDown(data = {}){

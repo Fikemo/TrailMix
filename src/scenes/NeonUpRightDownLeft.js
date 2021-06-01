@@ -11,6 +11,9 @@ export default class NeonUpRightDownLeft extends BaseSceneTiled{
         this.left = true;
 
         this.setIcon();
+
+        // this.load.audio('neon_bgm', './assets/sounds/texture11.wav');
+        // this.music = this.scene.sound.add('neon_bgm', {volume: 0.1});
     }
 
     create(data){

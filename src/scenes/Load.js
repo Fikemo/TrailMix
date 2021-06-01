@@ -37,6 +37,9 @@ export default class Load extends Phaser.Scene {
         // load sounds
         this.load.path = "./assets/sounds/"
         this.load.audio('startMenu_bgm', 'texture03.wav');
+        this.load.audio('neon_bgm', 'texture11.wav');
+        
+
         this.load.audio('sfx_jump', 'JumpSound.wav');
         //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
     }
