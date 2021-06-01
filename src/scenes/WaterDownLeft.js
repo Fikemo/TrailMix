@@ -8,6 +8,8 @@ export default class WaterDownLeft extends BaseSceneTiled{
         this.left = true;
         this.down = true;
 
+        this.musicKey = "water";
+
         this.setIcon();
     }
 

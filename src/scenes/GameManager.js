@@ -95,7 +95,12 @@ export default class GameManager extends Phaser.Scene{
 
         // this.music = this.sound.add('neon_bgm', {volume: 0.1});
         this.music = {
+            basic: this.sound.add('basic_bgm', {volume: 0.1}),
             neon: this.sound.add('neon_bgm', {volume: 0.1}),
+            water: this.sound.add('water_bgm', {volume: 0.1}),
+            lava: this.sound.add('lava_bgm', {volume: 0.1}),
+            candy: this.sound.add('candy_bgm', {volume: 0.1}),
+            forest: this.sound.add('forest_bgm', {volume: 0.1}),
         }
 
 
@@ -535,6 +540,7 @@ export default class GameManager extends Phaser.Scene{
                 musicCanPlay = false;
             }
         })
+        if(this.currentScene) console.log(this.currentScene);
         if (musicCanPlay && sceneToLaunch.musicKey) {
             this.music[sceneToLaunch.musicKey].play();
         }

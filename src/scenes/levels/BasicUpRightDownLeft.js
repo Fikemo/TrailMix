@@ -11,6 +11,8 @@ export default class BasicUpRightDownLeft extends BaseSceneTiled{
         this.down = true;
         this.left = true;
 
+        this.musicKey = "basic";
+
         this.setIcon();
     }
 

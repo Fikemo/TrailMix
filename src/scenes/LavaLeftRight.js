@@ -11,6 +11,8 @@ export default class LavaLeftRight extends BaseSceneTiled{
         //this.down = true;
         this.left = true;
  
+        this.musicKey = "lava";
+
         this.setIcon();
     }
     create(data){

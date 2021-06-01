@@ -90,7 +90,12 @@ export default class Load extends Phaser.Scene {
         // bgm
         this.load.audio('startMenu_bgm', 'texture03.wav');
         this.load.audio('neon_bgm', 'texture11.wav');
-        
+        this.load.audio('water_bgm', 'WaterLevel.wav');
+        //this.load.audio('candy_bgm', 'texture11.wav');
+        this.load.audio('lava_bgm', 'Vibe28.wav');
+        this.load.audio('forest_bgm', 'CHILL4_2.wav');
+        this.load.audio('candy_bgm', 'texture08.wav');
+        this.load.audio('basic_bgm', 'chill12_1.2.wav');
 
 
         // sfx

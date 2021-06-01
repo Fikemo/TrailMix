@@ -9,6 +9,8 @@ export default class ForestRightLeft extends BaseSceneTiled{
         // this.down = false;
         this.left = true;
 
+        this.musicKey = "forest";
+
         this.setIcon();
     }
 

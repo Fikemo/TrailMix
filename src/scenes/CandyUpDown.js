@@ -11,6 +11,8 @@ export default class CandyUpDown extends BaseSceneTiled{
         this.down = true;
         //this.left = true;
  
+        this.musicKey = "candy";
+
         this.setIcon();
     }
     create(data){
