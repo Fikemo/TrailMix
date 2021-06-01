@@ -601,7 +601,7 @@
   <object id="2" name="playerSpawnLeft" x="0" y="128">
    <point/>
   </object>
-  <object id="3" name="playerSpawnDown" x="544" y="544">
+  <object id="3" name="playerSpawnDown" x="512" y="544">
    <point/>
   </object>
  </objectgroup>
