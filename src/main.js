@@ -1,16 +1,11 @@
-import GameManager from './scenes/GameManager.js';
-import Menu from './scenes/Menu.js';
-import Tutorial from './scenes/Tutorial.js';
 import Load from './scenes/Load.js';
 import Credits from './scenes/Credits.js';
 import End from './scenes/End.js';
-//import TestRight from './scenes/TestRight.js';
-//import TestDownLeft from './scenes/TestDownLeft.js';
-//import TestUpDown from './scenes/TestUpDown.js';
-//import LevelTemplate from './scenes/LevelTemplate.js';
-// import fonts from "../assets/images/webfontkit-20210512-142138/stylesheet.css";
+import Menu from './scenes/Menu.js';
+import GameManager from './scenes/GameManager.js';
 
 let config = {
+    type: Phaser.AUTO,
     width: 768,
     height: 768,
     scene: [Load, Credits, Menu, Tutorial, GameManager, End],
@@ -20,13 +15,11 @@ let config = {
             gravity: {
                 y: 1500,
             },
-            debug: true,
+            // debug: true,
         }
     },
-    //antiAlias: false,
-    pixelArt: true,
-    // zoom: 0.75,
     roundPixels: true,
+    antialias: false,
 }
 
 /**@type {Phaser.Game} */
