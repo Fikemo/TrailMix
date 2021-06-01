@@ -216,6 +216,20 @@ export default class BaseSceneTiled extends BaseScene{
         }
     }
 
+    setColliders(layer, active = true, ...colliderNames){
+        if (colliderNames.length != 0){
+            colliderNames.forEach(colliderName => {
+                if (layer.colliders[colliderName]){
+                    layer.colliders[colliderName].active = active;
+                }
+            })
+        } else {
+            Object.values(layer.colliders).forEach(collider => {
+                collider.active = active;
+            })
+        }
+    }
+
     createDoors(layersObj){
         if (!layersObj){
             if (!this.layers) return console.error("NO LAYERS TO CREATE DOORS FROM!");
@@ -249,10 +263,11 @@ export default class BaseSceneTiled extends BaseScene{
                         if (this.up && yOffset == -1){
                             // console.log(this.doors.upDoor);
                             if (adjacentScene.down){
-                                this.doors.upDoor.colliders.player.active = false;
+                                // this.doors.upDoor.colliders.player.active = false;
+                                this.setColliders(this.doors.upDoor, false, "player");
                                 this.doors.upDoor.tilemapLayer.alpha = 0;
                             } else {
-                                this.doors.upDoor.colliders.player.active = true;
+                                this.setColliders(this.doors.upDoor, true, "player");
                                 this.doors.upDoor.tilemapLayer.alpha = 1;
                             }
                         }
@@ -261,10 +276,10 @@ export default class BaseSceneTiled extends BaseScene{
                         if (this.right && xOffset == 1){
                             // console.log(this.doors.rightDoor);
                             if (adjacentScene.left){
-                                this.doors.rightDoor.colliders.player.active = false;
+                                this.setColliders(this.doors.rightDoor, false, "player");
                                 this.doors.rightDoor.tilemapLayer.alpha = 0;
                             } else {
-                                this.doors.rightDoor.colliders.player.active = true;
+                                this.setColliders(this.doors.rightDoor, true, "player");
                                 this.doors.rightDoor.tilemapLayer.alpha = 1;
                             }
                         }
@@ -272,10 +287,10 @@ export default class BaseSceneTiled extends BaseScene{
                         if (this.down && yOffset == 1){
                             // console.log(this.doors.downDoor);
                             if (adjacentScene.up){
-                                this.doors.downDoor.colliders.player.active = false;
+                                this.setColliders(this.doors.downDoor, false, "player");
                                 this.doors.downDoor.tilemapLayer.alpha = 0;
                             } else {
-                                this.doors.downDoor.colliders.player.active = true;
+                                this.setColliders(this.doors.downDoor, true, "player");
                                 this.doors.downDoor.tilemapLayer.alpha = 1;
                             }
                         }
@@ -283,10 +298,10 @@ export default class BaseSceneTiled extends BaseScene{
                         if (this.left && xOffset == -1){
                             // console.log(this.doors.leftDoor);
                             if (adjacentScene.right){
-                                this.doors.leftDoor.colliders.player.active = false;
+                                this.setColliders(this.doors.leftDoor, false, "player");
                                 this.doors.leftDoor.tilemapLayer.alpha = 0;
                             } else {
-                                this.doors.leftDoor.colliders.player.active = true;
+                                this.setColliders(this.doors.leftDoor, true, "player");
                                 this.doors.leftDoor.tilemapLayer.alpha = 1;
                             }
                         }

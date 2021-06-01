@@ -7,6 +7,7 @@ import BasicDownLeft from "./levels/BasicDownLeft.js";
 import EnemyHazardTest from "./levels/EnemyHazardTest.js";
 import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
 import WaterDownLeft from "./WaterDownLeft.js";
+import ForestRightLeft from "./levels/ForestRightLeft.js";
 
 import TestScene from "./levels/Test.js";
 
@@ -45,22 +46,18 @@ export default class GameManager extends Phaser.Scene{
             this.active = false;
 
             //**The type of scene that the player will start in */
-            this.startingSceneType = TestScene;
+            this.startingSceneType = ForestRightLeft;
             // optionally, you can set the starting scene to be the scene you want to test
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
             //**An array of levels that COULD be in the player's inventory */
             this.availableSceneTypes = [
                 BasicUpRightDownLeft,
-                // BasicRightLeft,
-                // BasicDownLeft,
-                // EnemyHazardTest,
-                // NeonUpRightDownLeft
                 WaterDownLeft,
                 LavaLeftRight,
                 CandyUpDown,
-                NeonUpRightDownLeft
-
+                // NeonUpRightDownLeft
+                ForestRightLeft,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes

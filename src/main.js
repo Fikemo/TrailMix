@@ -16,7 +16,7 @@ let config = {
             gravity: {
                 y: 1500,
             },
-            // debug: true,
+            debug: true,
         }
     },
     roundPixels: true,

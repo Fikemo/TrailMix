@@ -1,5 +1,4 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
-import Player from "../../prefabs/Player.js";
 
 export default class Test extends BaseSceneTiled{
     constructor(key, gameManager){

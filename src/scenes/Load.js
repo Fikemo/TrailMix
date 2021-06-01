@@ -61,8 +61,9 @@ export default class Load extends Phaser.Scene {
         this.load.image("basicTileSet", "basicTileSet.png");
         this.load.image("NeonTileSet", "NeonTileSet.png");
         this.load.image("waterTileset","waterTileset.png");
+        this.load.image("forestTileset", "forestTileset.png");
 
-        // tile maps
+        // tilemaps
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
         this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
         this.load.tilemapTiledJSON("basicDownLeftJSON", "basicDownLeft.json");
@@ -70,6 +71,7 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("testJSON", "test.json");
         this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
         this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
+        this.load.tilemapTiledJSON("forestRightLeftJSON", "forestRightLeft.json");
 
         // fonts
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");

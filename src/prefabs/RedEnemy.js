@@ -4,6 +4,8 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setOrigin(0);
+        this.body.setSize(24, 24, false);
+        this.body.setOffset(4, 8);
         this.anims.play("redEnemy");
 
         this.damage = 5;
