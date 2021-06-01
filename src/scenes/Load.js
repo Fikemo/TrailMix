@@ -60,6 +60,7 @@ export default class Load extends Phaser.Scene {
         // tilesets
         this.load.image("basicTileSet", "basicTileSet.png");
         this.load.image("NeonTileSet", "NeonTileSet.png");
+        this.load.image("waterTileset","waterTileset.png");
 
         // tile maps
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
@@ -68,8 +69,6 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("enemyHazardTestJSON", "enemyHazardTest.json");
         this.load.tilemapTiledJSON("testJSON", "test.json");
         this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
-
-        this.load.image("waterTileset","waterTileSet.png");
         this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
 
         // fonts
