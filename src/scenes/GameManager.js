@@ -57,6 +57,10 @@ export default class GameManager extends Phaser.Scene{
                 // EnemyHazardTest,
                 // NeonUpRightDownLeft
                 WaterDownLeft,
+                LavaLeftRight,
+                CandyUpDown,
+                NeonUpRightDownLeft
+
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes

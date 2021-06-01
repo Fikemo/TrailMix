@@ -75,8 +75,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             this.anims.play('idle_blush',true);
         }
      */
-       ////////////////Aubrey
-        //this.grounded = this.body.touching.down;
+    
 
         this.grounded = this.body.touching.down || this.body.blocked.down;
 
@@ -84,10 +83,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
 
         // FIXME: Implement a state machine for the player
 
-        ///////////////////Aubrey
-        //if (this.canJump && Phaser.Input.Keyboard.DownDuration(this.keySpace, 250)){
-           // console.log("jumping");
-            //this.anims.play('jumping_blush', true);
 
         if ((this.grounded || this.jumping) && Phaser.Input.Keyboard.DownDuration(this.keySpace, 300)){
             // console.log("jumping");
@@ -100,10 +95,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         } else {
             this.jumping = false;
         }
-        ////////////////Aubrey
-        //if (Phaser.Input.Keyboard.JustDown(this.keySpace)) {
-           // this.anims.play('jumping_blush', true);
-           // this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.15});
+      
         if (Phaser.Input.Keyboard.JustDown(this.keySpace) && this.canJump) {
             this.anims.play('jumping_blush', true);
             this.sfx_jump.play();
