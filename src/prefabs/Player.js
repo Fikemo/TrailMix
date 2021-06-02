@@ -148,6 +148,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
 
     takeDamage(damage){
         if (!this.invincible){
+            console.log(damage);
             this.invincible = true;
             this.scene.time.delayedCall(1000, () => {this.invincible = false});
         }

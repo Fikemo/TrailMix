@@ -82,6 +82,10 @@ export default class BaseSceneTiled extends BaseScene{
                 this.bulletEnemyOverlap(bullet, enemy);
             })
         }
+
+        if (this.player && this.layers && this.layers.hazards){
+            console.log(this.layers.hazards);
+        }
     }
 
     createMap(mapJSON){
@@ -322,7 +326,14 @@ export default class BaseSceneTiled extends BaseScene{
     setHazards(){
         if (!this.layers) return console.error("this.layers NOT DEFINED");
         if (!this.layers.hazards) return console.error("NO HAZARDS LAYER DEFINED");
-
+        this.printAmount = 50;
+        if (this.layers.hazards.colliders && this.layers.hazards.colliders.player){
+            this.layers.hazards.colliders.player.collideCallback = (o1, o2) => {
+                if (o2.index != -1){
+                    this.player.takeDamage(5);
+                }
+            }
+        }
         Object.values(this.layers.hazards.colliders).forEach(collider => {
             collider.overlapOnly = true;
         });
