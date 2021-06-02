@@ -169,14 +169,19 @@ export default class GameManager extends Phaser.Scene{
         // Set the starting scene
         // create a scene of the starting scene type
         this.startingScene = this.createSceneOfClass(this.startingSceneType);
+        // create more rooms to place in the beginning of the game
+        this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
 
-        // put that scene in the map
+        // let's put some scenes on the map
+        this.setSceneOnMap(this.destinationRoom1, 0, 0);
         this.setSceneOnMap(this.startingScene, 9, 2);
 
-        // launch the scene
+        // launch the scenes
+        
+        this.launchSceneAt(0,0);
         this.launchSceneAt(9,2);
 
         // update the UI
