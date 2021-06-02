@@ -88,10 +88,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             // console.log("jumping");
             this.body.setVelocityY(this.JUMP_VEL);
             this.jumping = true;
-            //this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.1});
-            //this.sfx_jump.play();
-            //this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
-            //this.jfx.play();
+            // this.sfx_jump = this.scene.sound.add('sfx_jump', {volume: 0.1});
+            // this.sfx_jump.play();
+            // this.jfx = this.sound.add('sfx_jump', {volume: 0.2});
+            // this.jfx.play();
         } else {
             this.jumping = false;
         }
@@ -127,6 +127,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             bullet.damage = 1;
             bullet.body.setAllowGravity(false);
             bullet.anims.play("bullet");
+            this.sfx_bullet = this.scene.sound.add('sfx_bullet', {volume: 0.1});
+            this.sfx_bullet.play();
             this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(shootingFrom, pointer)), 500, bullet.body.velocity);
             bullet.body.setAngularVelocity(400);
 
