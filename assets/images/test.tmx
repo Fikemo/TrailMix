@@ -222,6 +222,9 @@
 </data>
  </layer>
  <layer id="8" name="hazards" width="24" height="18">
+  <properties>
+   <property name="collides" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

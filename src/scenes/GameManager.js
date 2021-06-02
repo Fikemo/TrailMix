@@ -47,7 +47,7 @@ export default class GameManager extends Phaser.Scene{
             this.active = false;
 
             //**The type of scene that the player will start in */
-            this.startingSceneType = ForestRightLeft;
+            this.startingSceneType = TestScene;
             // optionally, you can set the starting scene to be the scene you want to test
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
@@ -397,6 +397,7 @@ export default class GameManager extends Phaser.Scene{
     //**Inserts the scene in the map's corresponding x,y coordinate */
     setSceneOnMap(scene, x, y){
         console.log(scene);
+        if (!scene) return console.error("NO SCENE DEFINED TO PLACE ON MAP");
         this.map[x][y] = scene;
         scene.coordinate.x = x;
         scene.coordinate.y = y;
