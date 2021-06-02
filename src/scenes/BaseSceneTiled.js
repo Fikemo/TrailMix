@@ -83,8 +83,16 @@ export default class BaseSceneTiled extends BaseScene{
             })
         }
 
-        if (this.player && this.layers && this.layers.hazards){
-            console.log(this.layers.hazards);
+        if (this.player && this.player.bulletGroup){
+            this.createColliders("bullets", this.player.bulletGroup, this.testBulletCollision);
+        }
+    }
+
+    testBulletCollision(bullet, tile){
+        console.log(bullet);
+        console.log(tile);
+        if (tile.layer.name != "platforms"){
+            bullet.destroy();
         }
     }
 
@@ -429,14 +437,14 @@ export default class BaseSceneTiled extends BaseScene{
         this.createColliders("player", this.player);
     }
 
-    createColliders(colliderName, object){
+    createColliders(colliderName, object, callback){
         if (!colliderName) console.error("NO COLLIDER NAME DEFINED");
         if (!object) return console.error("NO OBJECT DEFINED");
         if (!this.layers) return console.error("NO LAYERS DEFINED");
 
         Object.values(this.layers).forEach(layer => {
             if (layer.layerData.properties[0] && layer.layerData.properties[0].name == "collides" && layer.layerData.properties[0].value == true){
-                layer.colliders[colliderName] = this.physics.add.collider(object, layer.tilemapLayer);
+                layer.colliders[colliderName] = this.physics.add.collider(object, layer.tilemapLayer, callback);
             }
         });
 

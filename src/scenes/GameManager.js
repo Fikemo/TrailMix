@@ -8,7 +8,6 @@ import EnemyHazardTest from "./levels/EnemyHazardTest.js";
 import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
 import WaterDownLeft from "./WaterDownLeft.js";
 import ForestRightLeft from "./levels/ForestRightLeft.js";
-import Load from "./Load.js";
 
 import TestScene from "./levels/Test.js";
 
@@ -95,12 +94,12 @@ export default class GameManager extends Phaser.Scene{
 
         // this.music = this.sound.add('neon_bgm', {volume: 0.1});
         this.music = {
-            basic: this.sound.add('basic_bgm', {volume: 0.1}),
-            neon: this.sound.add('neon_bgm', {volume: 0.1}),
-            water: this.sound.add('water_bgm', {volume: 0.1}),
-            lava: this.sound.add('lava_bgm', {volume: 0.1}),
-            candy: this.sound.add('candy_bgm', {volume: 0.1}),
-            forest: this.sound.add('forest_bgm', {volume: 0.1}),
+            basic: this.sound.add('basic_bgm', {volume: 0.01}),
+            neon: this.sound.add('neon_bgm', {volume: 0.01}),
+            water: this.sound.add('water_bgm', {volume: 0.01}),
+            lava: this.sound.add('lava_bgm', {volume: 0.01}),
+            candy: this.sound.add('candy_bgm', {volume: 0.01}),
+            forest: this.sound.add('forest_bgm', {volume: 0.01}),
         }
 
 
@@ -179,9 +178,7 @@ export default class GameManager extends Phaser.Scene{
         this.setSceneOnMap(this.destinationRoom1, 0, 0);
         this.setSceneOnMap(this.startingScene, 9, 2);
 
-        // launch the scenes
-        
-        this.launchSceneAt(0,0);
+        // launch the starting scene scene
         this.launchSceneAt(9,2);
 
         // update the UI

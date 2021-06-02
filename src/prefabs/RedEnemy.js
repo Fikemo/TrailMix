@@ -7,6 +7,7 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
         this.body.setSize(24, 24, false);
         this.body.setOffset(4, 8);
         this.anims.play("redEnemy");
+        this.sfx_enemy = this.scene.sound.add('sfx_enemy', {volume: 0.1});
 
         this.damage = 5;
 
@@ -129,7 +130,6 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
     takeDamage(damage){
         console.log(damage);
         this.hp -= damage;
-        this.sfx_enemy = this.scene.sound.add('sfx_enemy', {volume: 0.1});
         this.sfx_enemy.play();
 
         if (this.hp <= 0){
