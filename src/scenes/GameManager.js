@@ -541,7 +541,6 @@ export default class GameManager extends Phaser.Scene{
                 musicCanPlay = false;
             }
         })
-        if(this.currentScene) console.log(this.currentScene);
         if (musicCanPlay && sceneToLaunch.musicKey) {
             this.music[sceneToLaunch.musicKey].play();
         }
