@@ -497,11 +497,11 @@ export default class BaseSceneTiled extends BaseScene{
     spawnEnemy(spawnObject){
         console.log(spawnObject);
 
-        let newEnemy = new RedEnemy(this, spawnObject.x, spawnObject.y, spawnObject);
-        // switch(spawnObject.name){
-        //     case "red":
-
-        //     break;
+        let newEnemy;
+        switch(spawnObject.name){
+            case "red":
+                newEnemy = new RedEnemy(this, spawnObject.x, spawnObject.y, spawnObject)
+            break;
         //     case "green":
 
         //     break;
@@ -511,12 +511,11 @@ export default class BaseSceneTiled extends BaseScene{
         //     case "yellow":
 
         //     break;
-        //     case "saw":
-        //         newEnemy = new Saw(this, spawnObject.x, spawnObject.y, spawnObject);
-        //     break;
-        // }
-
-        this.enemyGroup.add(newEnemy);
+            case "saw":
+                newEnemy = new Saw(this, spawnObject.x, spawnObject.y, spawnObject);
+            break;
+        }
+        if (newEnemy) this.enemyGroup.add(newEnemy);
     }
 
     playerEnemyOverlap(player, enemy){
