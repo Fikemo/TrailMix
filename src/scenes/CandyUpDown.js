@@ -1,5 +1,4 @@
 import BaseSceneTiled from "./BaseSceneTiled.js";
-import Player from "../prefabs/Player.js";
  
 export default class CandyUpDown extends BaseSceneTiled{
     //candyUpDown
@@ -17,10 +16,10 @@ export default class CandyUpDown extends BaseSceneTiled{
     }
     create(data){
         super.create();
-        this.createStandardLevel({mapJSON: "CandyUpDownJSON",
-        backgroundColor: 0xf0e17,
-        player: true,
-    });
-       
+        this.createStandardLevel({
+            mapJSON: "CandyUpDownJSON",
+            backgroundColor: 0xf0e17,
+            player: true,
+        });
     }
 }
