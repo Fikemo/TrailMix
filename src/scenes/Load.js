@@ -21,12 +21,21 @@ export default class Load extends Phaser.Scene {
         this.load.spritesheet('blush', 'moving_blush.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('jump', 'jump_blush.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('sleep', 'idle_blush.png', { frameWidth: 32, frameHeight: 32 });
+
         // UI
         this.load.image("gameManagerBackground", "gameManagerBackground.png");
         this.load.image("selectedInventoryIconFrame", "inventoryIconFrame.png");
         this.load.image("mapIconFrame", "mapIconFrame.png");
         this.load.atlas("mapIcons", "mapIcons.png", "mapIcons.json");
         this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
+        this.load.image("terminalOnScreen", "terminalOn.png");
+        this.load.image("locationIndicator", "locationIndicator.png");
+        this.load.spritesheet("locationIndicator_spritesheet", "locationIndicator_spritesheet.png", {
+            frameWidth: 24,
+            frameHeight: 24,
+            startFrame: 0,
+            endFrame: 1,
+        });
 
         //this.load.image("blushie", "blush.png");
         //this.load.image("bar", "bar.png");
@@ -59,6 +68,7 @@ export default class Load extends Phaser.Scene {
 
         // tilesets
         this.load.image("basicTileSet", "basicTileSet.png");
+        this.load.image("commonTileset", "commonTileset.png");
         this.load.image("NeonTileSet", "NeonTileSet.png");
         this.load.image("waterTileset","waterTileset.png");
         this.load.image("forestTileset", "forestTileset.png");
@@ -72,6 +82,7 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
         this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
         this.load.tilemapTiledJSON("forestRightLeftJSON", "forestRightLeft.json");
+        this.load.tilemapTiledJSON("hubJSON", "hubRoom.json");
 
         // fonts
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
@@ -169,6 +180,17 @@ export default class Load extends Phaser.Scene {
                 first: 0
             }),
             frameRate: 6,
+            repeat: -1,
+        })
+
+        this.anims.create({
+            key: "locationIndicator",
+            frames: this.anims.generateFrameNumbers("locationIndicator_spritesheet", {
+                start: 0,
+                end: 1,
+                first: 0,
+            }),
+            frameRate: 2,
             repeat: -1,
         })
 
