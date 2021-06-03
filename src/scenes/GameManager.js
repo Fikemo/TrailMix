@@ -171,17 +171,25 @@ export default class GameManager extends Phaser.Scene{
         this.startingScene = this.createSceneOfClass(this.startingSceneType);
         // create more rooms to place in the beginning of the game
         this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
+        this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
+        this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
+        this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
 
         // let's put some scenes on the map
         this.setSceneOnMap(this.destinationRoom1, 0, 0);
+        this.setSceneOnMap(this.destinationRoom2, 19, 0);
+        this.setSceneOnMap(this.destinationRoom3, 3, 3);
+        this.setSceneOnMap(this.destinationRoom4, 13, 1);
         this.setSceneOnMap(this.startingScene, 9, 2);
 
         // launch the scenes
-        
         this.launchSceneAt(0,0);
+        this.launchSceneAt(19,0);
+        this.launchSceneAt(3,3);
+        this.launchSceneAt(13,1);
         this.launchSceneAt(9,2);
 
         // update the UI
@@ -485,7 +493,7 @@ export default class GameManager extends Phaser.Scene{
 
     //**Randomly fill the inventory with available scenes */
     randomlyFillSceneInventory(){
-        for(let i = 0; i < this.sceneInventory.max; i++){
+        for(let i = 0; i < this.sceneInventory.max - 15; i++){
             if (!this.sceneInventory[i]){
                 let sceneToAdd = this.createSceneOfClass(this.availableSceneTypes[Phaser.Math.Between(0, this.availableSceneTypes.length - 1)]);
                 this.addSceneToInventory(sceneToAdd);
