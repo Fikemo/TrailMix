@@ -19,16 +19,17 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.keyA = scene.gameManager.keyA;
         this.keyD = scene.gameManager.keyD;
         this.keySpace = scene.gameManager.keySpace;
-
-        this.FSM = new StateMachine("idle", {
-            idle: new IdleState(),
-            jumping: new JumpingState(),
-            falling: new FallingState(),
-            walking: new WalkingState(),
-        }, [scene, this]);
         
         this.body.setSize(26, 18, false);
-        this.body.setOffset(4, 14)
+        this.body.setOffset(4, 14);
+
+        this.bulletGroup = scene.add.group();
+
+        this.canShoot = true;
+
+        scene.input.on("pointerdown", (pointer) => {
+            this.shoot(pointer);
+        })
     }
 
     update(time, delta){
@@ -48,6 +49,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.body.setAccelerationX(0);
         this.body.setDragX(this.DRAG);
 
+        this.alpha = this.invincible ? 0.25 : 1;
+
         if (this.keyA.isDown){
             this.body.setAccelerationX(this.body.acceleration.x - this.ACCELERATION);
         }
@@ -60,7 +63,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.grounded = this.body.touching.down || this.body.blocked.down;
 
         if (this.grounded && Phaser.Input.Keyboard.JustDown(this.keySpace)){
-            console.log("initiate jump");
             this.jumping = true;
             this.scene.time.delayedCall(200, () => {this.jumping = false});
         }
@@ -118,77 +120,39 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         }
     }
 
-    handleMovement(){
-        
-    }
-
     shoot(pointer){
-        
+        if (this.canShoot){
+            let shootingFrom = {x: this.x + this.width * 0.5, y: this.y + this.height * 0.75};
+
+            let bullet = this.scene.physics.add.sprite(shootingFrom.x, shootingFrom.y, "bullet").setImmovable(true);
+            bullet.damage = 1;
+            bullet.body.setAllowGravity(false);
+            bullet.anims.play("bullet");
+
+            bullet.sfx = bullet.scene.sound.add("sfx_bullet", {volume: 0.1});
+            bullet.sfx.play();
+
+            this.scene.physics.velocityFromAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.BetweenPoints(shootingFrom, pointer)), 500, bullet.body.velocity);
+            bullet.body.setAngularVelocity(400);
+
+            this.bulletGroup.add(bullet);
+
+            this.scene.time.delayedCall(4000, () => {
+                bullet.destroy();
+            });
+
+            this.canShoot = false;
+            this.scene.time.delayedCall(250, () => {
+                this.canShoot = true;
+            })
+        }
     }
 
     takeDamage(damage){
-        
-    }
-}
-
-class IdleState extends State {
-    enter(scene, player){
-        console.log(player);
-        player.anims.play("player_idle");
-    }
-    
-    execute(scene, player){
-        if (player.keyA.isDown || player.keyD.isDown){
-            player.FSM.transition("walking")
+        if (!this.invincible){
+            this.invincible = true;
+            this.scene.gameManager.adjustPlayerHealth(-damage);
+            this.scene.time.delayedCall(1000, () => {this.invincible = false})
         }
-    }
-
-    exit(scene, player){
-
-    }
-}
-
-class JumpingState extends State {
-    enter(scene, player){
-
-    }
-    
-    execute(scene, player){
-
-    }
-
-    exit(scene, player){
-
-    }
-}
-
-class FallingState extends State {
-    enter(scene, player){
-
-    }
-    
-    execute(scene, player){
-
-    }
-
-    exit(scene, player){
-
-    }
-}
-
-class WalkingState extends State {
-    enter(scene, player){
-        console.log("entered walking state");
-        player.anims.play("player_move");
-    }
-    
-    execute(scene, player){
-        if (player.body.touching.down || player.body.blocked.down){
-            player.FSM.transition("idle");
-        }
-    }
-
-    exit(scene, player){
-
     }
 }

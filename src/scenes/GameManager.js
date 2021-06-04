@@ -144,8 +144,17 @@ export default class GameManager extends Phaser.Scene{
         // Initialize the game for start
         this.initializeMapForGameStart();
 
+        this.playerHealth = 50;
+        this.playerHealthMax = 50;
+
         this.uiNeedsUpdate = true;
         this.eventCalls.updateUIEvent();
+    }
+
+    adjustPlayerHealth(value){
+
+        this.playerHealth += value;
+        this.uiNeedsUpdate = true;
     }
 
     update(time, delta){
@@ -251,6 +260,12 @@ export default class GameManager extends Phaser.Scene{
         }
 
         // TODO: update the player's health
+
+        if (health){
+            if (this.healthBar){
+                this.healthBar.setScale(this.playerHealth / this.playerHealthMax, 1);
+            }
+        }
     }
 
 
@@ -322,20 +337,22 @@ export default class GameManager extends Phaser.Scene{
 
     //Create health bar
     createHealthUI(){
-        let healthbarPos = new Phaser.Math.Vector2(32, 32);
-        let healthBarSegmentWidth = 40;
-        this.backgroundHealth = [];
-        for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
-            this.backgroundHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i, healthbarPos.y, 'bar').setOrigin(0));
-        }
-        this.emptyHealth = [];
-        for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
-            this.emptyHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
-        }
-        this.filledHealth = [];
-        for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
-            this.filledHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
-        }
+        // let healthbarPos = new Phaser.Math.Vector2(32, 32);
+        // let healthBarSegmentWidth = 40;
+        // this.backgroundHealth = [];
+        // for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        //     this.backgroundHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i, healthbarPos.y, 'bar').setOrigin(0));
+        // }
+        // this.emptyHealth = [];
+        // for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        //     this.emptyHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
+        // }
+        // this.filledHealth = [];
+        // for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        //     this.filledHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
+        // }
+
+        this.healthBar = this.add.sprite(6, 586, "healthbar").setOrigin(0);
     }
 
     // Mini Map
