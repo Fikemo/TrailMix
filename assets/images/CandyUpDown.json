@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"candylevel.json"
+         "target":"CandyUpDown.json"
         }
     },
  "height":18,

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="7">
  <editorsettings>
-  <export target="candylevel.json" format="json"/>
+  <export target="CandyUpDown.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="candyTileset" tilewidth="32" tileheight="32" tilecount="196" columns="14">
-  <image source="Downloads/candyTileset.png" width="448" height="448"/>
+  <image source="candyTileset.png" width="448" height="448"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -107,7 +107,7 @@
   </tile>
  </tileset>
  <tileset firstgid="197" name="candybg" tilewidth="32" tileheight="32" tilecount="432" columns="24">
-  <image source="Downloads/candybackground.png" width="768" height="576"/>
+  <image source="../../../../Downloads/candybackground.png" width="768" height="576"/>
  </tileset>
  <layer id="7" name="background" width="24" height="18">
   <data encoding="csv">
@@ -163,18 +163,18 @@
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,57,58,59,0,0,0,0,0,0,0,0,0,0,0,
