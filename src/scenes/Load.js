@@ -30,6 +30,7 @@ export default class Load extends Phaser.Scene {
         this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
         this.load.image("terminalOnScreen", "terminalOn.png");
         this.load.image("locationIndicator", "locationIndicator.png");
+        this.load.image("healthbar", "bar.png");
         this.load.spritesheet("locationIndicator_spritesheet", "locationIndicator_spritesheet.png", {
             frameWidth: 24,
             frameHeight: 24,
