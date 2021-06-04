@@ -154,6 +154,11 @@ export default class GameManager extends Phaser.Scene{
     adjustPlayerHealth(value){
 
         this.playerHealth += value;
+
+        if (this.playerHealth <= 0){
+            this.launchSceneAt(9, 2);
+        }
+
         this.uiNeedsUpdate = true;
     }
 
@@ -180,6 +185,7 @@ export default class GameManager extends Phaser.Scene{
             this.scene.resume(this.activeScene);
             this.scene.sendToBack(this);
         } else {
+            this.setSelectedSceneIcon(this.sceneInventoryUI[0]);
             this.active = true;
             this.scene.pause(this.activeScene);
             this.scene.bringToTop(this);
@@ -311,11 +317,25 @@ export default class GameManager extends Phaser.Scene{
             }
         }
 
+        this.eraserIcon = this.add.sprite(694, 502, "eraserButton").setOrigin(0).setInteractive();
+        this.eraserIcon.on("pointerdown", () => {
+            if (this.active){
+                this.activateEraser();
+            }
+        }, this);
+
         return inventoryUI;
+    }
+
+    activateEraser(){
+        this.eraserActive = true;
+        this.selectedSceneIcon = null;
+        this.selectedSceneIconFrame.setPosition(this.eraserIcon.x, this.eraserIcon.y);
     }
 
     //**Set the selected scene based on the clicked icon */
     setSelectedSceneIcon(icon){
+        this.eraserActive = false;
         this.selectedSceneIcon = icon;
         this.setSelectedScene();
         this.setSelectedSceneIconFramePosition();
@@ -391,7 +411,10 @@ export default class GameManager extends Phaser.Scene{
                 icon.coordinate = new Phaser.Math.Vector2(x, y);
                 icon.on("pointerdown", (pointer, localX, localY, event) => {
                     if (this.active){
-                        this.putSelectedSceneOnMap(icon);
+                        if (!this.eraserActive) this.putSelectedSceneOnMap(icon);
+                        else {
+                            this.putSceneFromMapInInventory(icon);
+                        }
                     }
                 }, this);
                 icon.on("pointerover", () => {
@@ -419,6 +442,7 @@ export default class GameManager extends Phaser.Scene{
     }
 
     putSelectedSceneOnMap(icon, overwrite = false, returnToInventory = false){
+        if (!icon || !this.selectedSceneIcon) return;
         let x = icon.coordinate.x;
         let y = icon.coordinate.y;
 
@@ -429,6 +453,19 @@ export default class GameManager extends Phaser.Scene{
             this.setSceneOnMap(sceneToAdd, x, y);
         }
         this.uiNeedsUpdate = true;
+    }
+
+    putSceneFromMapInInventory(icon){
+        let x = icon.coordinate.x;
+        let y = icon.coordinate.y;
+
+        let selectedScene = this.map[x][y];
+        if (selectedScene != null && !selectedScene.static && selectedScene != this.activeScene){
+            console.log(selectedScene);
+            this.addSceneToInventory(selectedScene);
+            this.map[x][y] = null;
+            this.uiNeedsUpdate = true;
+        }
     }
 
     //**Inserts the scene in the map's corresponding x,y coordinate */

@@ -4,6 +4,8 @@ export default class Hub extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
 
+        this.static = true;
+
         this.up = true;
         this.right = true;
         this.down = true;

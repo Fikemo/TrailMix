@@ -6,6 +6,7 @@ export default class Load extends Phaser.Scene {
     preload(){
         let loadingBar = this.add.graphics();
         this.load.on("progress", (value) => {
+            console.log(value);
             loadingBar.clear();
             loadingBar.fillStyle(0xFFFFFF, 1);
             loadingBar.fillRect(0,this.scale.height / 2, this.scale.width * value, 5);
@@ -31,6 +32,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("terminalOnScreen", "terminalOn.png");
         this.load.image("locationIndicator", "locationIndicator.png");
         this.load.image("healthbar", "bar.png");
+        this.load.image("eraserButton", "eraserButton.png");
         this.load.spritesheet("locationIndicator_spritesheet", "locationIndicator_spritesheet.png", {
             frameWidth: 24,
             frameHeight: 24,
