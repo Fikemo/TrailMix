@@ -361,7 +361,7 @@ export default class BaseSceneTiled extends BaseScene{
     // create player
     createPlayer(){
         let ps = this.calculatePlayerSpawnPoint();
-        this.player = new Player(this, ps.x, ps.y, "blushie");
+        this.player = new Player(this, ps.x, ps.y);
         this.setPlayerSpawnState();
         this.createPlayerColliders();
     }

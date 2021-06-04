@@ -18,9 +18,9 @@ export default class Load extends Phaser.Scene {
         this.load.path = "./assets/images/";
 
         //this.load.image('blushie','blushie.png');
-        this.load.spritesheet('blush', 'moving_blush.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('jump', 'jump_blush.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('sleep', 'idle_blush.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('player_move', 'moving_blush.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('player_jump', 'jump_blush.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('player_idle', 'idle_blush.png', { frameWidth: 32, frameHeight: 32 });
 
         // UI
         this.load.image("gameManagerBackground", "gameManagerBackground.png");
@@ -117,36 +117,70 @@ export default class Load extends Phaser.Scene {
 
     create(){
         //create moving animation
+        // this.anims.create({
+        //     key: 'moving_blush',
+        //     frames: this.anims.generateFrameNumbers('blush', {
+        //         start: 0,
+        //         end: 6,
+        //         first: 0
+        //     }),
+        //     frameRate: 10,
+        //     repeat: 0,
+        // })
+        // //create jump animation
+        // this.anims.create({
+        //     key: 'jumping_blush',
+        //     frames: this.anims.generateFrameNumbers('jump', {
+        //         //custom frames for smooth transition
+        //         frames: [0,1,2,3,4,5,6,0],
+        //     }),
+        //     frameRate: 7,
+        //     repeat: 0,
+        // })
+        // //create idle animation
+        // this.anims.create({
+        //     key: 'idle_blush',
+        //     frames: this.anims.generateFrameNumbers('sleep', {
+        //         start:0,
+        //         end:10,
+        //         first: 0,
+        //     }),
+        //     frameRate: 1,
+        //     repeat: -1,
+        // })
+
+        // create player animations
         this.anims.create({
-            key: 'moving_blush',
-            frames: this.anims.generateFrameNumbers('blush', {
-                start: 0,
-                end: 6,
-                first: 0
-            }),
-            frameRate: 10,
-            repeat: 0,
-        })
-        //create jump animation
-        this.anims.create({
-            key: 'jumping_blush',
-            frames: this.anims.generateFrameNumbers('jump', {
-                //custom frames for smooth transition
-                frames: [0,1,2,3,4,5,6,0],
-            }),
-            frameRate: 7,
-            repeat: 0,
-        })
-        //create idle animation
-        this.anims.create({
-            key: 'idle_blush',
-            frames: this.anims.generateFrameNumbers('sleep', {
+            key: "player_idle",
+            frames: this.anims.generateFrameNumbers( "player_idle", {
                 start:0,
-                end:10,
+                end: 3,
                 first: 0,
             }),
-            frameRate: 1,
+            frameRate: 4,
             repeat: -1,
+        });
+
+        this.anims.create({
+            key: "player_move",
+            frames: this.anims.generateFrameNumbers("player_move", {
+                start: 0,
+                end: 8,
+                first: 0,
+            }),
+            frameRate: 12,
+            repeat: -1,
+        });
+
+        this.anims.create({
+            key: "player_jump",
+            frames: this.anims.generateFrameNumbers( "player_jump", {
+                start: 0,
+                end: 4,
+                first: 0,
+            }),
+            frameRate: 12,
+            repeat: 0,
         })
 
         // create animations
