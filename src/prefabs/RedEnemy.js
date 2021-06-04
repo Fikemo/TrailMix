@@ -129,6 +129,8 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
     takeDamage(damage){
         console.log(damage);
         this.hp -= damage;
+        this.sfx_enemy = this.scene.sound.add('sfx_enemy', {volume: 0.1});
+        this.sfx_enemy.play();
 
         if (this.hp <= 0){
             this.destroy();
