@@ -151,9 +151,13 @@ export default class GameManager extends Phaser.Scene{
         this.eventCalls.updateUIEvent();
     }
 
-    adjustPlayerHealth(value){
+    adjustPlayerHealth(value, set = false){
 
-        this.playerHealth += value;
+        if (set){
+            this.playerHealth = value;
+        } else {
+            this.playerHealth += value;
+        }
 
         if (this.playerHealth <= 0){
             this.launchSceneAt(9, 2);

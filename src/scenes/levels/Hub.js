@@ -41,6 +41,8 @@ export default class Hub extends BaseSceneTiled{
         this.terminalOverlap = this.physics.add.overlap(this.player, this.terminalHitbox, (player, terminal) => {this.terminalOn = true});
         this.terminalOn = false;
 
+        this.gameManager.adjustPlayerHealth(this.gameManager.playerHealthMax, true);
+
         this.keyW = this.gameManager.keyW;
         // this.keyW.on("down", (x, y) => {
         //     console.log(x)
