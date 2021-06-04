@@ -27,6 +27,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             walking: new WalkingState(),
         }, [scene, this]);
         
+        this.body.setSize(26, 18, false);
+        this.body.setOffset(4, 14)
     }
 
     update(time, delta){
