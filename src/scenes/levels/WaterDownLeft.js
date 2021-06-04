@@ -1,8 +1,7 @@
-import BaseSceneTiled from "./BaseSceneTiled.js";
-import Player from"../prefabs/Player.js";
+import BaseSceneTiled from "../BaseSceneTiled.js";
 
 export default class WaterDownLeft extends BaseSceneTiled{
-    constructor (key,gameManager){
+    constructor(key, gameManager){
         super(key, gameManager);
 
         this.left = true;
@@ -18,10 +17,9 @@ export default class WaterDownLeft extends BaseSceneTiled{
 
         this.createStandardLevel({
             mapJSON: "waterDownLeftJSON",
-            backgroundColor: 0xf0e17,
+            backgroundColor: "#131e28",
             player: true,
         })
-
         
     }
 
