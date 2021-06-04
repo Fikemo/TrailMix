@@ -73,6 +73,8 @@ export default class Load extends Phaser.Scene {
         this.load.image("NeonTileSet", "NeonTileSet.png");
         this.load.image("waterTileset","waterTileset.png");
         this.load.image("forestTileset", "forestTileset.png");
+        this.load.image("LavaLeftRight", "lavalevels.png");
+        this.load.image("candyTileset", "candyTileset.png");
 
         // tilemaps
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
@@ -84,17 +86,11 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
         this.load.tilemapTiledJSON("forestRightLeftJSON", "forestRightLeft.json");
         this.load.tilemapTiledJSON("hubJSON", "hubRoom.json");
+        this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
+        this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
 
         // fonts
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
-
-        //LavaLeftRight
-        this.load.image("LavaLeftRight", "lavalevels.png");
-        this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
-
-        //candyUpDown
-        this.load.image("candyTileset", "candyTileset.png");
-        this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
 
         // load sounds
         this.load.path = "./assets/sounds/";
