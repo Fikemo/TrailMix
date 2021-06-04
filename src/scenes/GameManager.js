@@ -196,11 +196,6 @@ export default class GameManager extends Phaser.Scene{
         this.setSceneOnMap(this.destinationRoom4, 13, 1);
         this.setSceneOnMap(this.startingScene, 9, 2);
 
-        // launch the scenes
-        this.launchSceneAt(0,0);
-        this.launchSceneAt(19,0);
-        this.launchSceneAt(3,3);
-        this.launchSceneAt(13,1);
         // launch the starting scene scene
         this.launchSceneAt(9,2);
 
@@ -516,6 +511,13 @@ export default class GameManager extends Phaser.Scene{
             }
         }
         this.uiNeedsUpdate = true;
+    }
+
+    // add 1 new room to the inventory
+    add1RoomToInventory(){
+        let sceneToAdd = this.createSceneOfClass(this.availableSceneTypes[Phaser.Math.Between(0, this.availableSceneTypes.length - 1)]);
+        this.addSceneToInventory(sceneToAdd);
+        console.log("we added a new scene boi");
     }
 
     //**Remove the given scene from the inventory */

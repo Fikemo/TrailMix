@@ -1,3 +1,4 @@
+import Blushie from "../prefabs/Blushie.js";
 import Player from "../prefabs/Player.js";
 import RedEnemy from "../prefabs/RedEnemy.js";
 import Saw from "../prefabs/Saw.js";
@@ -65,8 +66,9 @@ export default class BaseSceneTiled extends BaseScene{
             this.createPlayer();
         }
 
-        // spawn the enemies from the enemySpawns object layers
+        // spawn the enemies && blushies from the enemySpawns object layers
         this.spawnEnemies();
+        this.spawnBlushies();
 
         // set the hazard layer to use overlaps instead of collisions
         if (this.layers.hazards){
@@ -74,12 +76,18 @@ export default class BaseSceneTiled extends BaseScene{
         }
 
         if (this.player && this.enemyGroup){
-            this.physics.add.overlap(this.player,this.enemyGroup, (player, enemy) => {
+            this.physics.add.overlap(this.player, this.enemyGroup, (player, enemy) => {
                 this.playerEnemyOverlap(player, enemy);
             })
 
             this.physics.add.overlap(this.player.bulletGroup, this.enemyGroup, (bullet, enemy) => {
                 this.bulletEnemyOverlap(bullet, enemy);
+            })
+        }
+
+        if (this.player && this.blushieGroup) {
+            this.physics.add.overlap(this.player, this.blushieGroup, (player, blushie) => {
+                this.playerBlushieOverlap(player, blushie);
             })
         }
 
@@ -505,6 +513,18 @@ export default class BaseSceneTiled extends BaseScene{
         })
     }
 
+    spawnBlushies(){
+        let blushieSpawnsObjectLayer = this.map.getObjectLayer("blushieSpawns");
+        if (!blushieSpawnsObjectLayer) return console.error("NO BLUSHIE SPAWNS OBJECT LAYER DEFINED");
+
+        this.blushieGroup = this.add.group({runChildUpdate: true});
+        this.createColliders("blushies", this.blushieGroup);
+
+        blushieSpawnsObjectLayer.objects.forEach(object => {
+            this.spawnBlushie(object);
+        })
+    }
+
     spawnEnemy(spawnObject){
         console.log(spawnObject);
 
@@ -529,8 +549,26 @@ export default class BaseSceneTiled extends BaseScene{
         if (newEnemy) this.enemyGroup.add(newEnemy);
     }
 
+    spawnBlushie(spawnObject) {
+        console.log(spawnObject);
+        let newBlushie;
+        switch(spawnObject.name){
+            case "blush": 
+                newBlushie = new Blushie(this, spawnObject.x, spawnObject.y, "blushie");
+        }
+        if (newBlushie) {
+            this.blushieGroup.add(newBlushie);
+            console.log(this.blushieGroup);
+        }
+    }
+
     playerEnemyOverlap(player, enemy){
         player.takeDamage(enemy.damage);
+    }
+
+    playerBlushieOverlap(player, blushie){
+        this.gameManager.add1RoomToInventory();
+        blushie.destroy();
     }
 
     bulletEnemyOverlap(bullet, enemy){

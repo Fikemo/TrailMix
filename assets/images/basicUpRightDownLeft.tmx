@@ -342,13 +342,13 @@
 </data>
  </layer>
  <objectgroup id="16" name="blushieSpawns">
-  <object id="28" name="blush3" x="352" y="416">
+  <object id="28" name="blush" x="352" y="416">
    <point/>
   </object>
-  <object id="29" name="blush2" x="384" y="288">
+  <object id="29" name="blush" x="384" y="288">
    <point/>
   </object>
-  <object id="30" name="blush1" x="416" y="160">
+  <object id="30" name="blush" x="416" y="160">
    <point/>
   </object>
  </objectgroup>
