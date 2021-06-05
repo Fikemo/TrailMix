@@ -36,8 +36,7 @@ export default class Menu extends Phaser.Scene {
         //this.bgm.play();
 
         this.add.text(game.config.width/2, game.config.height/2 + 100, 'Press SPACE to Start', menuConfig).setOrigin(0.5);
-        //this.menuConfig.fontSize = '30px';
-        //this.add.text(game.config.width/2, game.config.height/2, 'Trail Mix', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 200, 'Press Shift for Credits', menuConfig).setOrigin(0.5);
         this.cursors.space.on('down', () => {this.scene.start('gameManagerScene')});
         this.cursors.shift.on('down', () => {this.scene.start('creditScene')});
         //this.scene.start("gameManagerScene");
