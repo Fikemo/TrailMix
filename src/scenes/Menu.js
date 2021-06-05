@@ -1,4 +1,5 @@
 import game from "../main.js";
+import Player from "../prefabs/Player.js";
 export default class Menu extends Phaser.Scene {
     constructor(){
         super("menuScene");
@@ -22,19 +23,26 @@ export default class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+        
         this.add.rectangle(20, 20, game.config.width - 40, game.config.height - 40, 0xFFFFFF).setOrigin(0, 0);
+         // add title
+        this.add.image(game.config.width/ 2, game.config.height/2 - 60, 'title');
+
+        //try to add a bouncing blushie
+        //this.blushie = new Blushie(this, this.defaultSpawnObject.x + 500, this.defaultSpawnObject.y, "blushie");
+        //this.anims.play("player_jump", true);
 
         this.bgm = this.sound.add('startMenu_bgm', {volume: 0.1});
         //this.bgm.play();
 
         this.add.text(game.config.width/2, game.config.height/2 + 100, 'Press SPACE to Start', menuConfig).setOrigin(0.5);
-        //this.menuConfig.fontSize = '30px';
-        this.add.text(game.config.width/2, game.config.height/2, 'Trail Mix', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 200, 'Press Shift for Credits', menuConfig).setOrigin(0.5);
         this.cursors.space.on('down', () => {this.scene.start('gameManagerScene')});
+        this.cursors.shift.on('down', () => {this.scene.start('creditScene')});
         //this.scene.start("gameManagerScene");
     }
 
     update(time, delta){
-        
+      
     }
 }

@@ -99,6 +99,10 @@ export default class Load extends Phaser.Scene {
         // fonts
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
 
+        //Menus
+        this.load.image("title", "titleArt.png");
+        this.load.image("logo","grouplogo.png")
+
         // load sounds
         this.load.path = "./assets/sounds/";
 
@@ -233,6 +237,6 @@ export default class Load extends Phaser.Scene {
         })
 
       //  this.scene.start("creditScene");
-        this.scene.start("menuScene");
+        this.scene.start("openingScene");
     }
 }

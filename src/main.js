@@ -4,12 +4,13 @@ import End from './scenes/End.js';
 import Menu from './scenes/Menu.js';
 import Tutorial from './scenes/Tutorial.js'
 import GameManager from './scenes/GameManager.js';
+import Opening from './scenes/Opening.js';
 
 let config = {
     type: Phaser.AUTO,
     width: 768,
     height: 768,
-    scene: [Load, Credits, Menu, GameManager, End],
+    scene: [Load, Opening, Credits, Menu, GameManager, End],
     physics: {
         default: 'arcade',
         arcade: {
