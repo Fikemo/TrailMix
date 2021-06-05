@@ -10,6 +10,7 @@ import EnemyHazardTest from "./levels/EnemyHazardTest.js";
 import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
 import WaterDownLeft from "./WaterDownLeft.js";
 import ForestRightLeft from "./levels/ForestRightLeft.js";
+import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 
 import TestScene from "./levels/Test.js";
 import UpRoomDepot from "./levels/UpRoomDepot.js";
@@ -63,6 +64,7 @@ export default class GameManager extends Phaser.Scene{
                 CandyUpRightLeft,
                 // NeonUpRightDownLeft
                 ForestRightLeft,
+                ForestUpDownLeft,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
