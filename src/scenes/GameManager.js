@@ -111,7 +111,19 @@ export default class GameManager extends Phaser.Scene{
 
                 TestUpDown,
                 TestUpRightDownLeft,
-                TestUpDown
+                TestUpDown,
+
+                TestUpDownLeft,
+                TestRightLeft,
+                TestUpDown,
+
+                TestUpLeft,
+                TestRightDown,
+                TestUpRightLeft,
+                
+                TestUpRightDownLeft,
+                TestRightDownLeft,
+                TestUpRight,
             ];
 
             //**A 2D array that holds all the scenes in their respective coordinates on the map */
