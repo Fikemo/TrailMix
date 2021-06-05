@@ -11,6 +11,8 @@ import WaterDownLeft from "./WaterDownLeft.js";
 import ForestRightLeft from "./levels/ForestRightLeft.js";
 
 import TestScene from "./levels/Test.js";
+import UpRoomDepot from "./levels/UpRoomDepot.js";
+import RightRoomDepot from "./levels/RightRoomDepot.js";
 
 // TODO: Add player health
 // TODO: Add player temporary inventory
@@ -160,7 +162,7 @@ export default class GameManager extends Phaser.Scene{
         }
 
         if (this.playerHealth <= 0){
-            this.launchSceneAt(9, 2);
+            this.launchSceneAt(6, 2);
         }
 
         this.uiNeedsUpdate = true;
@@ -201,23 +203,26 @@ export default class GameManager extends Phaser.Scene{
         // create a scene of the starting scene type
         this.startingScene = this.createSceneOfClass(this.startingSceneType);
         // create more rooms to place in the beginning of the game
-        this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
-        this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
-        this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
-        this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
+
+        let upRoomDepot1 = this.createSceneOfClass(UpRoomDepot);
+        this.setSceneOnMap(upRoomDepot1, 4, 3);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
 
         // let's put some scenes on the map
-        this.setSceneOnMap(this.destinationRoom1, 0, 0);
-        this.setSceneOnMap(this.destinationRoom2, 19, 0);
-        this.setSceneOnMap(this.destinationRoom3, 3, 3);
-        this.setSceneOnMap(this.destinationRoom4, 13, 1);
-        this.setSceneOnMap(this.startingScene, 9, 2);
+        // this.setSceneOnMap(this.destinationRoom1, 0, 0);
+        // this.setSceneOnMap(this.destinationRoom2, 19, 0);
+        // this.setSceneOnMap(this.destinationRoom3, 3, 3);
+        // this.setSceneOnMap(this.destinationRoom4, 13, 1);
+        this.setSceneOnMap(this.startingScene, 6, 2);
 
         // launch the starting scene scene
-        this.launchSceneAt(9,2);
+        this.launchSceneAt(6,2);
 
         // update the UI
         this.uiNeedsUpdate = true;
