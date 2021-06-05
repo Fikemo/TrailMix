@@ -115,7 +115,6 @@ export default class GameManager extends Phaser.Scene{
 
                 TestUpDownLeft,
                 TestRightLeft,
-                TestUpDown,
 
                 TestUpLeft,
                 TestRightDown,
