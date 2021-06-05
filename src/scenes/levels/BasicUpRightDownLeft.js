@@ -27,5 +27,7 @@ export default class BasicUpRightDownLeft extends BaseSceneTiled{
             mapJSON: "basicUpRightDownLeftJSON",
             player: true,
         });
+
+        // this.blushie_1 = new Blushie(this, 50, 70, "blushie");
     }
 }

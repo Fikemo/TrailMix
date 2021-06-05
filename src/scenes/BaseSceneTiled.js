@@ -1,3 +1,4 @@
+import Blushie from "../prefabs/Blushie.js";
 import Player from "../prefabs/Player.js";
 import RedEnemy from "../prefabs/RedEnemy.js";
 import Saw from "../prefabs/Saw.js";
@@ -65,8 +66,9 @@ export default class BaseSceneTiled extends BaseScene{
             this.createPlayer();
         }
 
-        // spawn the enemies from the enemySpawns object layers
+        // spawn the enemies && blushies from the enemySpawns object layers
         this.spawnEnemies();
+        this.spawnBlushies();
 
         // set the hazard layer to use overlaps instead of collisions
         if (this.layers.hazards){
@@ -74,7 +76,7 @@ export default class BaseSceneTiled extends BaseScene{
         }
 
         if (this.player && this.enemyGroup){
-            this.physics.add.overlap(this.player,this.enemyGroup, (player, enemy) => {
+            this.physics.add.overlap(this.player, this.enemyGroup, (player, enemy) => {
                 this.playerEnemyOverlap(player, enemy);
             })
 
@@ -83,8 +85,25 @@ export default class BaseSceneTiled extends BaseScene{
             })
         }
 
-        if (this.player && this.layers && this.layers.hazards){
-            console.log(this.layers.hazards);
+        if (this.player && this.blushieGroup) {
+            this.physics.add.overlap(this.player, this.blushieGroup, (player, blushie) => {
+                this.playerBlushieOverlap(player, blushie);
+            })
+        }
+
+        if (this.player && this.player.bulletGroup){
+            this.createColliders("bullets", this.player.bulletGroup, this.testBulletCollision);
+            if (this.layers.platforms){
+                this.layers.platforms.colliders.bullets.active = false;
+            }
+        }
+    }
+
+    testBulletCollision(bullet, tile){
+        console.log(bullet);
+        console.log(tile);
+        if (tile.layer.name != "platforms"){
+            bullet.destroy();
         }
     }
 
@@ -342,7 +361,7 @@ export default class BaseSceneTiled extends BaseScene{
     // create player
     createPlayer(){
         let ps = this.calculatePlayerSpawnPoint();
-        this.player = new Player(this, ps.x, ps.y, "blushie");
+        this.player = new Player(this, ps.x, ps.y);
         this.setPlayerSpawnState();
         this.createPlayerColliders();
     }
@@ -429,14 +448,14 @@ export default class BaseSceneTiled extends BaseScene{
         this.createColliders("player", this.player);
     }
 
-    createColliders(colliderName, object){
+    createColliders(colliderName, object, callback){
         if (!colliderName) console.error("NO COLLIDER NAME DEFINED");
         if (!object) return console.error("NO OBJECT DEFINED");
         if (!this.layers) return console.error("NO LAYERS DEFINED");
 
         Object.values(this.layers).forEach(layer => {
             if (layer.layerData.properties[0] && layer.layerData.properties[0].name == "collides" && layer.layerData.properties[0].value == true){
-                layer.colliders[colliderName] = this.physics.add.collider(object, layer.tilemapLayer);
+                layer.colliders[colliderName] = this.physics.add.collider(object, layer.tilemapLayer, callback);
             }
         });
 
@@ -494,14 +513,26 @@ export default class BaseSceneTiled extends BaseScene{
         })
     }
 
+    spawnBlushies(){
+        let blushieSpawnsObjectLayer = this.map.getObjectLayer("blushieSpawns");
+        if (!blushieSpawnsObjectLayer) return console.error("NO BLUSHIE SPAWNS OBJECT LAYER DEFINED");
+
+        this.blushieGroup = this.add.group({runChildUpdate: true});
+        this.createColliders("blushies", this.blushieGroup);
+
+        blushieSpawnsObjectLayer.objects.forEach(object => {
+            this.spawnBlushie(object);
+        })
+    }
+
     spawnEnemy(spawnObject){
         console.log(spawnObject);
 
-        let newEnemy = new RedEnemy(this, spawnObject.x, spawnObject.y, spawnObject);
-        // switch(spawnObject.name){
-        //     case "red":
-
-        //     break;
+        let newEnemy;
+        switch(spawnObject.name){
+            case "red":
+                newEnemy = new RedEnemy(this, spawnObject.x, spawnObject.y, spawnObject)
+            break;
         //     case "green":
 
         //     break;
@@ -511,16 +542,33 @@ export default class BaseSceneTiled extends BaseScene{
         //     case "yellow":
 
         //     break;
-        //     case "saw":
-        //         newEnemy = new Saw(this, spawnObject.x, spawnObject.y, spawnObject);
-        //     break;
-        // }
+            case "saw":
+                newEnemy = new Saw(this, spawnObject.x, spawnObject.y, spawnObject);
+            break;
+        }
+        if (newEnemy) this.enemyGroup.add(newEnemy);
+    }
 
-        this.enemyGroup.add(newEnemy);
+    spawnBlushie(spawnObject) {
+        console.log(spawnObject);
+        let newBlushie;
+        switch(spawnObject.name){
+            case "blush": 
+                newBlushie = new Blushie(this, spawnObject.x, spawnObject.y, "blushie");
+        }
+        if (newBlushie) {
+            this.blushieGroup.add(newBlushie);
+            console.log(this.blushieGroup);
+        }
     }
 
     playerEnemyOverlap(player, enemy){
         player.takeDamage(enemy.damage);
+    }
+
+    playerBlushieOverlap(player, blushie){
+        this.gameManager.add1RoomToInventory();
+        blushie.destroy();
     }
 
     bulletEnemyOverlap(bullet, enemy){

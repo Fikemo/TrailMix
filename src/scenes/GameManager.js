@@ -1,4 +1,5 @@
 import createEvent from "../../lib/events.js";
+import Hub from "./levels/Hub.js";
 import LavaLeftRight from "./LavaLeftRight.js";
 import CandyUpDown from "./CandyUpDown.js";
 import BasicUpRightDownLeft from "./levels/BasicUpRightDownLeft.js";
@@ -11,7 +12,7 @@ import ForestRightLeft from "./levels/ForestRightLeft.js";
 import SkyUpRight from "./levels/SkyUpRight.js";
 import ForestDownRight from "./levels/ForestDownRight.js";
 import WaterLeftRight from "./levels/WaterLeftRight.js";
-import Load from "./Load.js";
+
 
 import TestScene from "./levels/Test.js";
 
@@ -50,7 +51,7 @@ export default class GameManager extends Phaser.Scene{
             this.active = false;
 
             //**The type of scene that the player will start in */
-            this.startingSceneType = ForestRightLeft;
+            this.startingSceneType = Hub;
             // optionally, you can set the starting scene to be the scene you want to test
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
@@ -97,16 +98,20 @@ export default class GameManager extends Phaser.Scene{
         }
     }
 
+    onWKeyDown(){
+        console.log("w");
+    }
+
     create(data){
 
         // this.music = this.sound.add('neon_bgm', {volume: 0.1});
         this.music = {
-            basic: this.sound.add('basic_bgm', {volume: 0.1}),
-            neon: this.sound.add('neon_bgm', {volume: 0.1}),
-            water: this.sound.add('water_bgm', {volume: 0.1}),
-            lava: this.sound.add('lava_bgm', {volume: 0.1}),
-            candy: this.sound.add('candy_bgm', {volume: 0.1}),
-            forest: this.sound.add('forest_bgm', {volume: 0.1}),
+            basic: this.sound.add('basic_bgm', {volume: 0.01}),
+            neon: this.sound.add('neon_bgm', {volume: 0.01}),
+            water: this.sound.add('water_bgm', {volume: 0.01}),
+            lava: this.sound.add('lava_bgm', {volume: 0.01}),
+            candy: this.sound.add('candy_bgm', {volume: 0.01}),
+            forest: this.sound.add('forest_bgm', {volume: 0.01}),
         }
 
 
@@ -117,6 +122,8 @@ export default class GameManager extends Phaser.Scene{
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // add the background
         this.add.sprite(0, 0, "gameManagerBackground").setOrigin(0);
@@ -144,22 +151,34 @@ export default class GameManager extends Phaser.Scene{
         // Initialize the game for start
         this.initializeMapForGameStart();
 
+        this.playerHealth = 50;
+        this.playerHealthMax = 50;
+
         this.uiNeedsUpdate = true;
         this.eventCalls.updateUIEvent();
+    }
+
+    adjustPlayerHealth(value, set = false){
+
+        if (set){
+            this.playerHealth = value;
+        } else {
+            this.playerHealth += value;
+        }
+
+        if (this.playerHealth <= 0){
+            this.launchSceneAt(9, 2);
+        }
+
+        this.uiNeedsUpdate = true;
     }
 
     update(time, delta){
         //FIXME: Use ESC to access the inventory from any level
         if (Phaser.Input.Keyboard.JustDown(this.keyEscape)){
-            if (this.active){
-                this.active = false;
-                this.scene.resume(this.activeScene);
-                this.scene.sendToBack(this);
-            } else {
-                this.active = true;
-                this.scene.pause(this.activeScene);
-                this.scene.bringToTop(this);
-            }
+            this.setActive(this.active);
+        } else if (Phaser.Input.Keyboard.JustDown(this.keyW) && this.active){
+            this.setActive(this.active);
         }
 
         // FIXME: Find a better way to hide the map icon highlight
@@ -171,18 +190,40 @@ export default class GameManager extends Phaser.Scene{
         }
     }
 
+    setActive(active){
+        if (active){
+            this.active = false;
+            this.scene.resume(this.activeScene);
+            this.scene.sendToBack(this);
+        } else {
+            this.setSelectedSceneIcon(this.sceneInventoryUI[0]);
+            this.active = true;
+            this.scene.pause(this.activeScene);
+            this.scene.bringToTop(this);
+        }
+    }
+
     initializeMapForGameStart(){
         // Set the starting scene
         // create a scene of the starting scene type
         this.startingScene = this.createSceneOfClass(this.startingSceneType);
+        // create more rooms to place in the beginning of the game
+        this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
+        this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
+        this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
+        this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
 
-        // put that scene in the map
+        // let's put some scenes on the map
+        this.setSceneOnMap(this.destinationRoom1, 0, 0);
+        this.setSceneOnMap(this.destinationRoom2, 19, 0);
+        this.setSceneOnMap(this.destinationRoom3, 3, 3);
+        this.setSceneOnMap(this.destinationRoom4, 13, 1);
         this.setSceneOnMap(this.startingScene, 9, 2);
 
-        // launch the scene
+        // launch the starting scene scene
         this.launchSceneAt(9,2);
 
         // update the UI
@@ -236,6 +277,12 @@ export default class GameManager extends Phaser.Scene{
         }
 
         // TODO: update the player's health
+
+        if (health){
+            if (this.healthBar){
+                this.healthBar.setScale(this.playerHealth / this.playerHealthMax, 1);
+            }
+        }
     }
 
 
@@ -281,11 +328,25 @@ export default class GameManager extends Phaser.Scene{
             }
         }
 
+        this.eraserIcon = this.add.sprite(694, 502, "eraserButton").setOrigin(0).setInteractive();
+        this.eraserIcon.on("pointerdown", () => {
+            if (this.active){
+                this.activateEraser();
+            }
+        }, this);
+
         return inventoryUI;
+    }
+
+    activateEraser(){
+        this.eraserActive = true;
+        this.selectedSceneIcon = null;
+        this.selectedSceneIconFrame.setPosition(this.eraserIcon.x, this.eraserIcon.y);
     }
 
     //**Set the selected scene based on the clicked icon */
     setSelectedSceneIcon(icon){
+        this.eraserActive = false;
         this.selectedSceneIcon = icon;
         this.setSelectedScene();
         this.setSelectedSceneIconFramePosition();
@@ -307,20 +368,22 @@ export default class GameManager extends Phaser.Scene{
 
     //Create health bar
     createHealthUI(){
-    let healthbarPos = new Phaser.Math.Vector2(32, 32);
-    let healthBarSegmentWidth = 40;
-    this.backgroundHealth = [];
-    for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
-        this.backgroundHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i, healthbarPos.y, 'bar').setOrigin(0));
-    }
-    this.emptyHealth = [];
-    for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
-        this.emptyHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
-    }
-    this.filledHealth = [];
-    for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
-        this.filledHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
-    }
+        // let healthbarPos = new Phaser.Math.Vector2(32, 32);
+        // let healthBarSegmentWidth = 40;
+        // this.backgroundHealth = [];
+        // for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        //     this.backgroundHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i, healthbarPos.y, 'bar').setOrigin(0));
+        // }
+        // this.emptyHealth = [];
+        // for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        //     this.emptyHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
+        // }
+        // this.filledHealth = [];
+        // for (let i = 0; i < this.DEBUG_MAX_PLAYER_HEALTH; i++) {
+        //     this.filledHealth.push(this.add.sprite(healthbarPos.x + healthBarSegmentWidth * i + 8, healthbarPos.y + 4, 'bar').setOrigin(0));
+        // }
+
+        this.healthBar = this.add.sprite(6, 586, "healthbar").setOrigin(0);
     }
 
     // Mini Map
@@ -359,7 +422,10 @@ export default class GameManager extends Phaser.Scene{
                 icon.coordinate = new Phaser.Math.Vector2(x, y);
                 icon.on("pointerdown", (pointer, localX, localY, event) => {
                     if (this.active){
-                        this.putSelectedSceneOnMap(icon);
+                        if (!this.eraserActive) this.putSelectedSceneOnMap(icon);
+                        else {
+                            this.putSceneFromMapInInventory(icon);
+                        }
                     }
                 }, this);
                 icon.on("pointerover", () => {
@@ -374,6 +440,10 @@ export default class GameManager extends Phaser.Scene{
         // the frame hightlights the map cell taht the pointer is hovering over
         this.mapIconFrame = this.add.sprite(mapUI.position.x - 4, mapUI.position.y - 4, "mapIconFrame").setOrigin(0);
 
+        //
+        this.locationIndicator = this.add.sprite(mapUI.position.x, mapUI.position.y, "locationIndicator").setOrigin(0);
+        this.locationIndicator.anims.play("locationIndicator");
+
         return mapUI;
     }
 
@@ -383,6 +453,7 @@ export default class GameManager extends Phaser.Scene{
     }
 
     putSelectedSceneOnMap(icon, overwrite = false, returnToInventory = false){
+        if (!icon || !this.selectedSceneIcon) return;
         let x = icon.coordinate.x;
         let y = icon.coordinate.y;
 
@@ -395,9 +466,23 @@ export default class GameManager extends Phaser.Scene{
         this.uiNeedsUpdate = true;
     }
 
+    putSceneFromMapInInventory(icon){
+        let x = icon.coordinate.x;
+        let y = icon.coordinate.y;
+
+        let selectedScene = this.map[x][y];
+        if (selectedScene != null && !selectedScene.static && selectedScene != this.activeScene){
+            console.log(selectedScene);
+            this.addSceneToInventory(selectedScene);
+            this.map[x][y] = null;
+            this.uiNeedsUpdate = true;
+        }
+    }
+
     //**Inserts the scene in the map's corresponding x,y coordinate */
     setSceneOnMap(scene, x, y){
         console.log(scene);
+        if (!scene) return console.error("NO SCENE DEFINED TO PLACE ON MAP");
         this.map[x][y] = scene;
         scene.coordinate.x = x;
         scene.coordinate.y = y;
@@ -485,13 +570,20 @@ export default class GameManager extends Phaser.Scene{
 
     //**Randomly fill the inventory with available scenes */
     randomlyFillSceneInventory(){
-        for(let i = 0; i < this.sceneInventory.max; i++){
+        for(let i = 0; i < this.sceneInventory.max - 15; i++){
             if (!this.sceneInventory[i]){
                 let sceneToAdd = this.createSceneOfClass(this.availableSceneTypes[Phaser.Math.Between(0, this.availableSceneTypes.length - 1)]);
                 this.addSceneToInventory(sceneToAdd);
             }
         }
         this.uiNeedsUpdate = true;
+    }
+
+    // add 1 new room to the inventory
+    add1RoomToInventory(){
+        let sceneToAdd = this.createSceneOfClass(this.availableSceneTypes[Phaser.Math.Between(0, this.availableSceneTypes.length - 1)]);
+        this.addSceneToInventory(sceneToAdd);
+        console.log("we added a new scene boi");
     }
 
     //**Remove the given scene from the inventory */
@@ -532,6 +624,8 @@ export default class GameManager extends Phaser.Scene{
             this.scene.launch(sceneToLaunch, data);
             this.activeScene = sceneToLaunch;
             this.active = false;
+
+            this.locationIndicator.setPosition(this.mapUI.position.x + 28 * this.activeScene.coordinate.x, this.mapUI.position.y + 28 * this.activeScene.coordinate.y);
         }
 
         //this.music = this.sound.add('neon_bgm', {volume: 0.1});
