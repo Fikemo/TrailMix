@@ -8,8 +8,6 @@ export default class RightRoomDepot extends BaseSceneTiled {
 
         this.static = true;
 
-        this.musicKey = "basic";
-
         this.setIcon();
     }
 
