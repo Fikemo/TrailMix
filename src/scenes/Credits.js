@@ -12,9 +12,10 @@ export default class Credits extends Phaser.Scene{
     }
 
     create(){
+        this.cursors = this.input.keyboard.createCursorKeys();
         let instructConfig = {
             fontFamily: 'Courier',
-            fontSize: '20px',
+            fontSize: '18px',
             //backgroundColor: '#A3C941',
             color: '#FFFFFF',
             align: 'center',
@@ -30,14 +31,12 @@ export default class Credits extends Phaser.Scene{
         
 
         //add text
-        this.add.text(game.config.width/2, game.config.height/2 + 122, 'Programming: Finn Morrison & Emersen Lorenz\nArt and Animation: Marla De Leon & Aubrey Schelbauer\nSound Design: Emersen Lorenz', instructConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 100, 'Finn Morrison: Lead Programmer / Lead Designer / UX Designer\nEmersen Lorenz: Sound and Music Producer\nMarla De Leon: Lead Artist / Level Designer\nAubrey Schelbauer: Supporting Artist / Supporting Programmer \n/ Level Designer', instructConfig).setOrigin(0.5);
 
-       
+        this.cursors.shift.on('down', () => {this.scene.start('menuScene')});
     }
 
     update(){
-        //set credit timer to transition into title screen
-        this.time.delayedCall(3000, () => { this.scene.start('menuScene'); }); // delay in ms
 
     }
 }
