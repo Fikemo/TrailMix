@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"candyUpRightLeft.json"
+        }
+    },
  "height":18,
  "infinite":false,
  "layers":[
@@ -175,6 +183,26 @@
                  "width":0,
                  "x":192,
                  "y":512
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"red",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":192,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":64,
+                 "y":160
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -183,7 +211,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":8,
+ "nextobjectid":9,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.6.0",

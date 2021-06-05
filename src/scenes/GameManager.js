@@ -2,7 +2,7 @@ import createEvent from "../../lib/events.js";
 import Hub from "./levels/Hub.js";
 import LavaLeftRight from "./LavaLeftRight.js";
 import CandyUpDown from "./CandyUpDown.js";
-import CandyUpRightLeft from "./CandyUpDown.js";
+import CandyUpRightLeft from "./levels/CandyUpRightLeft.js";
 import BasicUpRightDownLeft from "./levels/BasicUpRightDownLeft.js";
 import BasicRightLeft from "./levels/BasicRightLeft.js";
 import BasicDownLeft from "./levels/BasicDownLeft.js";
