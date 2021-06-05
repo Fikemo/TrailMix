@@ -93,7 +93,7 @@ export default class BaseSceneTiled extends BaseScene{
 
         if (this.player && this.player.bulletGroup){
             this.createColliders("bullets", this.player.bulletGroup, this.testBulletCollision);
-            if (this.layers.platforms){
+            if (this.layers.platforms  && this.layers.platforms.colliders.bullets){
                 this.layers.platforms.colliders.bullets.active = false;
             }
         }

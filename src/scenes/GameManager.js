@@ -11,7 +11,7 @@ import WaterDownLeft from "./levels/WaterDownLeft.js";
 import ForestRightLeft from "./levels/ForestRightLeft.js";
 import SkyUpRight from "./levels/SkyUpRight.js";
 import ForestDownRight from "./levels/ForestDownRight.js";
-import WaterLeftRight from "./levels/WaterLeftRight.js";
+import WaterUpRightDownLeft from "./levels/WaterUpRightDownLeft.js";
 
 
 import TestScene from "./levels/Test.js";
@@ -65,7 +65,7 @@ export default class GameManager extends Phaser.Scene{
                 ForestRightLeft,
                 SkyUpRight,
                 ForestDownRight,
-                WaterLeftRight,
+                WaterUpRightDownLeft,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes

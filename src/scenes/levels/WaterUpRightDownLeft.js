@@ -1,11 +1,13 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
 
-export default class WaterDownLeft extends BaseSceneTiled{
+export default class WaterUpRightDownLeft extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
 
-        this.left = true;
+        this.up = true;
         this.right = true;
+        this.down = true;
+        this.left = true;
 
         this.musicKey = "water";
 
@@ -16,7 +18,7 @@ export default class WaterDownLeft extends BaseSceneTiled{
         super.create();
 
         this.createStandardLevel({
-            mapJSON: "waterLeftRightJSON",
+            mapJSON: "waterUpRightDownLeftJSON",
             backgroundColor: "#131e28",
             player: true,
         })
