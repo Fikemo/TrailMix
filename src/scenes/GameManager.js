@@ -1,18 +1,33 @@
 import createEvent from "../../lib/events.js";
 import Hub from "./levels/Hub.js";
-import LavaLeftRight from "./LavaLeftRight.js";
-import CandyUpDown from "./CandyUpDown.js";
-import BasicUpRightDownLeft from "./levels/BasicUpRightDownLeft.js";
-import BasicRightLeft from "./levels/BasicRightLeft.js";
-import BasicDownLeft from "./levels/BasicDownLeft.js";
-import EnemyHazardTest from "./levels/EnemyHazardTest.js";
-import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
-import WaterDownLeft from "./WaterDownLeft.js";
-import ForestRightLeft from "./levels/ForestRightLeft.js";
+// import LavaLeftRight from "./LavaLeftRight.js";
+// import CandyUpDown from "./CandyUpDown.js";
+// import BasicUpRightDownLeft from "./levels/BasicUpRightDownLeft.js";
+// import BasicRightLeft from "./levels/BasicRightLeft.js";
+// import BasicDownLeft from "./levels/BasicDownLeft.js";
+// import EnemyHazardTest from "./levels/EnemyHazardTest.js";
+// import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
+// import WaterDownLeft from "./WaterDownLeft.js";
+// import ForestRightLeft from "./levels/ForestRightLeft.js";
 
 import TestScene from "./levels/Test.js";
 import UpRoomDepot from "./levels/UpRoomDepot.js";
 import RightRoomDepot from "./levels/RightRoomDepot.js";
+import DownRoomDepot from "./levels/DownRoomDepot.js";
+import LeftRoomDepot from "./levels/LeftRoomDepot.js";
+
+// test rooms
+import TestUpRightDownLeft from "./testLevels/TestUpRightDownLeft.js";
+import TestDownLeft from "./testLevels/TestDownLeft.js";
+import TestRightDown from "./testLevels/TestRightDown.js";
+import TestRightDownLeft from "./testLevels/TestRightDownLeft.js";
+import TestRightLeft from "./testLevels/TestRightLeft.js";
+import TestUpDown from "./testLevels/TestUpDown.js";
+import TestUpDownLeft from "./testLevels/TestUpDownLeft.js";
+import TestUpLeft from "./testLevels/TestUpLeft.js";
+import TestUpRight from "./testLevels/TestUpRight.js";
+import TestUpRightDown from "./testLevels/TestUpRightDown.js";
+import TestUpRightLeft from "./testLevels/TestUpRightLeft.js";
 
 // TODO: Add player health
 // TODO: Add player temporary inventory
@@ -55,17 +70,48 @@ export default class GameManager extends Phaser.Scene{
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
             //**An array of levels that COULD be in the player's inventory */
             this.availableSceneTypes = [
-                BasicUpRightDownLeft,
-                WaterDownLeft,
-                LavaLeftRight,
-                CandyUpDown,
-                // NeonUpRightDownLeft
-                ForestRightLeft,
+
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
             this.allSceneTypes = [
                 ...this.availableSceneTypes,
+            ];
+
+            this.startingSceneTypes = [
+                // TestUpRightDownLeft,
+                // TestDownLeft,
+                // TestRightDown,
+                // TestRightDownLeft,
+                // TestRightLeft,
+                // TestUpDown,
+                // TestUpDownLeft,
+                // TestUpLeft,
+                // TestUpRight,
+                // TestUpRightDown,
+                // TestUpRightLeft,
+                TestRightLeft,
+                TestUpRightDownLeft,
+
+                TestRightDown,
+                TestUpDown,
+                TestUpLeft,
+
+                TestUpRightLeft,
+                TestUpDownLeft,
+                TestRightLeft,
+
+                TestUpRight,
+                TestUpDown,
+                TestDownLeft,
+
+                TestRightLeft,
+                TestUpRightDown,
+                TestRightDownLeft,
+
+                TestUpDown,
+                TestUpRightDownLeft,
+                TestUpDown
             ];
 
             //**A 2D array that holds all the scenes in their respective coordinates on the map */
@@ -141,7 +187,7 @@ export default class GameManager extends Phaser.Scene{
         ).setOrigin(0);
 
         // FIXME: Randomly fill the inventory with available scenes. This should be replaced with something that isn't so random
-        this.randomlyFillSceneInventory();
+        // this.randomlyFillSceneInventory();
 
         // Initialize the game for start
         this.initializeMapForGameStart();
@@ -210,6 +256,23 @@ export default class GameManager extends Phaser.Scene{
 
         let upRoomDepot1 = this.createSceneOfClass(UpRoomDepot);
         this.setSceneOnMap(upRoomDepot1, 4, 3);
+        let upRoomDepot2 = this.createSceneOfClass(UpRoomDepot);
+        this.setSceneOnMap(upRoomDepot2, 15, 5);
+
+        let rightRoomDepot1 = this.createSceneOfClass(RightRoomDepot);
+        this.setSceneOnMap(rightRoomDepot1, 2, 4);
+        let rightRoomDepot2 = this.createSceneOfClass(RightRoomDepot);
+        this.setSceneOnMap(rightRoomDepot2, 13, 3);
+
+        let downRoomDepot1 = this.createSceneOfClass(DownRoomDepot);
+        this.setSceneOnMap(downRoomDepot1, 0, 0);
+        let downRoomDepot2 = this.createSceneOfClass(DownRoomDepot);
+        this.setSceneOnMap(downRoomDepot2, 9, 4);
+
+        let leftRoomDepot1 = this.createSceneOfClass(LeftRoomDepot);
+        this.setSceneOnMap(leftRoomDepot1, 12, 2);
+        let leftRoomDepot2 = this.createSceneOfClass(LeftRoomDepot);
+        this.setSceneOnMap(leftRoomDepot2, 17, 1);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
@@ -220,6 +283,11 @@ export default class GameManager extends Phaser.Scene{
         // this.setSceneOnMap(this.destinationRoom3, 3, 3);
         // this.setSceneOnMap(this.destinationRoom4, 13, 1);
         this.setSceneOnMap(this.startingScene, 6, 2);
+
+        this.startingSceneTypes.forEach(sceneType => {
+            let sceneToGive = this.createSceneOfClass(sceneType);
+            this.addSceneToInventory(sceneToGive);
+        })
 
         // launch the starting scene scene
         this.launchSceneAt(6,2);

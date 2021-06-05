@@ -1,14 +1,13 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
 
-export default class RightRoomDepot extends BaseSceneTiled {
+export default class TestUpRightDownLeft extends BaseSceneTiled {
     constructor(key, gameManager){
         super(key, gameManager);
 
+        this.up = true;
         this.right = true;
-
-        this.static = true;
-
-        this.musicKey = "basic";
+        // this.down = true;
+        // this.left = true;
 
         this.setIcon();
     }
@@ -17,7 +16,7 @@ export default class RightRoomDepot extends BaseSceneTiled {
         super.create();
 
         this.createStandardLevel({
-            mapJSON: "rightRoomDepotJSON",
+            mapJSON: "testUpRightDownLeftJSON",
             player: true,
         })
     }

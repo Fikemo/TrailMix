@@ -6,6 +6,8 @@ export default class UpRoomDepot extends BaseSceneTiled {
 
         this.up = true;
 
+        this.static = true;
+
         this.musicKey = "basic";
 
         this.setIcon();
