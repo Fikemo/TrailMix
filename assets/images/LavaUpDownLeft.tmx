@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="15">
+ <editorsettings>
+  <export target="LavaUpDownLeft.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="lavaTileset" tilewidth="32" tileheight="32" tilecount="196" columns="14">
   <image source="lavaTileset.png" width="448" height="448"/>
   <tile id="0">
