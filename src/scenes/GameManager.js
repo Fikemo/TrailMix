@@ -72,8 +72,8 @@ export default class GameManager extends Phaser.Scene{
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
             //**An array of levels that COULD be in the player's inventory */
             this.availableSceneTypes = [
-                // ForestUpDownLeft,
-                // SkyRightLeft,
+                ForestUpDownLeft,
+                SkyRightLeft,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
