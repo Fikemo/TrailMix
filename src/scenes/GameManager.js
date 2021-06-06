@@ -11,6 +11,8 @@ import Hub from "./levels/Hub.js";
 // import ForestRightLeft from "./levels/ForestRightLeft.js";
 import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 import SkyRightLeft from "./levels/SkyRIghtLeft.js";
+import LavaUpDownLeft from "./levels/LavaUpDownLeft.js";
+import WaterRightLeft from "./levels/WaterRightLeft.js";
 
 import CommonUpLeftHard from "./levels/CommonUpLeftHard.js";
 import ForestRightDownHard from "./levels/ForestRightDownHard.js";
@@ -126,8 +128,8 @@ export default class GameManager extends Phaser.Scene{
                 ],
 
                 yellow: [
-                    TestUpDownLeft,
-                    TestRightLeft
+                    LavaUpDownLeft,
+                    WaterRightLeft
                 ],
 
                 aqua: [
