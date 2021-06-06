@@ -233,8 +233,11 @@ export default class GameManager extends Phaser.Scene{
             candy: this.sound.add('candy_bgm', {volume: 0.01}),
             forest: this.sound.add('forest_bgm', {volume: 0.01}),
             sky: this.sound.add('sky_bgm', {volume: 0.01}),
-        }
+        };
 
+        Object.values(this.music).forEach(track => {
+            track.played = false;
+        });
 
         // inputs
         // create the input keys
@@ -325,47 +328,47 @@ export default class GameManager extends Phaser.Scene{
     }
 
     initializeMapForGameStart(){
-
+        this.roomDepots = {};
         // create the room depots and put them on the map
         // orange
-        let upRoomDepot1 = this.createSceneOfClass(UpRoomDepot);
-        upRoomDepot1.heldRooms = this.allInventoryRoomTypes.orange;
-        this.setSceneOnMap(upRoomDepot1, 4, 3);
-
-        // aqua
-        let upRoomDepot2 = this.createSceneOfClass(UpRoomDepot);
-        upRoomDepot2.heldRooms = this.allInventoryRoomTypes.aqua;
-        this.setSceneOnMap(upRoomDepot2, 15, 5);
+        this.roomDepots.orange = this.createSceneOfClass(UpRoomDepot);
+        this.roomDepots.orange.heldRooms = this.allInventoryRoomTypes.orange;
+        this.setSceneOnMap(this.roomDepots.orange, 4, 3);
 
         // chartreuse
-        let rightRoomDepot1 = this.createSceneOfClass(RightRoomDepot);
-        rightRoomDepot1.heldRooms = this.allInventoryRoomTypes.chartreuse;
-        this.setSceneOnMap(rightRoomDepot1, 2, 4);
-
-        // yellow
-        let rightRoomDepot2 = this.createSceneOfClass(RightRoomDepot);
-        rightRoomDepot2.heldRooms = this.allInventoryRoomTypes.yellow;
-        this.setSceneOnMap(rightRoomDepot2, 13, 3);
-
-        // blue
-        let downRoomDepot1 = this.createSceneOfClass(DownRoomDepot);
-        downRoomDepot1.heldRooms = this.allInventoryRoomTypes.blue;
-        this.setSceneOnMap(downRoomDepot1, 0, 0);
+        this.roomDepots.chartreuse = this.createSceneOfClass(RightRoomDepot);
+        this.roomDepots.chartreuse.heldRooms = this.allInventoryRoomTypes.chartreuse;
+        this.setSceneOnMap(this.roomDepots.chartreuse, 2, 4);
 
         // maroon
-        let downRoomDepot2 = this.createSceneOfClass(DownRoomDepot);
-        downRoomDepot2.heldRooms = this.allInventoryRoomTypes.maroon;
-        this.setSceneOnMap(downRoomDepot2, 9, 4);
+        this.roomDepots.maroon = this.createSceneOfClass(DownRoomDepot);
+        this.roomDepots.maroon.heldRooms = this.allInventoryRoomTypes.maroon;
+        this.setSceneOnMap(this.roomDepots.maroon, 9, 4);
+
+        // blue
+        this.roomDepots.blue = this.createSceneOfClass(DownRoomDepot);
+        this.roomDepots.blue.heldRooms = this.allInventoryRoomTypes.blue;
+        this.setSceneOnMap(this.roomDepots.blue, 0, 0);
 
         // purple
-        let leftRoomDepot1 = this.createSceneOfClass(LeftRoomDepot);
-        leftRoomDepot1.heldRooms = this.allInventoryRoomTypes.purple;
-        this.setSceneOnMap(leftRoomDepot1, 12, 2);
+        this.roomDepots.purple = this.createSceneOfClass(LeftRoomDepot);
+        this.roomDepots.purple.heldRooms = this.allInventoryRoomTypes.purple;
+        this.setSceneOnMap(this.roomDepots.purple, 12, 2);
+
+        // yellow
+        this.roomDepots.yellow = this.createSceneOfClass(RightRoomDepot);
+        this.roomDepots.yellow.heldRooms = this.allInventoryRoomTypes.yellow;
+        this.setSceneOnMap(this.roomDepots.yellow, 13, 3);
+
+        // aqua
+        this.roomDepots.aqua = this.createSceneOfClass(UpRoomDepot);
+        this.roomDepots.aqua.heldRooms = this.allInventoryRoomTypes.aqua;
+        this.setSceneOnMap(this.roomDepots.aqua, 15, 5);
 
         // teal
-        let leftRoomDepot2 = this.createSceneOfClass(LeftRoomDepot);
-        leftRoomDepot2.heldRooms = this.allInventoryRoomTypes.teal;
-        this.setSceneOnMap(leftRoomDepot2, 17, 1);
+        this.roomDepots.teal = this.createSceneOfClass(LeftRoomDepot);
+        this.roomDepots.teal.heldRooms = this.allInventoryRoomTypes.teal;
+        this.setSceneOnMap(this.roomDepots.teal, 17, 1);
 
         // end room
         let endRoom = this.createSceneOfClass(DownRoomDepot);
@@ -386,6 +389,13 @@ export default class GameManager extends Phaser.Scene{
         //     this.addSceneToInventory(sceneToGive);
         // })
 
+        // Object.values(this.allInventoryRoomTypes).forEach(value => {
+        //     value.forEach(sceneType => {
+        //         let sceneToStartWith = this.createSceneOfClass(sceneType);
+        //         this.addSceneToInventory(sceneToStartWith);
+        //     })
+        // })
+
         this.allInventoryRoomTypes.start.forEach(sceneType => {
             let sceneToStartWith = this.createSceneOfClass(sceneType);
             this.addSceneToInventory(sceneToStartWith);
@@ -397,28 +407,18 @@ export default class GameManager extends Phaser.Scene{
         // update the UI
         this.uiNeedsUpdate = true;
     }
-    
-        //update player health
-/*
-        if (this.player.uiNeedsUpdate){
-            console.log('updating ui');
-            for (let i = 0; i < this.backgroundHealth.length; i++){
-                if (i > this.player.maxHealth - 1){
-                    this.backgroundHealth[i].alpha = 0;
-                    this.emptyHealth[i].alpha = 0;
-                } else {
-                    this.backgroundHealth[i].alpha = 1;
-                    this.emptyHealth[i].alpha = 1;
-                }
 
-                if (i > this.player.currentHealth - 1){
-                    this.filledHealth[i].alpha = 0;
-                } else {
-                    this.filledHealth[i].alpha = 1;
-                }
-            }
-        }
-        */
+    giveAllRooms(){
+        this.sceneInventory = [];
+        Object.values(this.allInventoryRoomTypes).forEach(roomArray => {
+            roomArray.forEach(roomType => {
+                let sceneToAdd = this.createSceneOfClass(roomType);
+                this.addSceneToInventory(sceneToAdd);
+            })
+        })
+
+        this.uiNeedsUpdate = true;
+    }
       
     updateUI(inventory = true, map = true, health = true){
         // console.log("updating UI");
@@ -803,12 +803,24 @@ export default class GameManager extends Phaser.Scene{
         // }
 
         let musicCanPlay = true;
+        let resetMusic = true;
         Object.values(this.music).forEach(track => { 
             if (track.isPlaying){
                 musicCanPlay = false;
             }
-        })
-        if (musicCanPlay && sceneToLaunch.musicKey) {
+
+            if (!track.played){
+                resetMusic = false;
+            }
+        });
+
+        if (resetMusic){
+            Object.values(this.music).forEach(track => {
+                track.played = false;
+            })
+        }
+
+        if (musicCanPlay && sceneToLaunch.musicKey && !this.music[sceneToLaunch.musicKey].played) {
             this.music[sceneToLaunch.musicKey].play();
         }
     }
