@@ -1,13 +1,13 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
 
-export default class SkyUpRight extends BaseSceneTiled{
+export default class ForestUpDown extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
 
         this.up = true;
-        this.right = true;
+        this.down = true;
 
-        this.musicKey = "sky";
+        this.musicKey = "forest";
 
         this.setIcon();
     }
@@ -16,10 +16,11 @@ export default class SkyUpRight extends BaseSceneTiled{
         super.create();
 
         this.createStandardLevel({
-            mapJSON:"skyUpRightJSON",
-            backgroundColor: "#a7f2fd",
+            mapJSON: "forestUpDownJSON",
+            backgroundColor: "#131e28",
             player: true,
         })
+        
     }
-}
 
+}
