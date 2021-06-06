@@ -15,9 +15,11 @@ import ForestDownRight from "./levels/ForestDownRight.js";
 import WaterUpRightDownLeft from "./levels/WaterUpRightDownLeft.js";
 import ForestUpDown from "./levels/ForestUpDown.js";
 import CandyUpRightDownLeft from "./levels/CandyUpRightDownLeft.js";
+import SkyUpDown from "./levels/SkyUpDown.js";
+import LavaUpDown from"./levels/LavaUpDown.js";
 
 import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
-import SkyRightLeft from "./levels/SkyRIghtLeft.js";
+import SkyRightLeft from "./levels/SkyRightLeft.js";
 
 import TestScene from "./levels/Test.js";
 import UpRoomDepot from "./levels/UpRoomDepot.js";
@@ -79,6 +81,8 @@ export default class GameManager extends Phaser.Scene{
                 SkyRightLeft,
                 ForestUpDown,
                 CandyUpRightDownLeft,
+                SkyUpDown,
+                LavaUpDown,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
