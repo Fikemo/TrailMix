@@ -7,7 +7,7 @@ export default class Saw extends Phaser.Physics.Arcade.Sprite{
         this.setOrigin(0.5);
         this.body.setCircle(12, 4, 4);
 
-        this.speed = 0.05;
+        this.speed = 0.075;
         this.damage = 5;
         this.rotationSpeed = -500;
         this.setAngularVelocity(this.rotationSpeed);

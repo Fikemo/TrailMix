@@ -78,18 +78,43 @@ export default class GameManager extends Phaser.Scene{
                 ...this.availableSceneTypes,
             ];
 
+            this.startingTestScenes = [
+                TestRightLeft,
+                TestUpRightDownLeft,
+
+                TestRightDown,
+                TestUpDown,
+                TestUpLeft,
+
+                TestUpRightLeft,
+                TestUpDownLeft,
+                TestRightLeft,
+
+                TestUpRight,
+                TestUpDown,
+                TestDownLeft,
+
+                TestRightLeft,
+                TestUpRightDown,
+                TestRightDownLeft,
+
+                TestUpDown,
+                TestUpRightDownLeft,
+                TestUpDown,
+
+                TestUpDownLeft,
+                TestRightLeft,
+
+                TestUpLeft,
+                TestRightDown,
+                TestUpRightLeft,
+                
+                TestUpRightDownLeft,
+                TestRightDownLeft,
+                TestUpRight,
+            ];
+
             this.startingSceneTypes = [
-                // TestUpRightDownLeft,
-                // TestDownLeft,
-                // TestRightDown,
-                // TestRightDownLeft,
-                // TestRightLeft,
-                // TestUpDown,
-                // TestUpDownLeft,
-                // TestUpLeft,
-                // TestUpRight,
-                // TestUpRightDown,
-                // TestUpRightLeft,
                 TestRightLeft,
                 TestUpRightDownLeft,
 
