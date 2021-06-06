@@ -1,31 +1,26 @@
 import createEvent from "../../lib/events.js";
-import Hub from "./levels/Hub.js";
-// import LavaLeftRight from "./LavaLeftRight.js";
-// import CandyUpDown from "./CandyUpDown.js";
-// import BasicUpRightDownLeft from "./levels/BasicUpRightDownLeft.js";
-// import BasicRightLeft from "./levels/BasicRightLeft.js";
-// import BasicDownLeft from "./levels/BasicDownLeft.js";
-// import EnemyHazardTest from "./levels/EnemyHazardTest.js";
-// import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
-// import WaterDownLeft from "./WaterDownLeft.js";
-// import ForestRightLeft from "./levels/ForestRightLeft.js";
-import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
-import SkyRightLeft from "./levels/SkyRIghtLeft.js";
+import Hub from "./roomDepots/Hub.js";
+
+// import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
+// import SkyRightLeft from "./levels/SkyRIghtLeft.js";
 import LavaUpDownLeft from "./levels/LavaUpDownLeft.js";
 import WaterRightLeft from "./levels/WaterRightLeft.js";
 
+// aqua
 import CommonUpLeftHard from "./levels/CommonUpLeftHard.js";
 import ForestRightDownHard from "./levels/ForestRightDownHard.js";
 import WaterUpRightLeftHard from "./levels/WaterUpRightLeftHard.js";
 
+// teal
 import LavaUpRightDownLeftHard from "./levels/LavaUpRightDownLeftHard.js";
 import CandyRightDownLeftHard from "./levels/CandyRightDownLeftHard.js";
 import SkyUpRightHard from "./levels/SkyUpRightHard.js";
 
-import UpRoomDepot from "./levels/UpRoomDepot.js";
-import RightRoomDepot from "./levels/RightRoomDepot.js";
-import DownRoomDepot from "./levels/DownRoomDepot.js";
-import LeftRoomDepot from "./levels/LeftRoomDepot.js";
+// room depots
+import UpRoomDepot from "./roomDepots/UpRoomDepot.js";
+import RightRoomDepot from "./roomDepots/RightRoomDepot.js";
+import DownRoomDepot from "./roomDepots/DownRoomDepot.js";
+import LeftRoomDepot from "./roomDepots/LeftRoomDepot.js";
 
 // test rooms
 import TestScene from "./levels/Test.js";
