@@ -7,6 +7,8 @@ export default class ForestDownRight extends BaseSceneTiled{
         this.down = true;
         this.right = true;
 
+        this.musicKey = "forest";
+
         this.setIcon();
     }
 
