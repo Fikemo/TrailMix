@@ -207,6 +207,18 @@
                  "width":0,
                  "x":224,
                  "y":224
+                }, 
+                {
+                 "ellipse":true,
+                 "height":96,
+                 "id":7,
+                 "name":"saw",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96,
+                 "x":576,
+                 "y":96
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -215,7 +227,7 @@
          "y":0
         }],
  "nextlayerid":14,
- "nextobjectid":7,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.6.0",

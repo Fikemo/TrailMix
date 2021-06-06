@@ -2,6 +2,7 @@ import createEvent from "../../lib/events.js";
 import Hub from "./levels/Hub.js";
 import LavaLeftRight from "./LavaLeftRight.js";
 import CandyUpDown from "./CandyUpDown.js";
+import CandyUpRightLeft from "./levels/CandyUpRightLeft.js";
 import BasicUpRightDownLeft from "./levels/BasicUpRightDownLeft.js";
 import BasicRightLeft from "./levels/BasicRightLeft.js";
 import BasicDownLeft from "./levels/BasicDownLeft.js";
@@ -13,8 +14,12 @@ import SkyUpRight from "./levels/SkyUpRight.js";
 import ForestDownRight from "./levels/ForestDownRight.js";
 import WaterUpRightDownLeft from "./levels/WaterUpRightDownLeft.js";
 
+import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
+import SkyRightLeft from "./levels/SkyRIghtLeft.js";
 
 import TestScene from "./levels/Test.js";
+import UpRoomDepot from "./levels/UpRoomDepot.js";
+import RightRoomDepot from "./levels/RightRoomDepot.js";
 
 // TODO: Add player health
 // TODO: Add player temporary inventory
@@ -61,11 +66,14 @@ export default class GameManager extends Phaser.Scene{
                 WaterDownLeft,
                 LavaLeftRight,
                 CandyUpDown,
+                CandyUpRightLeft,
                 // NeonUpRightDownLeft
                 ForestRightLeft,
                 SkyUpRight,
                 ForestDownRight,
                 WaterUpRightDownLeft,
+                ForestUpDownLeft,
+                SkyRightLeft,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
@@ -112,6 +120,7 @@ export default class GameManager extends Phaser.Scene{
             lava: this.sound.add('lava_bgm', {volume: 0.01}),
             candy: this.sound.add('candy_bgm', {volume: 0.01}),
             forest: this.sound.add('forest_bgm', {volume: 0.01}),
+            sky: this.sound.add('sky_bgm', {volume: 0.01}),
         }
 
 
@@ -167,7 +176,7 @@ export default class GameManager extends Phaser.Scene{
         }
 
         if (this.playerHealth <= 0){
-            this.launchSceneAt(9, 2);
+            this.launchSceneAt(6, 2);
         }
 
         this.uiNeedsUpdate = true;
@@ -208,23 +217,26 @@ export default class GameManager extends Phaser.Scene{
         // create a scene of the starting scene type
         this.startingScene = this.createSceneOfClass(this.startingSceneType);
         // create more rooms to place in the beginning of the game
-        this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
-        this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
-        this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
-        this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
+        // this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
+
+        let upRoomDepot1 = this.createSceneOfClass(UpRoomDepot);
+        this.setSceneOnMap(upRoomDepot1, 4, 3);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
 
         // let's put some scenes on the map
-        this.setSceneOnMap(this.destinationRoom1, 0, 0);
-        this.setSceneOnMap(this.destinationRoom2, 19, 0);
-        this.setSceneOnMap(this.destinationRoom3, 3, 3);
-        this.setSceneOnMap(this.destinationRoom4, 13, 1);
-        this.setSceneOnMap(this.startingScene, 9, 2);
+        // this.setSceneOnMap(this.destinationRoom1, 0, 0);
+        // this.setSceneOnMap(this.destinationRoom2, 19, 0);
+        // this.setSceneOnMap(this.destinationRoom3, 3, 3);
+        // this.setSceneOnMap(this.destinationRoom4, 13, 1);
+        this.setSceneOnMap(this.startingScene, 6, 2);
 
         // launch the starting scene scene
-        this.launchSceneAt(9,2);
+        this.launchSceneAt(6,2);
 
         // update the UI
         this.uiNeedsUpdate = true;
