@@ -11,6 +11,7 @@ import Hub from "./levels/Hub.js";
 // import ForestRightLeft from "./levels/ForestRightLeft.js";
 import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 import SkyRightLeft from "./levels/SkyRIghtLeft.js";
+import LavaUpDownLeft from "./levels/LavaUpDownLeft.js";
 
 import TestScene from "./levels/Test.js";
 import UpRoomDepot from "./levels/UpRoomDepot.js";
@@ -74,6 +75,7 @@ export default class GameManager extends Phaser.Scene{
             this.availableSceneTypes = [
                 ForestUpDownLeft,
                 SkyRightLeft,
+                LavaUpDownLeft,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
