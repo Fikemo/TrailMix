@@ -12,13 +12,21 @@ import Hub from "./levels/Hub.js";
 import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 import SkyRightLeft from "./levels/SkyRIghtLeft.js";
 
-import TestScene from "./levels/Test.js";
+import CommonUpLeftHard from "./levels/CommonUpLeftHard.js";
+import ForestRightDownHard from "./levels/ForestRightDownHard.js";
+import WaterUpRightLeftHard from "./levels/WaterUpRightLeftHard.js";
+
+import LavaUpRightDownLeftHard from "./levels/LavaUpRightDownLeftHard.js";
+import CandyRightDownLeftHard from "./levels/CandyRightDownLeftHard.js";
+import SkyUpRightHard from "./levels/SkyUpRightHard.js";
+
 import UpRoomDepot from "./levels/UpRoomDepot.js";
 import RightRoomDepot from "./levels/RightRoomDepot.js";
 import DownRoomDepot from "./levels/DownRoomDepot.js";
 import LeftRoomDepot from "./levels/LeftRoomDepot.js";
 
 // test rooms
+import TestScene from "./levels/Test.js";
 import TestUpRightDownLeft from "./testLevels/TestUpRightDownLeft.js";
 import TestDownLeft from "./testLevels/TestDownLeft.js";
 import TestRightDown from "./testLevels/TestRightDown.js";
@@ -52,7 +60,7 @@ export default class GameManager extends Phaser.Scene{
 
     init(data){
         // console.log(this.events);
-        if (!!!this.firstInitialized){
+        // if (!!!this.firstInitialized){
             // assign this to be the game's gameManager reference
             // make sure that the reference isn't already set
             if (this.game.gameManager && this.game.gameManager != this){
@@ -71,53 +79,71 @@ export default class GameManager extends Phaser.Scene{
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
             //**An array of levels that COULD be in the player's inventory */
-            this.availableSceneTypes = [
-                ForestUpDownLeft,
-                SkyRightLeft,
-            ];
+            // this.availableSceneTypes = [
+            //     ForestUpDownLeft,
+            //     SkyRightLeft,
+            // ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
-            this.allSceneTypes = [
-                ...this.availableSceneTypes,
-            ];
+            // this.allSceneTypes = [
+            //     ...this.availableSceneTypes,
+            // ];
+
+            this.allInventoryRoomTypes = {
+                start: [
+                    TestRightLeft,
+                    TestUpRightDownLeft
+                ],
+
+                orange: [
+                    TestRightDown,
+                    TestUpDown,
+                    TestUpLeft
+                ],
+
+                chartreuse: [
+                    TestUpRightLeft,
+                    TestUpDownLeft,
+                    TestRightLeft
+                ],
+
+                maroon: [
+                    TestUpRight,
+                    TestUpDown,
+                    TestDownLeft
+                ],
+
+                blue: [
+                    TestRightLeft,
+                    TestUpRightDown,
+                    TestRightDownLeft
+                ],
+
+                purple: [
+                    TestUpDown,
+                    TestUpRightDownLeft,
+                    TestUpDown
+                ],
+
+                yellow: [
+                    TestUpDownLeft,
+                    TestRightLeft
+                ],
+
+                aqua: [
+                    CommonUpLeftHard,
+                    ForestRightDownHard,
+                    WaterUpRightLeftHard
+                ],
+                
+                teal: [
+                    LavaUpRightDownLeftHard,
+                    CandyRightDownLeftHard,
+                    SkyUpRightHard
+                ]
+            }
 
             this.startingTestScenes = [
-                TestRightLeft,
-                TestUpRightDownLeft,
-
-                TestRightDown,
-                TestUpDown,
-                TestUpLeft,
-
-                TestUpRightLeft,
-                TestUpDownLeft,
-                TestRightLeft,
-
-                TestUpRight,
-                TestUpDown,
-                TestDownLeft,
-
-                TestRightLeft,
-                TestUpRightDown,
-                TestRightDownLeft,
-
-                TestUpDown,
-                TestUpRightDownLeft,
-                TestUpDown,
-
-                TestUpDownLeft,
-                TestRightLeft,
-
-                TestUpLeft,
-                TestRightDown,
-                TestUpRightLeft,
-                
-                TestUpRightDownLeft,
-                TestRightDownLeft,
-                TestUpRight,
-            ];
-
-            this.startingSceneTypes = [
                 TestRightLeft,
                 TestUpRightDownLeft,
 
@@ -159,6 +185,9 @@ export default class GameManager extends Phaser.Scene{
             //**An array of scenes that are available in the inventory menu */
             this.sceneInventory = this.createInventory(25);
 
+            //**An array of objects for the blushies that the player is currently holding */
+            this.playerBlushieInventory = [];
+
             //**A unique ID for every new scene that is created. Used as part of the scene's key. Incremented by 1 with every new scene */
             this.sceneID = 0;
 
@@ -175,7 +204,7 @@ export default class GameManager extends Phaser.Scene{
             this.eventCalls.updateUIEvent.add(() => {this.updateUI()});
 
             this.firstInitialized = true
-        }
+        // }
     }
 
     onWKeyDown(){
@@ -285,48 +314,70 @@ export default class GameManager extends Phaser.Scene{
     }
 
     initializeMapForGameStart(){
+
+        // create the room depots and put them on the map
+        // orange
+        let upRoomDepot1 = this.createSceneOfClass(UpRoomDepot);
+        upRoomDepot1.heldRooms = this.allInventoryRoomTypes.orange;
+        this.setSceneOnMap(upRoomDepot1, 4, 3);
+
+        // aqua
+        let upRoomDepot2 = this.createSceneOfClass(UpRoomDepot);
+        upRoomDepot2.heldRooms = this.allInventoryRoomTypes.aqua;
+        this.setSceneOnMap(upRoomDepot2, 15, 5);
+
+        // chartreuse
+        let rightRoomDepot1 = this.createSceneOfClass(RightRoomDepot);
+        rightRoomDepot1.heldRooms = this.allInventoryRoomTypes.chartreuse;
+        this.setSceneOnMap(rightRoomDepot1, 2, 4);
+
+        // yellow
+        let rightRoomDepot2 = this.createSceneOfClass(RightRoomDepot);
+        rightRoomDepot2.heldRooms = this.allInventoryRoomTypes.yellow;
+        this.setSceneOnMap(rightRoomDepot2, 13, 3);
+
+        // blue
+        let downRoomDepot1 = this.createSceneOfClass(DownRoomDepot);
+        downRoomDepot1.heldRooms = this.allInventoryRoomTypes.blue;
+        this.setSceneOnMap(downRoomDepot1, 0, 0);
+
+        // maroon
+        let downRoomDepot2 = this.createSceneOfClass(DownRoomDepot);
+        downRoomDepot2.heldRooms = this.allInventoryRoomTypes.maroon;
+        this.setSceneOnMap(downRoomDepot2, 9, 4);
+
+        // purple
+        let leftRoomDepot1 = this.createSceneOfClass(LeftRoomDepot);
+        leftRoomDepot1.heldRooms = this.allInventoryRoomTypes.purple;
+        this.setSceneOnMap(leftRoomDepot1, 12, 2);
+
+        // teal
+        let leftRoomDepot2 = this.createSceneOfClass(LeftRoomDepot);
+        leftRoomDepot2.heldRooms = this.allInventoryRoomTypes.teal;
+        this.setSceneOnMap(leftRoomDepot2, 17, 1);
+
+        // end room
+        let endRoom = this.createSceneOfClass(DownRoomDepot);
+        this.setSceneOnMap(endRoom, 19, 4);
+
         // Set the starting scene
         // create a scene of the starting scene type
         this.startingScene = this.createSceneOfClass(this.startingSceneType);
-        // create more rooms to place in the beginning of the game
-        // this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
-        // this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
-        // this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
-        // this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
-
-        let upRoomDepot1 = this.createSceneOfClass(UpRoomDepot);
-        this.setSceneOnMap(upRoomDepot1, 4, 3);
-        let upRoomDepot2 = this.createSceneOfClass(UpRoomDepot);
-        this.setSceneOnMap(upRoomDepot2, 15, 5);
-
-        let rightRoomDepot1 = this.createSceneOfClass(RightRoomDepot);
-        this.setSceneOnMap(rightRoomDepot1, 2, 4);
-        let rightRoomDepot2 = this.createSceneOfClass(RightRoomDepot);
-        this.setSceneOnMap(rightRoomDepot2, 13, 3);
-
-        let downRoomDepot1 = this.createSceneOfClass(DownRoomDepot);
-        this.setSceneOnMap(downRoomDepot1, 0, 0);
-        let downRoomDepot2 = this.createSceneOfClass(DownRoomDepot);
-        this.setSceneOnMap(downRoomDepot2, 9, 4);
-
-        let leftRoomDepot1 = this.createSceneOfClass(LeftRoomDepot);
-        this.setSceneOnMap(leftRoomDepot1, 12, 2);
-        let leftRoomDepot2 = this.createSceneOfClass(LeftRoomDepot);
-        this.setSceneOnMap(leftRoomDepot2, 17, 1);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
 
-        // let's put some scenes on the map
-        // this.setSceneOnMap(this.destinationRoom1, 0, 0);
-        // this.setSceneOnMap(this.destinationRoom2, 19, 0);
-        // this.setSceneOnMap(this.destinationRoom3, 3, 3);
-        // this.setSceneOnMap(this.destinationRoom4, 13, 1);
+        // put the starting scene on the map
         this.setSceneOnMap(this.startingScene, 6, 2);
 
-        this.startingSceneTypes.forEach(sceneType => {
-            let sceneToGive = this.createSceneOfClass(sceneType);
-            this.addSceneToInventory(sceneToGive);
+        // this.startingTestScenes.forEach(sceneType => {
+        //     let sceneToGive = this.createSceneOfClass(sceneType);
+        //     this.addSceneToInventory(sceneToGive);
+        // })
+
+        this.allInventoryRoomTypes.start.forEach(sceneType => {
+            let sceneToStartWith = this.createSceneOfClass(sceneType);
+            this.addSceneToInventory(sceneToStartWith);
         })
 
         // launch the starting scene scene
