@@ -17,7 +17,7 @@ export default class ForestUpDown extends BaseSceneTiled{
 
         this.createStandardLevel({
             mapJSON: "forestUpDownJSON",
-            backgroundColor: "#131e28",
+            backgroundColor: "#D0F0C0",
             player: true,
         })
         
