@@ -1,6 +1,6 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
 
-export default class ForestDownRight extends BaseSceneTiled{
+export default class ForestDownRightEasy extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
 

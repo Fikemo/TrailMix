@@ -115,7 +115,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("forestTileset", "forestTileset.png");
         this.load.tilemapTiledJSON("forestDownRightJSON", "forestDownRight.json");
 
-        // WaterLeftRight
+        // WaterUpRightDownLeft
         this.load.tilemapTiledJSON("waterUpRightDownLeftJSON", "waterUpRightDownLeft.json");
 
         // ForestUpDown
@@ -127,7 +127,7 @@ export default class Load extends Phaser.Scene {
         // SkyUpDown
         this.load.tilemapTiledJSON("skyUpDownJSON", "skyUpDown.json");
 
-        // Lava Up Down
+        // LavaUpDown
         this.load.tilemapTiledJSON("lavaUpDownJSON", "lavaUpDown.json");
         
         // load sounds

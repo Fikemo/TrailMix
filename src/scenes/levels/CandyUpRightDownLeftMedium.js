@@ -1,24 +1,28 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
- 
-export default class LavaUpDown extends BaseSceneTiled{
+
+export default class CandyUpRightDownLeftMedium extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
- 
+
         this.up = true;
+        this.right = true;
         this.down = true;
- 
-        this.musicKey = "lava";
+        this.left = true;
+
+        this.musicKey = "candy";
 
         this.setIcon();
     }
 
     create(data){
         super.create();
-        
+
         this.createStandardLevel({
-            mapJSON: "lavaUpDownJSON",
-            backgroundColor: 0xf0e17,
+            mapJSON: "candyUpRightDownLeftJSON",
+            backgroundColor: "#131e28",
             player: true,
         })
+        
     }
+
 }

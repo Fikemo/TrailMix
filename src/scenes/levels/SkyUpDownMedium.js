@@ -1,6 +1,6 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
 
-export default class SkyUpDown extends BaseSceneTiled{
+export default class SkyUpDownMedium extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
 

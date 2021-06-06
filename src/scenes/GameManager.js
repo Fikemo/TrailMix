@@ -11,12 +11,13 @@ import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
 import WaterDownLeft from "./levels/WaterDownLeft.js";
 import ForestRightLeft from "./levels/ForestRightLeft.js";
 import SkyUpRight from "./levels/SkyUpRight.js";
-import ForestDownRight from "./levels/ForestDownRight.js";
-import WaterUpRightDownLeft from "./levels/WaterUpRightDownLeft.js";
-import ForestUpDown from "./levels/ForestUpDown.js";
-import CandyUpRightDownLeft from "./levels/CandyUpRightDownLeft.js";
-import SkyUpDown from "./levels/SkyUpDown.js";
-import LavaUpDown from"./levels/LavaUpDown.js";
+import ForestDownRightEasy from "./levels/ForestDownRightEasy.js";
+
+import WaterUpRightDownLeftEasy from "./levels/WaterUpRightDownLeftEasy.js";
+import ForestUpDownMedium from "./levels/ForestUpDownMedium.js";
+import CandyUpRightDownLeftMedium from "./levels/CandyUpRightDownLeftMedium.js";
+import SkyUpDownMedium from "./levels/SkyUpDownMedium.js";
+import LavaUpDownEasy from"./levels/LavaUpDownEasy.js";
 
 import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 import SkyRightLeft from "./levels/SkyRightLeft.js";
@@ -24,7 +25,7 @@ import SkyRightLeft from "./levels/SkyRightLeft.js";
 import TestScene from "./levels/Test.js";
 import UpRoomDepot from "./levels/UpRoomDepot.js";
 import RightRoomDepot from "./levels/RightRoomDepot.js";
-import forestUpDown from "./levels/ForestUpDown.js";
+import forestUpDown from "./levels/ForestUpDownMedium.js";
 
 // TODO: Add player health
 // TODO: Add player temporary inventory
@@ -75,14 +76,14 @@ export default class GameManager extends Phaser.Scene{
                 // NeonUpRightDownLeft
                 ForestRightLeft,
                 SkyUpRight,
-                ForestDownRight,
-                WaterUpRightDownLeft,
+                ForestDownRightEasy,
+                WaterUpRightDownLeftEasy,
                 ForestUpDownLeft,
                 SkyRightLeft,
-                ForestUpDown,
-                CandyUpRightDownLeft,
-                SkyUpDown,
-                LavaUpDown,
+                ForestUpDownMedium,
+                CandyUpRightDownLeftMedium,
+                SkyUpDownMedium,
+                LavaUpDownEasy,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
