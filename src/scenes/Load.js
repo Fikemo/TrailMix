@@ -77,6 +77,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("forestTileset", "forestTileset.png");
         this.load.image("LavaLeftRight", "lavalevels.png");
         this.load.image("candyTileset", "candyTileset.png");
+        this.load.image("skyTileset", "skyTileset.png");
 
         // tilemaps
         this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
@@ -92,6 +93,7 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
         this.load.tilemapTiledJSON("candyUpRightLeftJSON", "candyUpRightLeft.json");
         this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
+        this.load.tilemapTiledJSON("skyRightLeftJSON", "skyRightLeft.json");
 
         this.load.tilemapTiledJSON("upRoomDepotJSON", "upRoomDepot.json");
         this.load.tilemapTiledJSON("rightRoomDepotJSON", "downRoomDepot.json");
@@ -117,6 +119,7 @@ export default class Load extends Phaser.Scene {
         this.load.audio('forest_bgm', 'CHILL4_2.wav');
         this.load.audio('candy_bgm', 'texture08.wav');
         this.load.audio('basic_bgm', 'chill12_1.2.wav');
+        this.load.audio('sky_bgm', 'chill14.wav');
 
 
         // sfx

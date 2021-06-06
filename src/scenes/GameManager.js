@@ -11,6 +11,7 @@ import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
 import WaterDownLeft from "./WaterDownLeft.js";
 import ForestRightLeft from "./levels/ForestRightLeft.js";
 import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
+import SkyRightLeft from "./levels/SkyRIghtLeft.js";
 
 import TestScene from "./levels/Test.js";
 import UpRoomDepot from "./levels/UpRoomDepot.js";
@@ -65,6 +66,7 @@ export default class GameManager extends Phaser.Scene{
                 // NeonUpRightDownLeft
                 ForestRightLeft,
                 ForestUpDownLeft,
+                SkyRightLeft,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
@@ -111,6 +113,7 @@ export default class GameManager extends Phaser.Scene{
             lava: this.sound.add('lava_bgm', {volume: 0.01}),
             candy: this.sound.add('candy_bgm', {volume: 0.01}),
             forest: this.sound.add('forest_bgm', {volume: 0.01}),
+            sky: this.sound.add('sky_bgm', {volume: 0.01}),
         }
 
 
