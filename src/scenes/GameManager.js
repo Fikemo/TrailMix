@@ -3,6 +3,20 @@ import Hub from "./roomDepots/Hub.js";
 
 // import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 // import SkyRightLeft from "./levels/SkyRIghtLeft.js";
+
+//start
+
+// orange
+
+// chartreuse
+
+// maroon
+
+// blue
+
+// purple
+
+// yellow
 import LavaUpDownLeft from "./levels/LavaUpDownLeft.js";
 import WaterRightLeft from "./levels/WaterRightLeft.js";
 
