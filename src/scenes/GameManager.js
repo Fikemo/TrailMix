@@ -26,7 +26,6 @@ import SkyUpDownMedium from "./levels/SkyUpDownMedium.js";
 import ForestUpDownMedium from "./levels/ForestUpDownMedium.js";
 import CandyUpRightDownLeftMedium from "./levels/CandyUpRightDownLeftMedium.js";
 
-
 // yellow
 import LavaUpDownLeftMedium from "./levels/LavaUpDownLeftMedium.js";
 import WaterRightLeftMedium from "./levels/WaterRightLeftMedium.js";
