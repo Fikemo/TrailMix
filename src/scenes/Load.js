@@ -75,30 +75,63 @@ export default class Load extends Phaser.Scene {
         this.load.image("NeonTileSet", "NeonTileSet.png");
         this.load.image("waterTileset","waterTileset.png");
         this.load.image("forestTileset", "forestTileset.png");
-        this.load.image("lavalevels", "lavalevels.png");
+        this.load.image("lavaTileset", "lavaTileset.png");
         this.load.image("candyTileset", "candyTileset.png");
         this.load.image("skyTileset", "skyTileset.png");
 
         // tilemaps
-        this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
-        this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
-        this.load.tilemapTiledJSON("basicDownLeftJSON", "basicDownLeft.json");
-        this.load.tilemapTiledJSON("enemyHazardTestJSON", "enemyHazardTest.json");
-        this.load.tilemapTiledJSON("testJSON", "test.json");
-        this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
-        this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
-        this.load.tilemapTiledJSON("forestRightLeftJSON", "forestRightLeft.json");
-        this.load.tilemapTiledJSON("forestUpDownLeftJSON", "forestUpDownLeft.json");
-        this.load.tilemapTiledJSON("hubJSON", "hubRoom.json");
-        this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
+        // this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
+        // this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
+        // this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeftMedium.json");
+        // this.load.tilemapTiledJSON("forestRightLeftJSON", "forestRightLeftMedium.json");
+        // this.load.tilemapTiledJSON("forestUpDownLeftJSON", "forestUpDownLeft.json");
+        // this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
+        // this.load.tilemapTiledJSON("candyUpRightLeftJSON", "candyUpRightLeft.json");
+        // this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
+
+        // start
+
+        // orange
+
+        // chartreuse
         this.load.tilemapTiledJSON("candyUpRightLeftJSON", "candyUpRightLeft.json");
-        this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
+        this.load.tilemapTiledJSON("forestUpDownLeftJSON", "forestUpDownLeft.json");
         this.load.tilemapTiledJSON("skyRightLeftJSON", "skyRightLeft.json");
 
+        // maroon
+
+        // blue
+
+        // purple
+
+        // yellow
+        this.load.tilemapTiledJSON("LavaUpDownLeftJSON", "LavaUpDownLeft.json");
+        this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeftMedium.json");
+
+        // aqua
+        this.load.tilemapTiledJSON("commonUpLeftHardJSON", "commonUpLeftHard.json");
+        this.load.tilemapTiledJSON("forestRightDownHardJSON", "forestRightDownHard.json");
+        this.load.tilemapTiledJSON("waterUpRightLeftHardJSON", "waterUpRightLeftHard.json");
+
+        // teal
+        this.load.tilemapTiledJSON("lavaUpRightDownLeftHardJSON", "lavaUpRightDownLeftHard.json");
+        this.load.tilemapTiledJSON("candyRightDownLeftHardJSON", "candyRightDownLeftHard.json");
+        this.load.tilemapTiledJSON("skyUpRightHardJSON", "skyUpRightHard.json");
+
+        // room depots
+        this.load.tilemapTiledJSON("hubJSON", "hubRoom.json");
         this.load.tilemapTiledJSON("upRoomDepotJSON", "upRoomDepot.json");
-        this.load.tilemapTiledJSON("rightRoomDepotJSON", "downRoomDepot.json");
-        this.load.tilemapTiledJSON("downRoomDepot", "downRoomDepot.json");
+        this.load.tilemapTiledJSON("rightRoomDepotJSON", "rightRoomDepot.json");
+        this.load.tilemapTiledJSON("downRoomDepotJSON", "downRoomDepot.json");
         this.load.tilemapTiledJSON("leftRoomDepotJSON", "leftRoomDepot.json");
+
+        // test rooms
+        // this.load.tilemapTiledJSON("basicRightLeftJSON", "basicRightLeft.json");
+        // this.load.tilemapTiledJSON("basicUpRightDownLeftJSON", "basicUpRightDownLeft.json");
+        // this.load.tilemapTiledJSON("basicDownLeftJSON", "basicDownLeft.json");
+        // this.load.tilemapTiledJSON("enemyHazardTestJSON", "enemyHazardTest.json");
+        this.load.tilemapTiledJSON("testJSON", "test.json");
+        this.load.tilemapTiledJSON("testUpRightDownLeftJSON", "testUpRightDownLeft.json");
 
         // fonts
         this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");

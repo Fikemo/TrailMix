@@ -11,7 +11,7 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
 
         this.damage = 5;
 
-        this.speed = 0.05;
+        this.speed = 0.075;
 
         this.hp = 1;
 

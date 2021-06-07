@@ -20,8 +20,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.keyD = scene.gameManager.keyD;
         this.keySpace = scene.gameManager.keySpace;
         
-        this.body.setSize(26, 18, false);
-        this.body.setOffset(4, 14);
+        this.body.setSize(20, 18, false);
+        this.body.setOffset(6, 14);
 
         this.bulletGroup = scene.add.group();
 

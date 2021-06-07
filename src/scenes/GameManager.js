@@ -1,33 +1,66 @@
 import createEvent from "../../lib/events.js";
-import Hub from "./levels/Hub.js";
-import LavaLeftRight from "./LavaLeftRight.js";
-import CandyUpDown from "./CandyUpDown.js";
-import CandyUpRightLeft from "./levels/CandyUpRightLeft.js";
-import BasicUpRightDownLeft from "./levels/BasicUpRightDownLeft.js";
-import BasicRightLeft from "./levels/BasicRightLeft.js";
-import BasicDownLeft from "./levels/BasicDownLeft.js";
-import EnemyHazardTest from "./levels/EnemyHazardTest.js";
-import NeonUpRightDownLeft from "./NeonUpRightDownLeft.js";
-import WaterDownLeft from "./levels/WaterDownLeft.js";
-import ForestRightLeft from "./levels/ForestRightLeft.js";
-import SkyUpRight from "./levels/SkyUpRight.js";
-import ForestDownRightEasy from "./levels/ForestDownRightEasy.js";
 
+// import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
+// import SkyRightLeft from "./levels/SkyRIghtLeft.js";
+
+//start
 import WaterUpRightDownLeftEasy from "./levels/WaterUpRightDownLeftEasy.js";
-import ForestUpDownMedium from "./levels/ForestUpDownMedium.js";
-import CandyUpRightDownLeftMedium from "./levels/CandyUpRightDownLeftMedium.js";
-import SkyUpDownMedium from "./levels/SkyUpDownMedium.js";
-import LavaUpDownEasy from "./levels/LavaUpDownEasy.js";
-import WaterLeftUpEasy from "./levels/WaterLeftUpEasy.js";
 import CandyLeftRightEasy from "./levels/CandyLeftRightEasy.js";
 
-import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
-import SkyRightLeft from "./levels/SkyRightLeft.js";
+// orange
+import LavaUpDownEasy from "./levels/LavaUpDownEasy.js";
+import WaterLeftUpEasy from "./levels/WaterLeftUpEasy.js";
+import ForestDownRightEasy from "./levels/ForestDownRightEasy.js";
 
+// chartreuse
+import CandyUpRightLeftEasy from "./levels/CandyUpRightLeftEasy.js";
+import ForestUpDownLeftEasy from "./levels/ForestUpDownLeftEasy.js";
+import SkyRightLeftEasy from "./levels/SkyRightLeftEasy.js";
+
+// maroon
+
+// blue
+
+// purple
+import SkyUpDownMedium from "./levels/SkyUpDownMedium.js";
+import ForestUpDownMedium from "./levels/ForestUpDownMedium.js";
+import CandyUpRightDownLeftMedium from "./levels/CandyUpRightDownLeftMedium.js";
+
+
+// yellow
+import LavaUpDownLeftMedium from "./levels/LavaUpDownLeftMedium.js";
+import WaterRightLeftMedium from "./levels/WaterRightLeftMedium.js";
+
+// aqua
+import CommonUpLeftHard from "./levels/CommonUpLeftHard.js";
+import ForestRightDownHard from "./levels/ForestRightDownHard.js";
+import WaterUpRightLeftHard from "./levels/WaterUpRightLeftHard.js";
+
+// teal
+import LavaUpRightDownLeftHard from "./levels/LavaUpRightDownLeftHard.js";
+import CandyRightDownLeftHard from "./levels/CandyRightDownLeftHard.js";
+import SkyUpRightHard from "./levels/SkyUpRightHard.js";
+
+// room depots
+import Hub from "./roomDepots/Hub.js";
+import UpRoomDepot from "./roomDepots/UpRoomDepot.js";
+import RightRoomDepot from "./roomDepots/RightRoomDepot.js";
+import DownRoomDepot from "./roomDepots/DownRoomDepot.js";
+import LeftRoomDepot from "./roomDepots/LeftRoomDepot.js";
+
+// test rooms
 import TestScene from "./levels/Test.js";
-import UpRoomDepot from "./levels/UpRoomDepot.js";
-import RightRoomDepot from "./levels/RightRoomDepot.js";
-import forestUpDown from "./levels/ForestUpDownMedium.js";
+import TestUpRightDownLeft from "./testLevels/TestUpRightDownLeft.js";
+import TestDownLeft from "./testLevels/TestDownLeft.js";
+import TestRightDown from "./testLevels/TestRightDown.js";
+import TestRightDownLeft from "./testLevels/TestRightDownLeft.js";
+import TestRightLeft from "./testLevels/TestRightLeft.js";
+import TestUpDown from "./testLevels/TestUpDown.js";
+import TestUpDownLeft from "./testLevels/TestUpDownLeft.js";
+import TestUpLeft from "./testLevels/TestUpLeft.js";
+import TestUpRight from "./testLevels/TestUpRight.js";
+import TestUpRightDown from "./testLevels/TestUpRightDown.js";
+import TestUpRightLeft from "./testLevels/TestUpRightLeft.js";
 
 // TODO: Add player health
 // TODO: Add player temporary inventory
@@ -50,7 +83,7 @@ export default class GameManager extends Phaser.Scene{
 
     init(data){
         // console.log(this.events);
-        if (!!!this.firstInitialized){
+        // if (!!!this.firstInitialized){
             // assign this to be the game's gameManager reference
             // make sure that the reference isn't already set
             if (this.game.gameManager && this.game.gameManager != this){
@@ -69,30 +102,105 @@ export default class GameManager extends Phaser.Scene{
             // eg. this.startingSceneType = BasicRightLeft
             // MAKE SURE YOU CHANGE IT BACK TO THE ORIGINAL STARTING SCENE
             //**An array of levels that COULD be in the player's inventory */
-            this.availableSceneTypes = [
-                BasicUpRightDownLeft,
-                WaterDownLeft,
-                LavaLeftRight,
-                CandyUpDown,
-                CandyUpRightLeft,
-                // NeonUpRightDownLeft
-                //ForestRightLeft,
-                SkyUpRight,
-                ForestDownRightEasy,
-                WaterUpRightDownLeftEasy,
-                ForestUpDownLeft,
-                //SkyRightLeft,
-                ForestUpDownMedium,
-                CandyUpRightDownLeftMedium,
-                SkyUpDownMedium,
-                LavaUpDownEasy,
-                WaterLeftUpEasy,
-                CandyLeftRightEasy,
-            ];
+            // this.availableSceneTypes = [
+            //     ForestUpDownLeft,
+            //     SkyRightLeft,
+            // ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes
-            this.allSceneTypes = [
-                ...this.availableSceneTypes,
+            // this.allSceneTypes = [
+            //     ...this.availableSceneTypes,
+            // ];
+
+            this.allInventoryRoomTypes = {
+                start: [
+                    WaterUpRightDownLeftEasy,
+                    CandyLeftRightEasy, 
+                ],
+
+                orange: [
+                    LavaUpDownEasy,
+                    WaterLeftUpEasy,
+                    ForestDownRightEasy,
+                ],
+
+                chartreuse: [
+                    CandyUpRightLeftEasy,
+                    ForestUpDownLeftEasy,
+                    TestRightLeft,
+                    SkyRightLeftEasy,
+                ],
+
+                maroon: [
+                    TestUpRight,
+                    TestUpDown,
+                    TestDownLeft
+                ],
+
+                blue: [
+                    TestRightLeft,
+                    TestUpRightDown,
+                    TestRightDownLeft
+                ],
+
+                purple: [
+                    SkyUpDownMedium,
+                    ForestUpDownMedium,
+                    CandyUpRightDownLeftMedium,
+                ],
+
+                yellow: [
+                    LavaUpDownLeftMedium,
+                    WaterRightLeftMedium,
+                ],
+
+                aqua: [
+                    CommonUpLeftHard,
+                    ForestRightDownHard,
+                    WaterUpRightLeftHard
+                ],
+                
+                teal: [
+                    LavaUpRightDownLeftHard,
+                    CandyRightDownLeftHard,
+                    SkyUpRightHard
+                ]
+            }
+
+            this.startingTestScenes = [
+                TestRightLeft,
+                TestUpRightDownLeft,
+
+                TestRightDown,
+                TestUpDown,
+                TestUpLeft,
+
+                TestUpRightLeft,
+                TestUpDownLeft,
+                TestRightLeft,
+
+                TestUpRight,
+                TestUpDown,
+                TestDownLeft,
+
+                TestRightLeft,
+                TestUpRightDown,
+                TestRightDownLeft,
+
+                TestUpDown,
+                TestUpRightDownLeft,
+                TestUpDown,
+
+                TestUpDownLeft,
+                TestRightLeft,
+
+                TestUpLeft,
+                TestRightDown,
+                TestUpRightLeft,
+                
+                TestUpRightDownLeft,
+                TestRightDownLeft,
+                TestUpRight,
             ];
 
             //**A 2D array that holds all the scenes in their respective coordinates on the map */
@@ -100,6 +208,9 @@ export default class GameManager extends Phaser.Scene{
 
             //**An array of scenes that are available in the inventory menu */
             this.sceneInventory = this.createInventory(25);
+
+            //**An array of objects for the blushies that the player is currently holding */
+            this.playerBlushieInventory = [];
 
             //**A unique ID for every new scene that is created. Used as part of the scene's key. Incremented by 1 with every new scene */
             this.sceneID = 0;
@@ -117,7 +228,7 @@ export default class GameManager extends Phaser.Scene{
             this.eventCalls.updateUIEvent.add(() => {this.updateUI()});
 
             this.firstInitialized = true
-        }
+        // }
     }
 
     onWKeyDown(){
@@ -135,8 +246,11 @@ export default class GameManager extends Phaser.Scene{
             candy: this.sound.add('candy_bgm', {volume: 0.01}),
             forest: this.sound.add('forest_bgm', {volume: 0.01}),
             sky: this.sound.add('sky_bgm', {volume: 0.01}),
-        }
+        };
 
+        Object.values(this.music).forEach(track => {
+            track.played = false;
+        });
 
         // inputs
         // create the input keys
@@ -169,7 +283,7 @@ export default class GameManager extends Phaser.Scene{
         ).setOrigin(0);
 
         // FIXME: Randomly fill the inventory with available scenes. This should be replaced with something that isn't so random
-        this.randomlyFillSceneInventory();
+        // this.randomlyFillSceneInventory();
 
         // Initialize the game for start
         this.initializeMapForGameStart();
@@ -220,34 +334,95 @@ export default class GameManager extends Phaser.Scene{
             this.scene.sendToBack(this);
         } else {
             this.setSelectedSceneIcon(this.sceneInventoryUI[0]);
+            this.turnBlushieInventoryIntoScenes();
             this.active = true;
             this.scene.pause(this.activeScene);
             this.scene.bringToTop(this);
         }
     }
 
+    turnBlushieInventoryIntoScenes(){
+        Object.values(this.playerBlushieInventory).forEach(obj => {
+            let sceneToAdd = this.createSceneOfClass(obj.sceneType);
+            this.addSceneToInventory(sceneToAdd);
+        });
+
+        this.playerBlushieInventory = [];
+    }
+
     initializeMapForGameStart(){
+        this.roomDepots = {};
+        // create the room depots and put them on the map
+        // orange
+        this.roomDepots.orange = this.createSceneOfClass(UpRoomDepot);
+        this.roomDepots.orange.heldRooms = this.allInventoryRoomTypes.orange;
+        this.setSceneOnMap(this.roomDepots.orange, 4, 3);
+
+        // chartreuse
+        this.roomDepots.chartreuse = this.createSceneOfClass(RightRoomDepot);
+        this.roomDepots.chartreuse.heldRooms = this.allInventoryRoomTypes.chartreuse;
+        this.setSceneOnMap(this.roomDepots.chartreuse, 2, 4);
+
+        // maroon
+        this.roomDepots.maroon = this.createSceneOfClass(DownRoomDepot);
+        this.roomDepots.maroon.heldRooms = this.allInventoryRoomTypes.maroon;
+        this.setSceneOnMap(this.roomDepots.maroon, 9, 4);
+
+        // blue
+        this.roomDepots.blue = this.createSceneOfClass(DownRoomDepot);
+        this.roomDepots.blue.heldRooms = this.allInventoryRoomTypes.blue;
+        this.setSceneOnMap(this.roomDepots.blue, 0, 0);
+
+        // purple
+        this.roomDepots.purple = this.createSceneOfClass(LeftRoomDepot);
+        this.roomDepots.purple.heldRooms = this.allInventoryRoomTypes.purple;
+        this.setSceneOnMap(this.roomDepots.purple, 12, 2);
+
+        // yellow
+        this.roomDepots.yellow = this.createSceneOfClass(RightRoomDepot);
+        this.roomDepots.yellow.heldRooms = this.allInventoryRoomTypes.yellow;
+        this.setSceneOnMap(this.roomDepots.yellow, 13, 3);
+
+        // aqua
+        this.roomDepots.aqua = this.createSceneOfClass(UpRoomDepot);
+        this.roomDepots.aqua.heldRooms = this.allInventoryRoomTypes.aqua;
+        this.setSceneOnMap(this.roomDepots.aqua, 15, 5);
+
+        // teal
+        this.roomDepots.teal = this.createSceneOfClass(LeftRoomDepot);
+        this.roomDepots.teal.heldRooms = this.allInventoryRoomTypes.teal;
+        this.setSceneOnMap(this.roomDepots.teal, 17, 1);
+
+        // end room
+        let endRoom = this.createSceneOfClass(DownRoomDepot);
+        this.setSceneOnMap(endRoom, 19, 4);
+
         // Set the starting scene
         // create a scene of the starting scene type
         this.startingScene = this.createSceneOfClass(this.startingSceneType);
-        // create more rooms to place in the beginning of the game
-        // this.destinationRoom1 = this.createSceneOfClass(BasicUpRightDownLeft);
-        // this.destinationRoom2 = this.createSceneOfClass(BasicUpRightDownLeft);
-        // this.destinationRoom3 = this.createSceneOfClass(BasicUpRightDownLeft);
-        // this.destinationRoom4 = this.createSceneOfClass(BasicUpRightDownLeft);
-
-        let upRoomDepot1 = this.createSceneOfClass(UpRoomDepot);
-        this.setSceneOnMap(upRoomDepot1, 4, 3);
 
         // set that scene to the active scene
         this.activeScene = this.startingScene;
 
-        // let's put some scenes on the map
-        // this.setSceneOnMap(this.destinationRoom1, 0, 0);
-        // this.setSceneOnMap(this.destinationRoom2, 19, 0);
-        // this.setSceneOnMap(this.destinationRoom3, 3, 3);
-        // this.setSceneOnMap(this.destinationRoom4, 13, 1);
+        // put the starting scene on the map
         this.setSceneOnMap(this.startingScene, 6, 2);
+
+        // this.startingTestScenes.forEach(sceneType => {
+        //     let sceneToGive = this.createSceneOfClass(sceneType);
+        //     this.addSceneToInventory(sceneToGive);
+        // })
+
+        // Object.values(this.allInventoryRoomTypes).forEach(value => {
+        //     value.forEach(sceneType => {
+        //         let sceneToStartWith = this.createSceneOfClass(sceneType);
+        //         this.addSceneToInventory(sceneToStartWith);
+        //     })
+        // })
+
+        this.allInventoryRoomTypes.start.forEach(sceneType => {
+            let sceneToStartWith = this.createSceneOfClass(sceneType);
+            this.addSceneToInventory(sceneToStartWith);
+        })
 
         // launch the starting scene scene
         this.launchSceneAt(6,2);
@@ -255,28 +430,18 @@ export default class GameManager extends Phaser.Scene{
         // update the UI
         this.uiNeedsUpdate = true;
     }
-    
-        //update player health
-/*
-        if (this.player.uiNeedsUpdate){
-            console.log('updating ui');
-            for (let i = 0; i < this.backgroundHealth.length; i++){
-                if (i > this.player.maxHealth - 1){
-                    this.backgroundHealth[i].alpha = 0;
-                    this.emptyHealth[i].alpha = 0;
-                } else {
-                    this.backgroundHealth[i].alpha = 1;
-                    this.emptyHealth[i].alpha = 1;
-                }
 
-                if (i > this.player.currentHealth - 1){
-                    this.filledHealth[i].alpha = 0;
-                } else {
-                    this.filledHealth[i].alpha = 1;
-                }
-            }
-        }
-        */
+    giveAllRooms(){
+        this.sceneInventory = [];
+        Object.values(this.allInventoryRoomTypes).forEach(roomArray => {
+            roomArray.forEach(roomType => {
+                let sceneToAdd = this.createSceneOfClass(roomType);
+                this.addSceneToInventory(sceneToAdd);
+            })
+        })
+
+        this.uiNeedsUpdate = true;
+    }
       
     updateUI(inventory = true, map = true, health = true){
         // console.log("updating UI");
@@ -661,12 +826,24 @@ export default class GameManager extends Phaser.Scene{
         // }
 
         let musicCanPlay = true;
+        let resetMusic = true;
         Object.values(this.music).forEach(track => { 
             if (track.isPlaying){
                 musicCanPlay = false;
             }
-        })
-        if (musicCanPlay && sceneToLaunch.musicKey) {
+
+            if (!track.played){
+                resetMusic = false;
+            }
+        });
+
+        if (resetMusic){
+            Object.values(this.music).forEach(track => {
+                track.played = false;
+            })
+        }
+
+        if (musicCanPlay && sceneToLaunch.musicKey && !this.music[sceneToLaunch.musicKey].played) {
             this.music[sceneToLaunch.musicKey].play();
         }
     }

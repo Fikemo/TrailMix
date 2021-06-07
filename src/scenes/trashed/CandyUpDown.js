@@ -1,4 +1,4 @@
-import BaseSceneTiled from "./BaseSceneTiled.js";
+import BaseSceneTiled from "../BaseSceneTiled.js";
  
 export default class CandyUpDown extends BaseSceneTiled{
     //candyUpDown
