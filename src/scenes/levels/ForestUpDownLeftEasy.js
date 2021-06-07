@@ -20,7 +20,7 @@ export default class ForestUpDownLeftEasy extends BaseSceneTiled{
         this.createStandardLevel({
             mapJSON: "forestUpDownLeftJSON",
             // backgroundImage: <background image key>
-            backgroundColor: 0x243f72,
+            backgroundColor: "#D0F0C0",
             player: true,
         })
     }

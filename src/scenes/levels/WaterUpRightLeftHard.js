@@ -16,7 +16,7 @@ export default class WaterUpRightLeftHard extends BaseSceneTiled {
 
         this.createStandardLevel({
             mapJSON: "waterUpRightLeftHardJSON",
-            backgroundColor: 0x131e28,
+            backgroundColor: "#131e28",
             player: true,
         })
     }

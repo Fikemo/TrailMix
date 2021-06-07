@@ -15,7 +15,7 @@ export default class SkyUpRightHard extends BaseSceneTiled {
 
         this.createStandardLevel({
             mapJSON: "skyUpRightHardJSON",
-            backgroundColor: 0x92f4ff,
+            backgroundColor:  "#a7f2fd",
             player: true,
         })
     }

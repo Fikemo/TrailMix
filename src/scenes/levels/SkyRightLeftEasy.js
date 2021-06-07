@@ -20,7 +20,7 @@ export default class SkyRightLeftEasy extends BaseSceneTiled{
         this.createStandardLevel({
             mapJSON: "skyRightLeftJSON",
             // backgroundImage: <background image key>
-            backgroundColor: 0xa7f2fd,
+            backgroundColor:  "#a7f2fd",
             player: true,
         })
     }

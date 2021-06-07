@@ -19,7 +19,7 @@ export default class WaterUpRightDownMedium extends BaseSceneTiled{
         this.createStandardLevel({
             mapJSON: "waterUpRightDownMediumJSON",
             // backgroundImage: <background image key>
-            backgroundColor: 0xf0e17,
+            backgroundColor: "#131e28",
             player: true,
         })
     }
