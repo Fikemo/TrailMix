@@ -330,6 +330,13 @@ export default class GameManager extends Phaser.Scene{
         }
 
         if (this.playerHealth <= 0){
+
+            this.playerBlushieInventory.forEach(blushieObj => {
+                blushieObj.scene.heldRooms.push(blushieObj.sceneType);
+            });
+
+            this.playerBlushieInventory = [];
+
             this.launchSceneAt(6, 2);
         }
 

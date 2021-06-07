@@ -43,6 +43,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("locationIndicator", "locationIndicator.png");
         this.load.image("healthbar", "bar.png");
         this.load.image("eraserButton", "eraserButton.png");
+        this.load.image("clearButton", "clearButton.png");
         this.load.image("mapInstructions", "mapInstructions.png");
         this.load.spritesheet("locationIndicator_spritesheet", "locationIndicator_spritesheet.png", {
             frameWidth: 24,

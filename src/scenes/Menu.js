@@ -28,7 +28,7 @@ export default class Menu extends Phaser.Scene {
         this.bg.alpha = 0.7;
 
          // add title
-        this.add.image(game.config.width/ 2, game.config.height/2 - 60, 'title');
+        this.add.image(game.config.width/ 2, game.config.height/2 - 60, 'title').setScale(2);
         
 
         //try to add a bouncing blushie
