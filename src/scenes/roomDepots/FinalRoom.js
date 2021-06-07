@@ -11,6 +11,8 @@ export default class FinalRoom extends BaseSceneTiled{
 
         this.musicKey = "basic";
 
+        this.static = true;
+
         this.setIcon();
     }
 
@@ -20,8 +22,13 @@ export default class FinalRoom extends BaseSceneTiled{
         this.createStandardLevel({
             mapJSON: "FinalRoomJSON",
             // backgroundImage: <background image key>
-            backgroundColor: 0x000000,
             player: true,
+        })
+
+        this.restartButton = this.add.image(this.scale.width/2, 480, "restartButton").setInteractive();
+
+        this.restartButton.on("pointerdown", () => {
+            location.reload();
         })
     }
 }

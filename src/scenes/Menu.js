@@ -41,6 +41,12 @@ export default class Menu extends Phaser.Scene {
         //mouse click to start the game
         this.start = this.add.text(game.config.width/2, game.config.height/2 + 100, 'Click to Start', menuConfig).setOrigin(0.5).setInteractive();
         this.start.on("pointerdown", () => {
+                // this.game.scene.scenes.forEach(scene => {
+                //     if (this.gameManager && scene.key && scene.key.includes("_")){
+                //         this.gameManager.destroyScene(scene);
+                //     }
+                // })
+
                 this.scene.start('gameManagerScene');
                 this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});
                 this.cursorClick.play();

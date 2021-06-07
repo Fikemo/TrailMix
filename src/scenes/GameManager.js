@@ -95,12 +95,14 @@ export default class GameManager extends Phaser.Scene{
         // if (!!!this.firstInitialized){
             // assign this to be the game's gameManager reference
             // make sure that the reference isn't already set
-            if (this.game.gameManager && this.game.gameManager != this){
-                console.error("Another instance of GameManager has been created! There should only ever be one!");
-                // this.scene.start("gameManagerScene");
-            } else {
-                this.game.gameManager = this;
-            }
+            // if (this.game.gameManager && this.game.gameManager != this){
+            //     console.error("Another instance of GameManager has been created! There should only ever be one!");
+            //     // this.scene.start("gameManagerScene");
+            // } else {
+            //     this.game.gameManager = this;
+            // }
+
+            this.game.gameManager = this;
 
             // active controls when the menus can be manipuleted. When active, the level should be paused and the game manager should be brought to the front
             this.active = false;
@@ -279,6 +281,8 @@ export default class GameManager extends Phaser.Scene{
             track.played = false;
         });
         this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});
+        this.cursorErase = this.sound.add('sfx_eraseClick', {volume: 0.1});
+        this.cursorRoomPlaced = this.sound.add('sfx_roomPlaced', {volume: 0.1});
 
         // inputs
         // create the input keys
@@ -576,7 +580,6 @@ export default class GameManager extends Phaser.Scene{
             icon.on("pointerdown", (pointer, localX, localY, event) => {
                 if (this.active){
                     this.setSelectedSceneIcon(icon);
-                    this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});
                     this.cursorClick.play();
                 }
             }, this);
@@ -596,7 +599,6 @@ export default class GameManager extends Phaser.Scene{
         this.eraserIcon.on("pointerdown", () => {
             if (this.active){
                 this.activateEraser();
-                this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});
                 this.cursorClick.play();
             }
         }, this);
@@ -700,12 +702,10 @@ export default class GameManager extends Phaser.Scene{
                     if (this.active){
                         if (!this.eraserActive) {
                             this.putSelectedSceneOnMap(icon);
-                            this.cursorRoomPlaced = this.sound.add('sfx_roomPlaced', {volume: 0.1});
                             this.cursorRoomPlaced.play();
                         }
                         else {
                             this.putSceneFromMapInInventory(icon);
-                            this.cursorErase = this.sound.add('sfx_eraseClick', {volume: 0.1});
                             this.cursorErase.play();
                         }
                     }

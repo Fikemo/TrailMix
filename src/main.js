@@ -19,7 +19,7 @@ let config = {
     parent: "phaser-game",
     width: 768,
     height: 768,
-    scene: [Preload, Load, Opening, Credits, Menu, GameManager, End],
+    scene: [Preload, Load, Credits, Menu, GameManager, End],
     physics: {
         default: 'arcade',
         arcade: {

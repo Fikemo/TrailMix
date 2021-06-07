@@ -28,7 +28,7 @@ export default class Hub extends BaseSceneTiled{
             player: true,
         });
 
-        if (this.showInsctructions) this.controlsText = this.add.bitmapText(64, 280,"upheaval", "WASD TO MOVE\nSPACE TO JUMP\nCLICK TO SHOOT", -24, "center");
+        if (this.showInsctructions) this.controlsText = this.add.bitmapText(64, 280,"upheaval", "ASD TO MOVE\nW TO INTERACT\nSPACE TO JUMP\nCLICK TO SHOOT", -24, "center");
 
         this.terminalOnScreen = this.add.image(384, 240, "terminalOnScreen");
 
