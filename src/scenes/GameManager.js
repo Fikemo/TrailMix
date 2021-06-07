@@ -17,7 +17,9 @@ import WaterUpRightDownLeftEasy from "./levels/WaterUpRightDownLeftEasy.js";
 import ForestUpDownMedium from "./levels/ForestUpDownMedium.js";
 import CandyUpRightDownLeftMedium from "./levels/CandyUpRightDownLeftMedium.js";
 import SkyUpDownMedium from "./levels/SkyUpDownMedium.js";
-import LavaUpDownEasy from"./levels/LavaUpDownEasy.js";
+import LavaUpDownEasy from "./levels/LavaUpDownEasy.js";
+import WaterLeftUpEasy from "./levels/WaterLeftUpEasy.js";
+import CandyLeftRightEasy from "./levels/CandyLeftRightEasy.js";
 
 import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 import SkyRightLeft from "./levels/SkyRightLeft.js";
@@ -74,16 +76,18 @@ export default class GameManager extends Phaser.Scene{
                 CandyUpDown,
                 CandyUpRightLeft,
                 // NeonUpRightDownLeft
-                ForestRightLeft,
+                //ForestRightLeft,
                 SkyUpRight,
                 ForestDownRightEasy,
                 WaterUpRightDownLeftEasy,
                 ForestUpDownLeft,
-                SkyRightLeft,
+                //SkyRightLeft,
                 ForestUpDownMedium,
                 CandyUpRightDownLeftMedium,
                 SkyUpDownMedium,
                 LavaUpDownEasy,
+                WaterLeftUpEasy,
+                CandyLeftRightEasy,
             ];
             //**A list of all level types in the game */
             // Add scenes that are not in the array of available scenes

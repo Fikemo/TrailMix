@@ -129,6 +129,11 @@ export default class Load extends Phaser.Scene {
 
         // LavaUpDown
         this.load.tilemapTiledJSON("lavaUpDownJSON", "lavaUpDown.json");
+
+        // WaterLeftUp
+        this.load.tilemapTiledJSON("waterLeftUpJSON", "waterLeftUp.json");
+
+        this.load.tilemapTiledJSON("candyLeftRightEasyJSON", "candyLeftRightEasy.json");
         
         // load sounds
         this.load.path = "./assets/sounds/";
