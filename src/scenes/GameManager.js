@@ -8,7 +8,9 @@ import createEvent from "../../lib/events.js";
 // orange
 
 // chartreuse
-
+import CandyUpRightLeftEasy from "./levels/CandyUpRightLeftEasy.js";
+import ForestUpDownLeftEasy from "./levels/ForestUpDownLeftEasy.js";
+import SkyRightLeftEasy from "./levels/SkyRightLeftEasy.js";
 // maroon
 
 // blue
@@ -16,8 +18,8 @@ import createEvent from "../../lib/events.js";
 // purple
 
 // yellow
-import LavaUpDownLeft from "./levels/LavaUpDownLeft.js";
-import WaterRightLeft from "./levels/WaterRightLeft.js";
+import LavaUpDownLeftMedium from "./levels/LavaUpDownLeftMedium.js";
+import WaterRightLeftMedium from "./levels/WaterRightLeftMedium.js";
 
 // aqua
 import CommonUpLeftHard from "./levels/CommonUpLeftHard.js";
@@ -103,7 +105,7 @@ export default class GameManager extends Phaser.Scene{
             this.allInventoryRoomTypes = {
                 start: [
                     TestRightLeft,
-                    TestUpRightDownLeft
+                    TestUpRightDownLeft,
                 ],
 
                 orange: [
@@ -113,9 +115,10 @@ export default class GameManager extends Phaser.Scene{
                 ],
 
                 chartreuse: [
-                    TestUpRightLeft,
-                    TestUpDownLeft,
-                    TestRightLeft
+                    CandyUpRightLeftEasy,
+                    ForestUpDownLeftEasy,
+                    TestRightLeft,
+                    SkyRightLeftEasy,
                 ],
 
                 maroon: [
@@ -137,8 +140,8 @@ export default class GameManager extends Phaser.Scene{
                 ],
 
                 yellow: [
-                    LavaUpDownLeft,
-                    WaterRightLeft
+                    LavaUpDownLeftMedium,
+                    WaterRightLeftMedium,
                 ],
 
                 aqua: [
