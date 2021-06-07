@@ -1,3 +1,11 @@
+/***************************************** */
+// Team Members:
+// Finn Morrison
+// Marla De Leon
+// Aubrey Schelbauer
+// Emersen Lorenz
+/***************************************** */
+
 import Load from './scenes/Load.js';
 import Credits from './scenes/Credits.js';
 import End from './scenes/End.js';
