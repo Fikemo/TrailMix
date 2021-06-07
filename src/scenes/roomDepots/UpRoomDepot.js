@@ -10,9 +10,6 @@ export default class UpRoomDepot extends BaseSceneTiled {
 
         this.musicKey = "basic";
 
-        this.sfxLvl;
-        this.soundPlayed = false;
-
         this.setIcon();
     }
 
@@ -38,11 +35,17 @@ export default class UpRoomDepot extends BaseSceneTiled {
 
         // this.terminalHitbox
 
+        this.sfxLvl = this.sound.add('sfx_levelsAcquired', {volume: 0.1});
+
         this.terminalScreenPointObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminalScreen");
         this.terminalScreenObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminal");
 
         this.terminalOnScreen = this.add.image(this.terminalScreenPointObj.x, this.terminalScreenPointObj.y, "terminalOnScreenSmall");
         this.terminalOnScreen.setOrigin(0);
+
+        this.terminalOnNewRoomsObtained = this.add.image(this.terminalScreenPointObj.x, this.terminalScreenPointObj.y, "terminalOnNewRoomsObtained");
+        this.terminalOnNewRoomsObtained.setOrigin(0);
+        this.terminalOnNewRoomsObtained.alpha = 0;
 
         this.terminalHitbox = this.physics.add.sprite(this.terminalScreenObj.x, this.terminalScreenObj.y);
         this.terminalHitbox.setSize(this.terminalScreenObj.width, this.terminalScreenObj.height);
@@ -58,13 +61,12 @@ export default class UpRoomDepot extends BaseSceneTiled {
         this.gameManager.adjustPlayerHealth(this.gameManager.playerHealthMax, true);
 
         this.keyW = this.gameManager.keyW;
-
     }
 
     update(time, delta){
         super.update(time, delta);
 
-        this.terminalOnScreen.alpha = this.terminalOn ? 1 : 0;
+        this.terminalOnScreen.alpha = this.terminalOn && this.heldRooms.length > 0 ? 1 : 0;
 
         if (Phaser.Input.Keyboard.JustDown(this.keyW)){
             if (this.terminalOn){
@@ -77,12 +79,9 @@ export default class UpRoomDepot extends BaseSceneTiled {
     }
 
     giveScenes(){
-        if (this.player && this.heldRooms){
-            if (this.soundPlayed == false) {
-                this.sfxLvl = this.sound.add('sfx_levelsAcquired', {volume: 0.1});
-                this.sfxLvl.play();
-                this.soundPlayed = true;
-            }
+        if (this.player && this.heldRooms && this.heldRooms.length > 0){
+            this.sfxLvl.play();
+            this.terminalOnNewRoomsObtained.alpha = 1;
             while(this.heldRooms.length != 0){
                 let sceneType = this.heldRooms.pop();
                 let objectToAddToPlayerBlushieInventory = {
