@@ -34,6 +34,8 @@ export default class Load extends Phaser.Scene {
         this.load.image("mapIconFrame", "mapIconFrame.png");
         this.load.atlas("mapIcons", "mapIcons.png", "mapIcons.json");
         this.load.atlas("mapIcons_depot", "mapIcons_depot.png", "mapIcons.json");
+        this.load.atlas("mapIcons_start", "mapIcons_startRoom.png", "mapIcons.json");
+        this.load.atlas("mapIcons_end", "mapIcons_endRoom.png", "mapIcons.json");
         this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
         this.load.image("terminalOnScreen", "terminalOn.png");
         this.load.image("terminalOnScreenSmall", "terminalOnScreenSmall.png");

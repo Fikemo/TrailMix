@@ -496,6 +496,14 @@ export default class GameManager extends Phaser.Scene{
                         if (cell.static){
                             this.mapUI[x][y].setTexture("mapIcons_depot");
                         }
+
+                        if (cell.key.includes("Hub")){
+                            this.mapUI[x][y].setTexture("mapIcons_start");
+                        }
+
+                        if (x == 19 && y == 4){
+                            this.mapUI[x][y].setTexture("mapIcons_end");
+                        }
                     }
                     this.mapUI[x][y].setFrame(frameName);
                 })
@@ -618,7 +626,8 @@ export default class GameManager extends Phaser.Scene{
         // }
 
         this.healthBar = this.add.sprite(6, 586, "healthbar").setOrigin(0);
-        this.playerBlushieInventoryText = this.add.text(6, 624, "NEW ROOMS: " + this.playerBlushieInventory.length);
+        // this.playerBlushieInventoryText = this.add.text(6, 624, "NEW ROOMS: " + this.playerBlushieInventory.length);
+        this.playerBlushieInventoryText = this.add.bitmapText(6, 624, "upheaval", "NEW ROOMS: " + this.playerBlushieInventory.length, -24);
     }
 
     // Mini Map
