@@ -156,6 +156,8 @@ export default class Load extends Phaser.Scene {
 
         //Menus
         this.load.image("title", "titleArt.png");
+        this.load.image("logo","grouplogo.png");
+        this.load.image("menu","menuArt.png");
 
         // SkyUpRight 
         this.load.image("skyTileset", "skyTileset.png");
