@@ -90,8 +90,13 @@ export default class Load extends Phaser.Scene {
         // this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
 
         // start
-
+        this.load.tilemapTiledJSON("candyLeftRightEasyJSON", "candyLeftRightEasy.json");
+        this.load.tilemapTiledJSON("waterUpRightDownLeftJSON", "waterUpRightDownLeft.json");
+        
         // orange
+        this.load.tilemapTiledJSON("lavaUpDownJSON", "lavaUpDown.json");
+        this.load.tilemapTiledJSON("waterLeftUpJSON", "waterLeftUp.json");
+        this.load.tilemapTiledJSON("forestDownRightJSON", "forestDownRight.json");
 
         // chartreuse
         this.load.tilemapTiledJSON("candyUpRightLeftJSON", "candyUpRightLeft.json");
@@ -103,7 +108,10 @@ export default class Load extends Phaser.Scene {
         // blue
 
         // purple
-
+        this.load.tilemapTiledJSON("skyUpDownJSON", "skyUpDown.json");
+        this.load.tilemapTiledJSON("forestUpDownJSON", "forestUpDown.json");
+        this.load.tilemapTiledJSON("candyUpRightDownLeftJSON", "candyUpRightDownLeft.json");
+        
         // yellow
         this.load.tilemapTiledJSON("LavaUpDownLeftJSON", "LavaUpDownLeft.json");
         this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeftMedium.json");
@@ -144,29 +152,8 @@ export default class Load extends Phaser.Scene {
         this.load.image("skyTileset", "skyTileset.png");
         this.load.tilemapTiledJSON("skyUpRightJSON", "skyUpRight.json");
 
-        // ForestDownRight
-        this.load.image("forestTileset", "forestTileset.png");
-        this.load.tilemapTiledJSON("forestDownRightJSON", "forestDownRight.json");
 
-        // WaterUpRightDownLeft
-        this.load.tilemapTiledJSON("waterUpRightDownLeftJSON", "waterUpRightDownLeft.json");
-
-        // ForestUpDown
-        this.load.tilemapTiledJSON("forestUpDownJSON", "forestUpDown.json");
-
-        // CandyUpRightDownLeft
-        this.load.tilemapTiledJSON("candyUpRightDownLeftJSON", "candyUpRightDownLeft.json");
-
-        // SkyUpDown
-        this.load.tilemapTiledJSON("skyUpDownJSON", "skyUpDown.json");
-
-        // LavaUpDown
-        this.load.tilemapTiledJSON("lavaUpDownJSON", "lavaUpDown.json");
-
-        // WaterLeftUp
-        this.load.tilemapTiledJSON("waterLeftUpJSON", "waterLeftUp.json");
-
-        this.load.tilemapTiledJSON("candyLeftRightEasyJSON", "candyLeftRightEasy.json");
+        
         
         // load sounds
         this.load.path = "./assets/sounds/";

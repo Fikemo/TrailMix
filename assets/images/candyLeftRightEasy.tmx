@@ -258,20 +258,8 @@
   <object id="1" name="saw" x="112" y="144">
    <polyline points="0,0 480,0"/>
   </object>
-  <object id="3" name="saw" x="80" y="144">
-   <polyline points="0,0 64,-64 128,0 192,-64 256,0 320,-64 384,0 448,-64 512,0"/>
-  </object>
   <object id="5" name="red" x="256" y="384">
    <polyline points="0,0 160,0"/>
-  </object>
-  <object id="7" name="s" x="112" y="528">
-   <polyline points="0,0 192,0"/>
-  </object>
-  <object id="10" name="saw" x="368" y="496">
-   <polyline points="0,0 32,32 256,32 288,0"/>
-  </object>
-  <object id="11" name="saw" x="560" y="368">
-   <polyline points="0,0 128,-128"/>
   </object>
  </objectgroup>
 </map>
