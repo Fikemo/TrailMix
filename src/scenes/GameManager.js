@@ -50,6 +50,7 @@ import UpRoomDepot from "./roomDepots/UpRoomDepot.js";
 import RightRoomDepot from "./roomDepots/RightRoomDepot.js";
 import DownRoomDepot from "./roomDepots/DownRoomDepot.js";
 import LeftRoomDepot from "./roomDepots/LeftRoomDepot.js";
+import FinalRoom from "./roomDepots/FinalRoom.js"
 
 // test rooms
 import TestScene from "./levels/Test.js";
@@ -424,7 +425,7 @@ export default class GameManager extends Phaser.Scene{
         this.setSceneOnMap(this.roomDepots.teal, 17, 1);
 
         // end room
-        let endRoom = this.createSceneOfClass(DownRoomDepot);
+        let endRoom = this.createSceneOfClass(FinalRoom);
         this.setSceneOnMap(endRoom, 19, 4);
 
         // Set the starting scene
