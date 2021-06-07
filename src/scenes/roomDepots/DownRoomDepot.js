@@ -24,26 +24,6 @@ export default class DownRoomDepot extends BaseSceneTiled {
             player: true,
         });
 
-        if (this.player && this.heldRooms){
-            if (this.soundPlayed == false) {
-                this.sfxLvl = this.sound.add('sfx_levelsAcquired', {volume: 0.1});
-                this.sfxLvl.play();
-                this.soundPlayed = true;
-            }
-            while(this.heldRooms.length != 0){
-                let sceneType = this.heldRooms.pop();
-                let objectToAddToPlayerBlushieInventory = {
-                    scene: this,
-                    sceneType: sceneType,
-                }
-
-                this.gameManager.playerBlushieInventory.push(objectToAddToPlayerBlushieInventory);
-            }
-            // console.log(this.heldRooms);
-        }
-
-        console.log(this.heldRooms);
-
         this.terminalScreenPointObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminalScreen");
         this.terminalScreenObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminal");
 
@@ -64,6 +44,7 @@ export default class DownRoomDepot extends BaseSceneTiled {
         this.gameManager.adjustPlayerHealth(this.gameManager.playerHealthMax, true);
 
         this.keyW = this.gameManager.keyW;
+
     }
 
     update(time, delta){
@@ -83,6 +64,11 @@ export default class DownRoomDepot extends BaseSceneTiled {
 
     giveScenes(){
         if (this.player && this.heldRooms){
+            if (this.soundPlayed == false) {
+                this.sfxLvl = this.sound.add('sfx_levelsAcquired', {volume: 0.1});
+                this.sfxLvl.play();
+                this.soundPlayed = true;
+            }
             while(this.heldRooms.length != 0){
                 let sceneType = this.heldRooms.pop();
                 let objectToAddToPlayerBlushieInventory = {
