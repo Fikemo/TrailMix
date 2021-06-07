@@ -14,6 +14,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
 
         this.JUMP_VEL = -400
         this.jumpsfx; 
+        this.oofsfx;
 
         this.DRAG = 1500;
 
@@ -156,6 +157,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             this.invincible = true;
             this.scene.gameManager.adjustPlayerHealth(-damage);
             this.scene.time.delayedCall(1000, () => {this.invincible = false})
+            this.oofsfx = this.scene.sound.add("sfx_oof", {volume: 0.1});
+            this.oofsfx.play();
         }
     }
 }
