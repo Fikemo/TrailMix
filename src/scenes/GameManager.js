@@ -242,13 +242,13 @@ export default class GameManager extends Phaser.Scene{
 
         // this.music = this.sound.add('neon_bgm', {volume: 0.1});
         this.music = {
-            basic: this.sound.add('basic_bgm', {volume: 0.08}),
-            neon: this.sound.add('neon_bgm', {volume: 0.08}),
-            water: this.sound.add('water_bgm', {volume: 0.08}),
-            lava: this.sound.add('lava_bgm', {volume: 0.08}),
-            candy: this.sound.add('candy_bgm', {volume: 0.08}),
-            forest: this.sound.add('forest_bgm', {volume: 0.08}),
-            sky: this.sound.add('sky_bgm', {volume: 0.08}),
+            basic: this.sound.add('basic_bgm', {volume: 0.03}),
+            neon: this.sound.add('neon_bgm', {volume: 0.03}),
+            water: this.sound.add('water_bgm', {volume: 0.03}),
+            lava: this.sound.add('lava_bgm', {volume: 0.03}),
+            candy: this.sound.add('candy_bgm', {volume: 0.03}),
+            forest: this.sound.add('forest_bgm', {volume: 0.03}),
+            sky: this.sound.add('sky_bgm', {volume: 0.03}),
         };
 
         Object.values(this.music).forEach(track => {
