@@ -28,6 +28,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("selectedInventoryIconFrame", "inventoryIconFrame.png");
         this.load.image("mapIconFrame", "mapIconFrame.png");
         this.load.atlas("mapIcons", "mapIcons.png", "mapIcons.json");
+        this.load.atlas("mapIcons_depot", "mapIcons_depot.png", "mapIcons.json");
         this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
         this.load.image("terminalOnScreen", "terminalOn.png");
         this.load.image("locationIndicator", "locationIndicator.png");
@@ -90,8 +91,13 @@ export default class Load extends Phaser.Scene {
         // this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
 
         // start
-
+        this.load.tilemapTiledJSON("candyLeftRightEasyJSON", "candyLeftRightEasy.json");
+        this.load.tilemapTiledJSON("waterUpRightDownLeftJSON", "waterUpRightDownLeft.json");
+        
         // orange
+        this.load.tilemapTiledJSON("lavaUpDownJSON", "lavaUpDown.json");
+        this.load.tilemapTiledJSON("waterLeftUpJSON", "waterLeftUp.json");
+        this.load.tilemapTiledJSON("forestDownRightJSON", "forestDownRight.json");
 
         // chartreuse
         this.load.tilemapTiledJSON("candyUpRightLeftJSON", "candyUpRightLeft.json");
@@ -107,7 +113,10 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("neonRightLeftMediumJSON", "neonRightLeftMedium.json");
         this.load.tilemapTiledJSON("skyRightDownLeftMediumJSON", "skyRightDownLeftMedium.json");
         // purple
-
+        this.load.tilemapTiledJSON("skyUpDownJSON", "skyUpDown.json");
+        this.load.tilemapTiledJSON("forestUpDownJSON", "forestUpDown.json");
+        this.load.tilemapTiledJSON("candyUpRightDownLeftJSON", "candyUpRightDownLeft.json");
+        
         // yellow
         this.load.tilemapTiledJSON("LavaUpDownLeftJSON", "LavaUpDownLeft.json");
         this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeftMedium.json");
@@ -144,6 +153,13 @@ export default class Load extends Phaser.Scene {
         this.load.image("title", "titleArt.png");
         this.load.image("logo","grouplogo.png")
 
+        // SkyUpRight 
+        this.load.image("skyTileset", "skyTileset.png");
+        this.load.tilemapTiledJSON("skyUpRightJSON", "skyUpRight.json");
+
+
+        
+        
         // load sounds
         this.load.path = "./assets/sounds/";
 

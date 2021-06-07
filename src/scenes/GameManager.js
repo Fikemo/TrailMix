@@ -4,13 +4,19 @@ import createEvent from "../../lib/events.js";
 // import SkyRightLeft from "./levels/SkyRIghtLeft.js";
 
 //start
+import WaterUpRightDownLeftEasy from "./levels/WaterUpRightDownLeftEasy.js";
+import CandyLeftRightEasy from "./levels/CandyLeftRightEasy.js";
 
 // orange
+import LavaUpDownEasy from "./levels/LavaUpDownEasy.js";
+import WaterLeftUpEasy from "./levels/WaterLeftUpEasy.js";
+import ForestDownRightEasy from "./levels/ForestDownRightEasy.js";
 
 // chartreuse
 import CandyUpRightLeftEasy from "./levels/CandyUpRightLeftEasy.js";
 import ForestUpDownLeftEasy from "./levels/ForestUpDownLeftEasy.js";
 import SkyRightLeftEasy from "./levels/SkyRightLeftEasy.js";
+
 // maroon
 import CandyUpDownEasy from "./levels/CandyUpDownEasy.js";
 import ForestDownLeftEasy from "./levels/ForestDownLeftEasy.js";
@@ -20,6 +26,10 @@ import WaterUpRightDownMedium from "./levels/WaterUpRightDownMedium.js";
 import NeonRightLeftMedium from "./levels/NeonRightLeftMedium.js";
 import SkyRightDownLeftMedium from "./levels/SkyRightDownLeftMedium.js";
 // purple
+import SkyUpDownMedium from "./levels/SkyUpDownMedium.js";
+import ForestUpDownMedium from "./levels/ForestUpDownMedium.js";
+import CandyUpRightDownLeftMedium from "./levels/CandyUpRightDownLeftMedium.js";
+
 
 // yellow
 import LavaUpDownLeftMedium from "./levels/LavaUpDownLeftMedium.js";
@@ -108,14 +118,14 @@ export default class GameManager extends Phaser.Scene{
 
             this.allInventoryRoomTypes = {
                 start: [
-                    TestRightLeft,
-                    TestUpRightDownLeft,
+                    WaterUpRightDownLeftEasy,
+                    CandyLeftRightEasy, 
                 ],
 
                 orange: [
-                    TestRightDown,
-                    TestUpDown,
-                    TestUpLeft
+                    LavaUpDownEasy,
+                    WaterLeftUpEasy,
+                    ForestDownRightEasy,
                 ],
 
                 chartreuse: [
@@ -138,9 +148,9 @@ export default class GameManager extends Phaser.Scene{
                 ],
 
                 purple: [
-                    TestUpDown,
-                    TestUpRightDownLeft,
-                    TestUpDown
+                    SkyUpDownMedium,
+                    ForestUpDownMedium,
+                    CandyUpRightDownLeftMedium,
                 ],
 
                 yellow: [
@@ -455,7 +465,12 @@ export default class GameManager extends Phaser.Scene{
             this.map.forEach( (column, x) => {
                 column.forEach( (cell, y) => {
                     let frameName = "icon_void";
-                    if (cell) frameName = cell.iconName;
+                    if (cell) {
+                        frameName = cell.iconName;
+                        if (cell.static){
+                            this.mapUI[x][y].setTexture("mapIcons_depot");
+                        }
+                    }
                     this.mapUI[x][y].setFrame(frameName);
                 })
             })
