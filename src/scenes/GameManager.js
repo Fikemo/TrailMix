@@ -451,7 +451,12 @@ export default class GameManager extends Phaser.Scene{
             this.map.forEach( (column, x) => {
                 column.forEach( (cell, y) => {
                     let frameName = "icon_void";
-                    if (cell) frameName = cell.iconName;
+                    if (cell) {
+                        frameName = cell.iconName;
+                        if (cell.static){
+                            this.mapUI[x][y].setTexture("mapIcons_depot");
+                        }
+                    }
                     this.mapUI[x][y].setFrame(frameName);
                 })
             })
