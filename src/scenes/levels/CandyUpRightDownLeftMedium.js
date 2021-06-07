@@ -1,17 +1,15 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
-<<<<<<< HEAD:src/scenes/levels/WaterDownLeft.js
-=======
-import Player from"../../prefabs/Player.js";
->>>>>>> main:src/scenes/trashed/WaterDownLeft.js
 
-export default class WaterDownLeft extends BaseSceneTiled{
+export default class CandyUpRightDownLeftMedium extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
 
-        this.left = true;
+        this.up = true;
+        this.right = true;
         this.down = true;
+        this.left = true;
 
-        this.musicKey = "water";
+        this.musicKey = "candy";
 
         this.setIcon();
     }
@@ -20,7 +18,7 @@ export default class WaterDownLeft extends BaseSceneTiled{
         super.create();
 
         this.createStandardLevel({
-            mapJSON: "waterDownLeftJSON",
+            mapJSON: "candyUpRightDownLeftJSON",
             backgroundColor: "#131e28",
             player: true,
         })

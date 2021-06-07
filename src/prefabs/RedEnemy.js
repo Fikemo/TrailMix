@@ -49,9 +49,9 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
                 repeat: -1,
             });
             //draw scene 
-            this.graphics = scene.add.graphics();
-            this.graphics.lineStyle(1, 0xffffff, 1);
-            this.path.draw(this.graphics);
+            // this.graphics = scene.add.graphics();
+            // this.graphics.lineStyle(1, 0xffffff, 1);
+            // this.path.draw(this.graphics);
         //check for polygon path
         } else if (spawnObj.polygon){
             this.body.setImmovable(true);
@@ -82,9 +82,9 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
                 repeat: -1,
             })
             
-            this.graphics = scene.add.graphics();
-            this.graphics.lineStyle(1, 0xffffff, 1);
-            this.path.draw(this.graphics);
+            // this.graphics = scene.add.graphics();
+            // this.graphics.lineStyle(1, 0xffffff, 1);
+            // this.path.draw(this.graphics);
 
 
 
@@ -113,9 +113,9 @@ export default class RedEnemy extends Phaser.Physics.Arcade.Sprite{
                 repeat: -1,
             });
 
-            this.graphics = scene.add.graphics();
-            this.graphics.lineStyle(1, 0xffffff, 1);
-            this.path.draw(this.graphics);
+            // this.graphics = scene.add.graphics();
+            // this.graphics.lineStyle(1, 0xffffff, 1);
+            // this.path.draw(this.graphics);
 
         }
     }

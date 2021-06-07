@@ -41,9 +41,9 @@ export default class Saw extends Phaser.Physics.Arcade.Sprite{
                     yoyo: true,
                     repeat: -1
                 })
-                this.graphics = scene.add.graphics();
-                this.graphics.lineStyle(1, 0xffffff, 1);
-                this.path.draw(this.graphics);
+                // this.graphics = scene.add.graphics();
+                // this.graphics.lineStyle(1, 0xffffff, 1);
+                // this.path.draw(this.graphics);
             } else if (spawnObj.polygon){
                 spawnObj.polygon.forEach(point => {
                     point.x += spawnObj.x;
@@ -68,9 +68,9 @@ export default class Saw extends Phaser.Physics.Arcade.Sprite{
                     duration: pathDuration,
                     repeat: -1,
                 });
-                this.graphics = scene.add.graphics();
-                this.graphics.lineStyle(1, 0xffffff, 1);
-                this.path.draw(this.graphics);
+                // this.graphics = scene.add.graphics();
+                // this.graphics.lineStyle(1, 0xffffff, 1);
+                // this.path.draw(this.graphics);
             } else if (spawnObj.ellipse){
                 this.path = new Phaser.Curves.Path();
 
@@ -88,9 +88,9 @@ export default class Saw extends Phaser.Physics.Arcade.Sprite{
                     duration: pathDuration,
                     repeat: -1,
                 });
-                this.graphics = scene.add.graphics();
-                this.graphics.lineStyle(1, 0xffffff, 1);
-                this.path.draw(this.graphics);
+                // this.graphics = scene.add.graphics();
+                // this.graphics.lineStyle(1, 0xffffff, 1);
+                // this.path.draw(this.graphics);
             }
         }
 
