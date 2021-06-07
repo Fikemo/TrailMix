@@ -1,6 +1,6 @@
 import BaseSceneTiled from "../BaseSceneTiled.js"
  
-export default class SkyDownLeftRightMedium extends BaseSceneTiled{
+export default class SkyRightDownLeftMedium extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
  
@@ -17,7 +17,7 @@ export default class SkyDownLeftRightMedium extends BaseSceneTiled{
         super.create();
  
         this.createStandardLevel({
-            mapJSON: "skyDownLeftRightMediumJSON",
+            mapJSON: "skyRightDownLeftMediumJSON",
             // backgroundImage: <background image key>
             backgroundColor:  "#a7f2fd",
             player: true,

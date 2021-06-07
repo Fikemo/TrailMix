@@ -135,7 +135,6 @@ export default class GameManager extends Phaser.Scene{
                 chartreuse: [
                     CandyUpRightLeftEasy,
                     ForestUpDownLeftEasy,
-                    TestRightLeft,
                     SkyRightLeftEasy,
                 ],
 
@@ -243,6 +242,25 @@ export default class GameManager extends Phaser.Scene{
         console.log("w");
     }
 
+    downloadScreenshot(){
+        this.game.renderer.snapshot((image) => {
+            this.exportCanvasAsPNG("phaser-game", "snapshot", image.src);
+        })
+    }
+
+    exportCanvasAsPNG(id, fileName, dataUrl) {
+        let canvasElement = document.getElementById(id);
+        let MIME_TYPE = "image/png";
+        let imgURL = dataUrl;
+        let dlLink = document.createElement('a');
+        dlLink.download = fileName;
+        dlLink.href = imgURL;
+        dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+    }
+
     create(data){
 
         // this.music = this.sound.add('neon_bgm', {volume: 0.1});
@@ -332,6 +350,10 @@ export default class GameManager extends Phaser.Scene{
         // Update the UI if need be
         if (this.uiNeedsUpdate){
             this.updateUI();
+        }
+
+        if (this.playerBlushieInventoryText){
+            this.playerBlushieInventoryText.setText("NEW ROOMS: " + this.playerBlushieInventory.length);
         }
     }
 
@@ -592,6 +614,7 @@ export default class GameManager extends Phaser.Scene{
         // }
 
         this.healthBar = this.add.sprite(6, 586, "healthbar").setOrigin(0);
+        this.playerBlushieInventoryText = this.add.text(6, 624, "NEW ROOMS: " + this.playerBlushieInventory.length);
     }
 
     // Mini Map
