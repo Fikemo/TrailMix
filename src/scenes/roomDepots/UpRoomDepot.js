@@ -20,5 +20,18 @@ export default class UpRoomDepot extends BaseSceneTiled {
             mapJSON: "upRoomDepotJSON",
             player: true,
         })
+
+        if (this.player && this.heldRooms){
+            while(this.heldRooms.length != 0){
+                let sceneType = this.heldRooms.pop();
+                let objectToAddToPlayerBlushieInventory = {
+                    scene: this,
+                    sceneType: sceneType,
+                }
+
+                this.gameManager.playerBlushieInventory.push(objectToAddToPlayerBlushieInventory);
+            }
+            // console.log(this.heldRooms);
+        }
     }
 }

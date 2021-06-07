@@ -1,5 +1,4 @@
 import createEvent from "../../lib/events.js";
-import Hub from "./roomDepots/Hub.js";
 
 // import ForestUpDownLeft from "./levels/ForestUpDownLeft.js";
 // import SkyRightLeft from "./levels/SkyRIghtLeft.js";
@@ -31,6 +30,7 @@ import CandyRightDownLeftHard from "./levels/CandyRightDownLeftHard.js";
 import SkyUpRightHard from "./levels/SkyUpRightHard.js";
 
 // room depots
+import Hub from "./roomDepots/Hub.js";
 import UpRoomDepot from "./roomDepots/UpRoomDepot.js";
 import RightRoomDepot from "./roomDepots/RightRoomDepot.js";
 import DownRoomDepot from "./roomDepots/DownRoomDepot.js";
@@ -321,10 +321,20 @@ export default class GameManager extends Phaser.Scene{
             this.scene.sendToBack(this);
         } else {
             this.setSelectedSceneIcon(this.sceneInventoryUI[0]);
+            this.turnBlushieInventoryIntoScenes();
             this.active = true;
             this.scene.pause(this.activeScene);
             this.scene.bringToTop(this);
         }
+    }
+
+    turnBlushieInventoryIntoScenes(){
+        Object.values(this.playerBlushieInventory).forEach(obj => {
+            let sceneToAdd = this.createSceneOfClass(obj.sceneType);
+            this.addSceneToInventory(sceneToAdd);
+        });
+
+        this.playerBlushieInventory = [];
     }
 
     initializeMapForGameStart(){

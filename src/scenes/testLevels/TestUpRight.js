@@ -1,6 +1,6 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
 
-export default class TestUpRightDownLeft extends BaseSceneTiled {
+export default class TestUpRight extends BaseSceneTiled {
     constructor(key, gameManager){
         super(key, gameManager);
 

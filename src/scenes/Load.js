@@ -80,16 +80,13 @@ export default class Load extends Phaser.Scene {
         this.load.image("skyTileset", "skyTileset.png");
 
         // tilemaps
-        this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
-        this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
-        // this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeft.json");
+        // this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
+        // this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
         // this.load.tilemapTiledJSON("forestRightLeftJSON", "forestRightLeftMedium.json");
-        this.load.tilemapTiledJSON("forestUpDownLeftJSON", "forestUpDownLeft.json");
-        this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
-        this.load.tilemapTiledJSON("candyUpRightLeftJSON", "candyUpRightLeft.json");
-        this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
-        this.load.tilemapTiledJSON("LavaUpDownLeftJSON", "LavaUpDownLeft.json");
-        this.load.tilemapTiledJSON("skyRightLeftJSON", "skyRightLeft.json");
+        // this.load.tilemapTiledJSON("forestUpDownLeftJSON", "forestUpDownLeft.json");
+        // this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
+        // this.load.tilemapTiledJSON("candyUpRightLeftJSON", "candyUpRightLeft.json");
+        // this.load.tilemapTiledJSON("LavaLeftRightJSON", "LavaLeftRight.json");
 
         // start
 
@@ -104,6 +101,8 @@ export default class Load extends Phaser.Scene {
         // purple
 
         // yellow
+        this.load.tilemapTiledJSON("LavaUpDownLeftJSON", "LavaUpDownLeft.json");
+        this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeft.json");
 
         // aqua
         this.load.tilemapTiledJSON("commonUpLeftHardJSON", "commonUpLeftHard.json");

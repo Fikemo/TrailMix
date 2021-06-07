@@ -1,5 +1,5 @@
-import BaseSceneTiled from "./BaseSceneTiled.js";
-import Player from"../prefabs/Player.js";
+import BaseSceneTiled from "../BaseSceneTiled.js";
+import Player from"../../prefabs/Player.js";
 
 export default class WaterDownLeft extends BaseSceneTiled{
     constructor (key,gameManager){

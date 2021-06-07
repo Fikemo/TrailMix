@@ -1,5 +1,5 @@
-import Player from "../prefabs/Player.js";
-import BaseSceneTiled from "./BaseSceneTiled.js";
+import Player from "../../prefabs/Player.js";
+import BaseSceneTiled from "../BaseSceneTiled.js";
 
 export default class NeonUpRightDownLeft extends BaseSceneTiled{
     constructor(key, gameManager){
