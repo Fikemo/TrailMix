@@ -34,13 +34,17 @@ export default class Load extends Phaser.Scene {
         this.load.image("mapIconFrame", "mapIconFrame.png");
         this.load.atlas("mapIcons", "mapIcons.png", "mapIcons.json");
         this.load.atlas("mapIcons_depot", "mapIcons_depot.png", "mapIcons.json");
+        this.load.atlas("mapIcons_start", "mapIcons_startRoom.png", "mapIcons.json");
+        this.load.atlas("mapIcons_end", "mapIcons_endRoom.png", "mapIcons.json");
         this.load.atlas("inventoryIcons", "inventoryIcons.png", "inventoryIcons.json");
         this.load.image("terminalOnScreen", "terminalOn.png");
         this.load.image("terminalOnScreenSmall", "terminalOnScreenSmall.png");
         this.load.image("terminalOnNewRoomsObtained", "terminalOnNewRoomsObtained.png");
         this.load.image("locationIndicator", "locationIndicator.png");
+        this.load.image("heldRoomsIndicator", "heldRoomsIndicator.png");
         this.load.image("healthbar", "bar.png");
         this.load.image("eraserButton", "eraserButton.png");
+        this.load.image("clearButton", "clearButton.png");
         this.load.image("mapInstructions", "mapInstructions.png");
         this.load.spritesheet("locationIndicator_spritesheet", "locationIndicator_spritesheet.png", {
             frameWidth: 24,
@@ -157,6 +161,8 @@ export default class Load extends Phaser.Scene {
 
         //Menus
         this.load.image("title", "titleArt.png");
+        this.load.image("logo","grouplogo.png");
+        this.load.image("menu","menuArt.png");
 
         // SkyUpRight 
         this.load.image("skyTileset", "skyTileset.png");

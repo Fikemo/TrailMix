@@ -10,6 +10,8 @@ export default class RightRoomDepot extends BaseSceneTiled {
 
         this.musicKey = "basic";
 
+        gameManager.createHeldRoomsIndicatorUI(this);
+
         this.sfxLvl;
         this.soundPlayed = false;
 

@@ -331,6 +331,13 @@ export default class GameManager extends Phaser.Scene{
         }
 
         if (this.playerHealth <= 0){
+
+            this.playerBlushieInventory.forEach(blushieObj => {
+                blushieObj.scene.heldRooms.push(blushieObj.sceneType);
+            });
+
+            this.playerBlushieInventory = [];
+
             this.launchSceneAt(6, 2);
         }
 
@@ -497,9 +504,32 @@ export default class GameManager extends Phaser.Scene{
                         if (cell.static){
                             this.mapUI[x][y].setTexture("mapIcons_depot");
                         }
+
+                        if (cell.key.includes("Hub")){
+                            this.mapUI[x][y].setTexture("mapIcons_start");
+                        }
+
+                        if (x == 19 && y == 4){
+                            this.mapUI[x][y].setTexture("mapIcons_end");
+                        }
                     }
                     this.mapUI[x][y].setFrame(frameName);
                 })
+            })
+        }
+
+        // held rooms indicators
+        if (this.roomDepots){
+            Object.values(this.roomDepots).forEach(room => {
+                // console.log(room);
+                if (room.heldRoomsIndicator){
+                    room.heldRoomsIndicator.setPosition(
+                        this.mapUI.position.x + (24 + 4) * room.coordinate.x,
+                        this.mapUI.position.y + (24 + 4) * room.coordinate.y,
+                    )
+
+                    room.heldRoomsIndicator.alpha = room.heldRooms.length > 0 ? 1 : 0;
+                }
             })
         }
 
@@ -688,6 +718,12 @@ export default class GameManager extends Phaser.Scene{
         this.locationIndicator.anims.play("locationIndicator");
 
         return mapUI;
+    }
+
+    createHeldRoomsIndicatorUI(scene){
+        console.log(scene);
+
+        scene.heldRoomsIndicator = this.add.image(-20,-20, "heldRoomsIndicator").setOrigin(0);
     }
 
     setMapIconFrame(icon){

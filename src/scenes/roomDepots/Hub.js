@@ -1,6 +1,7 @@
 import BaseSceneTiled from "../BaseSceneTiled.js";
 
 export default class Hub extends BaseSceneTiled{
+    
     constructor(key, gameManager){
         super(key, gameManager);
 
