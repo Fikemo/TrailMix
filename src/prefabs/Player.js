@@ -156,7 +156,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             this.invincible = true;
             this.scene.gameManager.adjustPlayerHealth(-damage);
             this.scene.time.delayedCall(1000, () => {this.invincible = false})
-            this.oofsfx.play();
+            // this.oofsfx.play();
         }
     }
 }

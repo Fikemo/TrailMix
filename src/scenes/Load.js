@@ -74,6 +74,8 @@ export default class Load extends Phaser.Scene {
             endFrame: 5
         });
 
+        this.load.image("goldenOnion", "goldenOnion.png");
+
         // enemies and hazards
         this.load.image("saw", "circularSaw.png");
         this.load.spritesheet("redEnemy", "redEnemy_spritesheet.png", {
