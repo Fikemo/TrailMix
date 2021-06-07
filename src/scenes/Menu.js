@@ -39,7 +39,7 @@ export default class Menu extends Phaser.Scene {
         //this.bgm.play();
         
         //mouse click to start the game
-        this.start = this.add.text(game.config.width/2, game.config.height/2 + 100, 'Click to Start', menuConfig).setOrigin(0.5).setInteractive();
+        this.start = this.add.image(game.config.width/2, game.config.height/2 + 100, 'start', menuConfig).setScale(0.5).setOrigin(0.5).setInteractive();
         this.start.on("pointerdown", () => {
                 // this.game.scene.scenes.forEach(scene => {
                 //     if (this.gameManager && scene.key && scene.key.includes("_")){
@@ -52,7 +52,7 @@ export default class Menu extends Phaser.Scene {
                 this.cursorClick.play();
         }, this);
         //mouse click for credits
-        this.start = this.add.text(game.config.width/2, game.config.height/2 + 200, 'Click for Credits', menuConfig).setOrigin(0.5).setInteractive();
+        this.start = this.add.image(game.config.width/2 , game.config.height/2 + 200, 'credit', menuConfig).setScale(0.5).setOrigin(0.5).setInteractive();
         this.start.on("pointerdown", () => {
                 this.scene.start('creditScene');
                 this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});

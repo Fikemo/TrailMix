@@ -164,7 +164,9 @@ export default class Load extends Phaser.Scene {
         this.load.image("title", "titleArt.png");
         this.load.image("logo","grouplogo.png");
         this.load.image("menu","menuArt.png");
-
+        this.load.image("start","buttonStart.png");
+        this.load.image("credit","buttonCredits.png");
+        this.load.image("return","buttonReturn.png");
         // SkyUpRight 
         this.load.image("skyTileset", "skyTileset.png");
         this.load.tilemapTiledJSON("skyUpRightJSON", "skyUpRight.json");
@@ -189,6 +191,7 @@ export default class Load extends Phaser.Scene {
 
         // sfx
         this.load.audio('sfx_jump', 'JumpSound.wav');
+        this.load.audio('sfx_oof', 'blushieHurt.wav');
         this.load.audio('sfx_bullet', 'gunShot3.wav');
         this.load.audio('sfx_enemy', 'enemyOof.wav');
         this.load.audio('sfx_levelsAcquired', 'levelsAcquired.wav');
