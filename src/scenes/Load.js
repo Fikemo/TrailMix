@@ -41,6 +41,7 @@ export default class Load extends Phaser.Scene {
         this.load.image("terminalOnScreenSmall", "terminalOnScreenSmall.png");
         this.load.image("terminalOnNewRoomsObtained", "terminalOnNewRoomsObtained.png");
         this.load.image("locationIndicator", "locationIndicator.png");
+        this.load.image("heldRoomsIndicator", "heldRoomsIndicator.png");
         this.load.image("healthbar", "bar.png");
         this.load.image("eraserButton", "eraserButton.png");
         this.load.image("clearButton", "clearButton.png");

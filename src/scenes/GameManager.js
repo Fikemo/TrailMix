@@ -517,6 +517,21 @@ export default class GameManager extends Phaser.Scene{
             })
         }
 
+        // held rooms indicators
+        if (this.roomDepots){
+            Object.values(this.roomDepots).forEach(room => {
+                // console.log(room);
+                if (room.heldRoomsIndicator){
+                    room.heldRoomsIndicator.setPosition(
+                        this.mapUI.position.x + (24 + 4) * room.coordinate.x,
+                        this.mapUI.position.y + (24 + 4) * room.coordinate.y,
+                    )
+
+                    room.heldRoomsIndicator.alpha = room.heldRooms.length > 0 ? 1 : 0;
+                }
+            })
+        }
+
         // TODO: update the player's health
 
         if (health){
@@ -702,6 +717,12 @@ export default class GameManager extends Phaser.Scene{
         this.locationIndicator.anims.play("locationIndicator");
 
         return mapUI;
+    }
+
+    createHeldRoomsIndicatorUI(scene){
+        console.log(scene);
+
+        scene.heldRoomsIndicator = this.add.image(-20,-20, "heldRoomsIndicator").setOrigin(0);
     }
 
     setMapIconFrame(icon){

@@ -10,6 +10,8 @@ export default class UpRoomDepot extends BaseSceneTiled {
 
         this.musicKey = "basic";
 
+        gameManager.createHeldRoomsIndicatorUI(this);
+
         this.setIcon();
     }
 
