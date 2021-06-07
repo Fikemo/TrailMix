@@ -13,6 +13,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
 
         this.JUMP_VEL = -400
+        this.jumpsfx; 
 
         this.DRAG = 1500;
 
@@ -64,6 +65,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
 
         if (this.grounded && Phaser.Input.Keyboard.JustDown(this.keySpace)){
             this.jumping = true;
+            this.jumpsfx = this.scene.sound.add("sfx_jump", {volume: 0.1});
+            this.jumpsfx.play();
             this.scene.time.delayedCall(200, () => {this.jumping = false});
         }
 

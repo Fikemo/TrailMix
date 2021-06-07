@@ -3,8 +3,7 @@
     {
      "export":
         {
-         "format":"json",
-         "target":"CandyUpDownEasy.json"
+         "format":"json"
         }
     },
  "height":18,
