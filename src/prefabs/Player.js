@@ -13,7 +13,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
 
         this.JUMP_VEL = -400
-        this.jumpsfx = this.scene.sound.add("sfx_jump", {volume: 0.1});
+        this.jumpsfx = this.scene.sound.add("sfx_jump", {volume: 0.05});
         this.oofsfx = this.scene.sound.add("sfx_oof", {volume: 0.15});
 
         this.DRAG = 1500;
