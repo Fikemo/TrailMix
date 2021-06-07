@@ -496,6 +496,14 @@ export default class GameManager extends Phaser.Scene{
                         if (cell.static){
                             this.mapUI[x][y].setTexture("mapIcons_depot");
                         }
+
+                        if (cell.key.includes("Hub")){
+                            this.mapUI[x][y].setTexture("mapIcons_start");
+                        }
+
+                        if (x == 19 && y == 4){
+                            this.mapUI[x][y].setTexture("mapIcons_end");
+                        }
                     }
                     this.mapUI[x][y].setFrame(frameName);
                 })
