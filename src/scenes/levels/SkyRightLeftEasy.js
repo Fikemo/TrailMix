@@ -1,15 +1,15 @@
 import BaseSceneTiled from "../BaseSceneTiled.js"
 
-export default class LavaUpDownLeft extends BaseSceneTiled{
+export default class SkyRightLeftEasy extends BaseSceneTiled{
     constructor(key, gameManager){
         super(key, gameManager);
 
-        this.up = true;
-        // this.right = true;
-        this.down = true;
+        // this.up = true;
+        this.right = true;
+        // this.down = true;
         this.left = true;
 
-        this.musicKey = "lava";
+        this.musicKey = "sky";
 
         this.setIcon();
     }
@@ -18,9 +18,9 @@ export default class LavaUpDownLeft extends BaseSceneTiled{
         super.create();
 
         this.createStandardLevel({
-            mapJSON: "LavaUpDownLeftJSON",
+            mapJSON: "skyRightLeftJSON",
             // backgroundImage: <background image key>
-            backgroundColor: 0x243f72,
+            backgroundColor: 0xa7f2fd,
             player: true,
         })
     }

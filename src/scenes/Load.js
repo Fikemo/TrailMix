@@ -82,7 +82,7 @@ export default class Load extends Phaser.Scene {
         // tilemaps
         this.load.tilemapTiledJSON("NeonUpRightDownLeftJSON", "NeonUpRightDownLeft.json");
         this.load.tilemapTiledJSON("waterDownLeftJSON", "waterDownLeft.json");
-        // this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeft.json");
+        this.load.tilemapTiledJSON("WaterRightLeftJSON", "WaterRightLeftMedium.json");
         // this.load.tilemapTiledJSON("forestRightLeftJSON", "forestRightLeftMedium.json");
         this.load.tilemapTiledJSON("forestUpDownLeftJSON", "forestUpDownLeft.json");
         this.load.tilemapTiledJSON("CandyUpDownJSON", "CandyUpDown.json");
