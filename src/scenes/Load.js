@@ -159,6 +159,7 @@ export default class Load extends Phaser.Scene {
         this.load.audio('sfx_jump', 'JumpSound.wav');
         this.load.audio('sfx_bullet', 'gunShot3.wav');
         this.load.audio('sfx_enemy', 'enemyOof.wav');
+        this.load.audio('sfx_levelsAcquired', 'levelsAcquired.wav');
     }
 
     create(){
