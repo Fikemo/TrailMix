@@ -28,26 +28,28 @@ export default class DownRoomDepot extends BaseSceneTiled {
 
         this.sfxLvl = this.sound.add('sfx_levelsAcquired', {volume: 0.1});
 
-        this.terminalScreenPointObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminalScreen");
-        this.terminalScreenObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminal");
-
-        this.terminalOnScreen = this.add.image(this.terminalScreenPointObj.x, this.terminalScreenPointObj.y, "terminalOnScreenSmall");
-        this.terminalOnScreen.setOrigin(0);
-
-        this.terminalOnNewRoomsObtained = this.add.image(this.terminalScreenPointObj.x, this.terminalScreenPointObj.y, "terminalOnNewRoomsObtained");
-        this.terminalOnNewRoomsObtained.setOrigin(0);
-        this.terminalOnNewRoomsObtained.alpha = 0;
-
-        this.terminalHitbox = this.physics.add.sprite(this.terminalScreenObj.x, this.terminalScreenObj.y);
-        this.terminalHitbox.setSize(this.terminalScreenObj.width, this.terminalScreenObj.height);
-        this.terminalHitbox.setOrigin(0);
-        this.terminalHitbox.body.setOffset(0);
-        this.terminalHitbox.body.setAllowGravity(false);
-        this.terminalHitbox.body.setImmovable(true);
-        console.log(this.terminalHitbox);
-
-        this.terminalOverlap = this.physics.add.overlap(this.player, this.terminalHitbox, (player, terminal) => {this.terminalOn = true});
-        this.terminalOn = false;
+        if (this.map && this.map.objects) {
+            this.terminalScreenPointObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminalScreen");
+            this.terminalScreenObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminal");
+    
+            this.terminalOnScreen = this.add.image(this.terminalScreenPointObj.x, this.terminalScreenPointObj.y, "terminalOnScreenSmall");
+            this.terminalOnScreen.setOrigin(0);
+    
+            this.terminalOnNewRoomsObtained = this.add.image(this.terminalScreenPointObj.x, this.terminalScreenPointObj.y, "terminalOnNewRoomsObtained");
+            this.terminalOnNewRoomsObtained.setOrigin(0);
+            this.terminalOnNewRoomsObtained.alpha = 0;
+    
+            this.terminalHitbox = this.physics.add.sprite(this.terminalScreenObj.x, this.terminalScreenObj.y);
+            this.terminalHitbox.setSize(this.terminalScreenObj.width, this.terminalScreenObj.height);
+            this.terminalHitbox.setOrigin(0);
+            this.terminalHitbox.body.setOffset(0);
+            this.terminalHitbox.body.setAllowGravity(false);
+            this.terminalHitbox.body.setImmovable(true);
+            console.log(this.terminalHitbox);
+    
+            this.terminalOverlap = this.physics.add.overlap(this.player, this.terminalHitbox, (player, terminal) => {this.terminalOn = true});
+            this.terminalOn = false;
+        }
 
         this.gameManager.adjustPlayerHealth(this.gameManager.playerHealthMax, true);
 

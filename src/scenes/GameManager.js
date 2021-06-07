@@ -277,6 +277,7 @@ export default class GameManager extends Phaser.Scene{
         Object.values(this.music).forEach(track => {
             track.played = false;
         });
+        this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});
 
         // inputs
         // create the input keys
@@ -599,6 +600,14 @@ export default class GameManager extends Phaser.Scene{
             }
         }, this);
 
+        this.clearIcon = this.add.sprite(632, 502, "clearButton").setOrigin(0).setInteractive();
+        this.clearIcon.on("pointerdown", () => {
+            if (this.active){
+                this.clearMap();
+                this.cursorClick.play();
+            }
+        }, this);
+
         return inventoryUI;
     }
 
@@ -886,6 +895,18 @@ export default class GameManager extends Phaser.Scene{
         //     }
         // }
         // this.uiNeedsUpdate = true;
+
+        if (this.map){
+            this.map.forEach((column, x) => {
+                column.forEach((cell, y) => {
+                    if (cell && !cell.static){
+                        this.addSceneToInventory(cell);
+                        this.map[x][y] = null;
+                        this.uiNeedsUpdate = true;
+                    }
+                })
+            })
+        }
     }
 
     //**Launch the scene at the given coordinate */
