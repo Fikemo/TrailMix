@@ -5,15 +5,20 @@ export default class Load extends Phaser.Scene {
 
     preload(){
         let loadingBar = this.add.graphics();
+
+        this.logo = this.add.image(this.scale.width / 2, this.scale.height / 2 - 64, "logo");
+
         this.load.on("progress", (value) => {
             console.log(value);
             loadingBar.clear();
             loadingBar.fillStyle(0xFFFFFF, 1);
-            loadingBar.fillRect(0,this.scale.height / 2, this.scale.width * value, 5);
+            loadingBar.fillRect(0, 640, this.scale.width * value, 5);
         })
         this.load.on("complete", () => {
             loadingBar.destroy();
-        })
+        });
+
+        this.takeAWhileText = this.add.bitmapText(260, 660, "upheaval", "This may take a while", -20, "center");
 
         // load images, spritesheets, tilesets, tilemaps, and atlases
         this.load.path = "./assets/images/";
@@ -148,12 +153,8 @@ export default class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("testJSON", "test.json");
         this.load.tilemapTiledJSON("testUpRightDownLeftJSON", "testUpRightDownLeft.json");
 
-        // fonts
-        this.load.bitmapFont("upheaval", "upheaval_0.png", "upheaval.xml");
-
         //Menus
         this.load.image("title", "titleArt.png");
-        this.load.image("logo","grouplogo.png")
 
         // SkyUpRight 
         this.load.image("skyTileset", "skyTileset.png");
@@ -301,6 +302,6 @@ export default class Load extends Phaser.Scene {
         })
 
       //  this.scene.start("creditScene");
-        this.scene.start("openingScene");
+        this.scene.start("menuScene");
     }
 }

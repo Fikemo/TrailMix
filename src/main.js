@@ -6,6 +6,7 @@
 // Emersen Lorenz
 /***************************************** */
 
+import Preload from "./scenes/Preload.js";
 import Load from './scenes/Load.js';
 import Credits from './scenes/Credits.js';
 import End from './scenes/End.js';
@@ -18,7 +19,7 @@ let config = {
     parent: "phaser-game",
     width: 768,
     height: 768,
-    scene: [Load, Opening, Credits, Menu, GameManager, End],
+    scene: [Preload, Load, Opening, Credits, Menu, GameManager, End],
     physics: {
         default: 'arcade',
         arcade: {

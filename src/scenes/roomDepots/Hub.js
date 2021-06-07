@@ -13,6 +13,8 @@ export default class Hub extends BaseSceneTiled{
 
         this.musicKey = "basic";
 
+        this.showInsctructions = true;
+
         this.setIcon();
     }
 
@@ -24,6 +26,8 @@ export default class Hub extends BaseSceneTiled{
             // backgroundImage: <background image key>
             player: true,
         });
+
+        if (this.showInsctructions) this.controlsText = this.add.bitmapText(64, 280,"upheaval", "WASD TO MOVE\nSPACE TO JUMP\nCLICK TO SHOOT", -24, "center");
 
         this.terminalOnScreen = this.add.image(384, 240, "terminalOnScreen");
 
@@ -49,6 +53,8 @@ export default class Hub extends BaseSceneTiled{
         //     console.log(y)
         //     if (this.terminalOn) this.gameManager.setActive(true)
         // });
+
+        this.showInsctructions = false;
     }
 
     update(time, delta){
