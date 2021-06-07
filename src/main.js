@@ -2,7 +2,6 @@ import Load from './scenes/Load.js';
 import Credits from './scenes/Credits.js';
 import End from './scenes/End.js';
 import Menu from './scenes/Menu.js';
-import Tutorial from './scenes/Tutorial.js'
 import GameManager from './scenes/GameManager.js';
 import Opening from './scenes/Opening.js';
 
