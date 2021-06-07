@@ -78,6 +78,11 @@ export default class GameManager extends Phaser.Scene{
         // I honestly don't know if this works the way I think it does - Finn
         this.firstInitialized = false;
 
+        // used for pointer click sound
+        this.cursorClick;
+        this.cursorErase;
+        this.cursorRoomPlaced;
+
         // TODO: This is meant to be like a list of C# style events
         this.eventCalls = {
             updateUIEvent: createEvent(),
@@ -513,6 +518,8 @@ export default class GameManager extends Phaser.Scene{
             icon.on("pointerdown", (pointer, localX, localY, event) => {
                 if (this.active){
                     this.setSelectedSceneIcon(icon);
+                    this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});
+                    this.cursorClick.play();
                 }
             }, this);
 
@@ -531,6 +538,8 @@ export default class GameManager extends Phaser.Scene{
         this.eraserIcon.on("pointerdown", () => {
             if (this.active){
                 this.activateEraser();
+                this.cursorClick = this.sound.add('sfx_cursorClick', {volume: 0.1});
+                this.cursorClick.play();
             }
         }, this);
 
@@ -621,9 +630,15 @@ export default class GameManager extends Phaser.Scene{
                 icon.coordinate = new Phaser.Math.Vector2(x, y);
                 icon.on("pointerdown", (pointer, localX, localY, event) => {
                     if (this.active){
-                        if (!this.eraserActive) this.putSelectedSceneOnMap(icon);
+                        if (!this.eraserActive) {
+                            this.putSelectedSceneOnMap(icon);
+                            this.cursorRoomPlaced = this.sound.add('sfx_roomPlaced', {volume: 0.1});
+                            this.cursorRoomPlaced.play();
+                        }
                         else {
                             this.putSceneFromMapInInventory(icon);
+                            this.cursorErase = this.sound.add('sfx_eraseClick', {volume: 0.1});
+                            this.cursorErase.play();
                         }
                     }
                 }, this);
@@ -782,7 +797,6 @@ export default class GameManager extends Phaser.Scene{
     add1RoomToInventory(){
         let sceneToAdd = this.createSceneOfClass(this.availableSceneTypes[Phaser.Math.Between(0, this.availableSceneTypes.length - 1)]);
         this.addSceneToInventory(sceneToAdd);
-        console.log("we added a new scene boi");
     }
 
     //**Remove the given scene from the inventory */
