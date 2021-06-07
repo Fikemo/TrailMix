@@ -7,6 +7,7 @@ import Opening from './scenes/Opening.js';
 
 let config = {
     type: Phaser.AUTO,
+    parent: "phaser-game",
     width: 768,
     height: 768,
     scene: [Load, Opening, Credits, Menu, GameManager, End],
