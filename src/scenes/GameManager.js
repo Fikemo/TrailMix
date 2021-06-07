@@ -618,7 +618,8 @@ export default class GameManager extends Phaser.Scene{
         // }
 
         this.healthBar = this.add.sprite(6, 586, "healthbar").setOrigin(0);
-        this.playerBlushieInventoryText = this.add.text(6, 624, "NEW ROOMS: " + this.playerBlushieInventory.length);
+        // this.playerBlushieInventoryText = this.add.text(6, 624, "NEW ROOMS: " + this.playerBlushieInventory.length);
+        this.playerBlushieInventoryText = this.add.bitmapText(6, 624, "upheaval", "NEW ROOMS: " + this.playerBlushieInventory.length, -24);
     }
 
     // Mini Map
