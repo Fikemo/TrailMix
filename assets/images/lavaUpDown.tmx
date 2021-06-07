@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="lavaUpDown.json" format="json"/>
  </editorsettings>
- <tileset firstgid="1" name="lavalevels" tilewidth="32" tileheight="32" tilecount="196" columns="14">
-  <image source="lavalevels.png" trans="000000" width="448" height="448"/>
+ <tileset firstgid="1" name="lavaTileset" tilewidth="32" tileheight="32" tilecount="196" columns="14">
+  <image source="lavaTileset.png" trans="000000" width="448" height="448"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>

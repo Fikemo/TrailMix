@@ -224,11 +224,11 @@
         {
          "columns":14,
          "firstgid":1,
-         "image":"lavalevels.png",
+         "image":"lavaTileset.png",
          "imageheight":448,
          "imagewidth":448,
          "margin":0,
-         "name":"lavalevels",
+         "name":"lavaTileset",
          "spacing":0,
          "tilecount":196,
          "tileheight":32,
