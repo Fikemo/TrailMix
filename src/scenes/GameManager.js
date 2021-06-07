@@ -18,9 +18,13 @@ import ForestUpDownLeftEasy from "./levels/ForestUpDownLeftEasy.js";
 import SkyRightLeftEasy from "./levels/SkyRightLeftEasy.js";
 
 // maroon
-
+import CandyUpDownEasy from "./levels/CandyUpDownEasy.js";
+import ForestDownLeftEasy from "./levels/ForestDownLeftEasy.js";
+import LavaUpRightEasy from "./levels/LavaUpRightEasy.js";
 // blue
-
+import WaterUpRightDownMedium from "./levels/WaterUpRightDownMedium.js";
+import NeonRightLeftMedium from "./levels/NeonRightLeftMedium.js";
+import SkyRightDownLeftMedium from "./levels/SkyRightDownLeftMedium.js";
 // purple
 import SkyUpDownMedium from "./levels/SkyUpDownMedium.js";
 import ForestUpDownMedium from "./levels/ForestUpDownMedium.js";
@@ -131,15 +135,15 @@ export default class GameManager extends Phaser.Scene{
                 ],
 
                 maroon: [
-                    TestUpRight,
-                    TestUpDown,
-                    TestDownLeft
+                    LavaUpRightEasy,
+                    CandyUpDownEasy,
+                    ForestDownLeftEasy,
                 ],
 
                 blue: [
-                    TestRightLeft,
-                    TestUpRightDown,
-                    TestRightDownLeft
+                    NeonRightLeftMedium,
+                    WaterUpRightDownMedium,
+                    SkyRightDownLeftMedium,
                 ],
 
                 purple: [
