@@ -163,7 +163,9 @@ export default class Load extends Phaser.Scene {
         this.load.image("title", "titleArt.png");
         this.load.image("logo","grouplogo.png");
         this.load.image("menu","menuArt.png");
-
+        this.load.image("start","buttonStart.png");
+        this.load.image("credit","buttonCredits.png");
+        this.load.image("return","buttonReturn.png");
         // SkyUpRight 
         this.load.image("skyTileset", "skyTileset.png");
         this.load.tilemapTiledJSON("skyUpRightJSON", "skyUpRight.json");
