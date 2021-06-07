@@ -522,6 +522,10 @@ export default class GameManager extends Phaser.Scene{
     createSceneInventoryUI(width = 5, x = 34, y = 72, iconSize = 48, paddingX = 48, paddingY = 48){
         if (!this.sceneInventory) return console.error("NO SCENE INVENTORY DEFINED!");
 
+        // add instruction text
+        // this.add.bitmapText(640, 60, "upheaval", "Click on a ROOM to the left to select it. Click on the MAP below to place the ROOM", )
+        this.add.image(0,0, "mapInstructions").setOrigin(0);
+
         let inventoryUI = [];
         inventoryUI.width = width;
         inventoryUI.position = new Phaser.Math.Vector2(x, y);
