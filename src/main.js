@@ -9,17 +9,15 @@
 import Preload from "./scenes/Preload.js";
 import Load from './scenes/Load.js';
 import Credits from './scenes/Credits.js';
-import End from './scenes/End.js';
 import Menu from './scenes/Menu.js';
 import GameManager from './scenes/GameManager.js';
-import Opening from './scenes/Opening.js';
 
 let config = {
     type: Phaser.AUTO,
     parent: "phaser-game",
     width: 768,
     height: 768,
-    scene: [Preload, Load, Credits, Menu, GameManager, End],
+    scene: [Preload, Load, Credits, Menu, GameManager],
     physics: {
         default: 'arcade',
         arcade: {

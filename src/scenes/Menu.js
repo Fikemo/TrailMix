@@ -35,8 +35,8 @@ export default class Menu extends Phaser.Scene {
         //this.blushie = new Blushie(this, this.defaultSpawnObject.x + 500, this.defaultSpawnObject.y, "blushie");
         //this.anims.play("player_jump", true);
 
-        this.bgm = this.sound.add('startMenu_bgm', {volume: 0.1});
-        //this.bgm.play();
+        // this.bgm = this.sound.add('startMenu_bgm', {volume: 0.1});
+        // this.bgm.play();
         
         //mouse click to start the game
         this.start = this.add.image(game.config.width/2, game.config.height/2 + 100, 'start', menuConfig).setScale(0.5).setOrigin(0.5).setInteractive();
