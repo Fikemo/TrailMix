@@ -29,7 +29,10 @@ export default class DownRoomDepot extends BaseSceneTiled {
         this.sfxLvl = this.sound.add('sfx_levelsAcquired', {volume: 0.1});
 
         if (this.map && this.map.objects) {
-            this.terminalScreenPointObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminalScreen");
+            let terminalLayer = this.map.objects.find(obj => obj.name === "terminalObject");
+            if (!terminalLayer) return;
+            
+            this.terminalScreenPointObj = terminalLayer.objects.find(obj => obj.name === "terminalScreen");
             this.terminalScreenObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminal");
     
             this.terminalOnScreen = this.add.image(this.terminalScreenPointObj.x, this.terminalScreenPointObj.y, "terminalOnScreenSmall");
