@@ -18,7 +18,7 @@ export default class NeonLeftRightMedium extends BaseSceneTiled{
         this.createStandardLevel({
             mapJSON: "neonRightLeftMediumJSON",
             // backgroundImage: <background image key>
-            backgroundColor: 0xf0e17,
+            backgroundColor: "#38053d",
             player: true,
         })
     }
