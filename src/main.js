@@ -29,6 +29,9 @@ let config = {
             // debug: true,
         }
     },
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
+    },
     roundPixels: true,
     antialias: false,
 }
