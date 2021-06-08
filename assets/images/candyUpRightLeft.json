@@ -3,7 +3,8 @@
     {
      "export":
         {
-         "format":"json"
+         "format":"json",
+         "target":"..\/Documents\/GitHub\/TrailMix\/assets\/images\/candyUpRightLeft.json"
         }
     },
  "height":18,
@@ -219,7 +220,7 @@
         {
          "columns":14,
          "firstgid":1,
-         "image":"..\/Documents\/GitHub\/TrailMix\/assets\/images\/candyTileset.png",
+         "image":"candyTileset.png",
          "imageheight":448,
          "imagewidth":448,
          "margin":0,
