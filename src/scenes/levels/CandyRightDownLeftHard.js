@@ -18,7 +18,7 @@ export default class CandyRightDownLeftHard extends BaseSceneTiled{
 
         this.createStandardLevel({
             mapJSON: "candyRightDownLeftHardJSON",
-            backgroundColor: 0x243f72,
+            backgroundColor: "#B7F6F6",
             player: true,
         })
     }
