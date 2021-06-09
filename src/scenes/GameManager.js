@@ -759,6 +759,7 @@ export default class GameManager extends Phaser.Scene{
         let y = icon.coordinate.y;
 
         let selectedScene = this.map[x][y];
+        console.log(this.selectedScene);
         if (selectedScene != null && !selectedScene.static && selectedScene != this.activeScene){
             console.log(selectedScene);
             this.addSceneToInventory(selectedScene);

@@ -282,51 +282,49 @@ export default class BaseSceneTiled extends BaseScene{
                 if (Math.abs(xOffset) != Math.abs(yOffset)){
                     let adjacentScene = this.gameManager.getSceneAtLocal(this, xOffset, yOffset);
                     // console.log(adjacentScene);
-                    if (adjacentScene){
-                        if (this.up && yOffset == -1){
-                            // console.log(this.doors.upDoor);
-                            if (adjacentScene.down){
-                                // this.doors.upDoor.colliders.player.active = false;
-                                this.setColliders(this.doors.upDoor, false, "player");
-                                this.doors.upDoor.tilemapLayer.alpha = 0;
-                            } else {
-                                this.setColliders(this.doors.upDoor, true, "player");
-                                this.doors.upDoor.tilemapLayer.alpha = 1;
-                            }
+                    if (this.up && yOffset == -1){
+                        // console.log(this.doors.upDoor);
+                        if (adjacentScene && adjacentScene.down){
+                            // this.doors.upDoor.colliders.player.active = false;
+                            this.setColliders(this.doors.upDoor, false, "player");
+                            this.doors.upDoor.tilemapLayer.alpha = 0;
+                        } else {
+                            this.setColliders(this.doors.upDoor, true, "player");
+                            this.doors.upDoor.tilemapLayer.alpha = 1;
                         }
+                    }
 
 
-                        if (this.right && xOffset == 1){
-                            // console.log(this.doors.rightDoor);
-                            if (adjacentScene.left){
-                                this.setColliders(this.doors.rightDoor, false, "player");
-                                this.doors.rightDoor.tilemapLayer.alpha = 0;
-                            } else {
-                                this.setColliders(this.doors.rightDoor, true, "player");
-                                this.doors.rightDoor.tilemapLayer.alpha = 1;
-                            }
+                    if (this.right && xOffset == 1){
+                        // console.log(this.doors.rightDoor);
+                        if (adjacentScene && adjacentScene.left){
+                            this.setColliders(this.doors.rightDoor, false, "player");
+                            this.doors.rightDoor.tilemapLayer.alpha = 0;
+                        } else {
+                            this.setColliders(this.doors.rightDoor, true, "player");
+                            this.doors.rightDoor.tilemapLayer.alpha = 1;
                         }
+                    }
 
-                        if (this.down && yOffset == 1){
-                            // console.log(this.doors.downDoor);
-                            if (adjacentScene.up){
-                                this.setColliders(this.doors.downDoor, false, "player");
-                                this.doors.downDoor.tilemapLayer.alpha = 0;
-                            } else {
-                                this.setColliders(this.doors.downDoor, true, "player");
-                                this.doors.downDoor.tilemapLayer.alpha = 1;
-                            }
+                    if (this.down && yOffset == 1){
+                        // console.log(this.doors.downDoor);
+                        if (adjacentScene && adjacentScene.up){
+                            this.setColliders(this.doors.downDoor, false, "player");
+                            this.doors.downDoor.tilemapLayer.alpha = 0;
+                        } else {
+                            this.setColliders(this.doors.downDoor, true, "player");
+                            this.doors.downDoor.tilemapLayer.alpha = 1;
                         }
+                    }
 
-                        if (this.left && xOffset == -1){
-                            // console.log(this.doors.leftDoor);
-                            if (adjacentScene.right){
-                                this.setColliders(this.doors.leftDoor, false, "player");
-                                this.doors.leftDoor.tilemapLayer.alpha = 0;
-                            } else {
-                                this.setColliders(this.doors.leftDoor, true, "player");
-                                this.doors.leftDoor.tilemapLayer.alpha = 1;
-                            }
+                    if (this.left && xOffset == -1){
+                        // console.log(this.doors.leftDoor);
+                        if (adjacentScene && adjacentScene.right){
+                            this.setColliders(this.doors.leftDoor, false, "player");
+                            this.doors.leftDoor.tilemapLayer.alpha = 0;
+                        } else {
+                            this.setColliders(this.doors.leftDoor, true, "player");
+                            this.doors.leftDoor.tilemapLayer.alpha = 1;
                         }
                     }
                 }
