@@ -18,7 +18,7 @@ export default class BasicDownLeft extends BaseSceneTiled{
         super.create();
 
         this.createStandardLevel({mapJSON: "basicDownLeftJSON"});
-        console.log(this.map);
+        // console.log(this.map);
 
         let ps = this.calculatePlayerSpawnPoint();
 
@@ -33,7 +33,7 @@ export default class BasicDownLeft extends BaseSceneTiled{
         this.graphics = this.add.graphics();
         this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
         this.enemyPathObj = this.map.objects[1].objects[0];
-        console.log(this.enemyPathObj);
+        // console.log(this.enemyPathObj);
         this.enemyPathObj.polyline.forEach(pos => {
             pos.x += this.enemyPathObj.x;
             pos.y += this.enemyPathObj.y;
@@ -43,7 +43,7 @@ export default class BasicDownLeft extends BaseSceneTiled{
             if (index == 0) return;
             this.enemyPath.lineTo(pos.x, pos.y);
         })
-        console.log(this.enemyPathObj.properties);
+        // console.log(this.enemyPathObj.properties);
 
         this.saw = new Saw(this, this.enemyPathObj.polyline[0].x, this.enemyPathObj.polyline[0].y);
 
@@ -57,7 +57,7 @@ export default class BasicDownLeft extends BaseSceneTiled{
         })
 
         this.gun = this.add.sprite(this.player.x, this.player.y, "mouth").setOrigin(0);
-        console.log(this.gun);
+        // console.log(this.gun);
         this.target = 0;
         this.canShoot = true;
         this.input.on("pointerdown", (pointer) => {

@@ -28,7 +28,7 @@ export default class DownRoomDepot extends BaseSceneTiled {
 
         this.sfxLvl = this.sound.add('sfx_levelsAcquired', {volume: 0.1});
 
-        console.log(this.map);
+        // console.log(this.map);
 
         this.terminalScreenPointObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminalScreen");
         this.terminalScreenObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminal");
@@ -46,7 +46,7 @@ export default class DownRoomDepot extends BaseSceneTiled {
         this.terminalHitbox.body.setOffset(0);
         this.terminalHitbox.body.setAllowGravity(false);
         this.terminalHitbox.body.setImmovable(true);
-        console.log(this.terminalHitbox);
+        // console.log(this.terminalHitbox);
 
         this.terminalOverlap = this.physics.add.overlap(this.player, this.terminalHitbox, (player, terminal) => {this.terminalOn = true});
         this.terminalOn = false;

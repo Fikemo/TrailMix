@@ -351,9 +351,10 @@ export default class GameManager extends Phaser.Scene{
 
     update(time, delta){
         //FIXME: Use ESC to access the inventory from any level
-        if (Phaser.Input.Keyboard.JustDown(this.keyEscape)){
-            this.setActive(this.active);
-        } else if (Phaser.Input.Keyboard.JustDown(this.keyW) && this.active){
+        // if (Phaser.Input.Keyboard.JustDown(this.keyEscape)){
+        //     this.setActive(this.active);
+        // } else
+        if (Phaser.Input.Keyboard.JustDown(this.keyW) && this.active){
             this.setActive(this.active);
         }
 

@@ -44,7 +44,7 @@ export default class RightRoomDepot extends BaseSceneTiled {
         this.terminalHitbox.body.setOffset(0);
         this.terminalHitbox.body.setAllowGravity(false);
         this.terminalHitbox.body.setImmovable(true);
-        console.log(this.terminalHitbox);
+        // console.log(this.terminalHitbox);
 
         this.terminalOverlap = this.physics.add.overlap(this.player, this.terminalHitbox, (player, terminal) => {this.terminalOn = true});
         this.terminalOn = false;

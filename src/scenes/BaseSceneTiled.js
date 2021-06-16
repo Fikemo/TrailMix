@@ -22,7 +22,7 @@ export default class BaseSceneTiled extends BaseScene{
         super.create();
 
         this.keyS = this.gameManager.keyS;
-        console.log(this.keyS);
+        // console.log(this.keyS);
 
         this.keyS.on("down", () => {this.turnOffPlatformColliders()});
     }
@@ -100,8 +100,8 @@ export default class BaseSceneTiled extends BaseScene{
     }
 
     testBulletCollision(bullet, tile){
-        console.log(bullet);
-        console.log(tile);
+        // console.log(bullet);
+        // console.log(tile);
         if (tile.layer.name != "platforms"){
             bullet.destroy();
         }
@@ -171,7 +171,7 @@ export default class BaseSceneTiled extends BaseScene{
         // if any layers listed in ...layers
         if (layers.length != 0){ // layers isn't empty
             layers.forEach(layerName => {
-                console.log(newLayer);
+                // console.log(newLayer);
                 let newLayer = map.createLayer(layerName,tileset);
                 newLayer.setCollisionByProperty({collides: true});
                 layersObj[layerName] = {
@@ -457,7 +457,7 @@ export default class BaseSceneTiled extends BaseScene{
             }
         });
 
-        console.log(this.layers);
+        // console.log(this.layers);
     }
 
     checkPlayerExit(){
@@ -524,7 +524,7 @@ export default class BaseSceneTiled extends BaseScene{
     }
 
     spawnEnemy(spawnObject){
-        console.log(spawnObject);
+        // console.log(spawnObject);
 
         let newEnemy;
         switch(spawnObject.name){
@@ -548,7 +548,7 @@ export default class BaseSceneTiled extends BaseScene{
     }
 
     spawnBlushie(spawnObject) {
-        console.log(spawnObject);
+        // console.log(spawnObject);
         let newBlushie;
         switch(spawnObject.name){
             case "blush": 
@@ -556,7 +556,7 @@ export default class BaseSceneTiled extends BaseScene{
         }
         if (newBlushie) {
             this.blushieGroup.add(newBlushie);
-            console.log(this.blushieGroup);
+            // console.log(this.blushieGroup);
         }
     }
 

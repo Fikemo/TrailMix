@@ -33,7 +33,7 @@ export default class Hub extends BaseSceneTiled{
         this.terminalOnScreen = this.add.image(384, 240, "terminalOnScreen");
 
         this.terminalObj = this.map.objects.find(obj => obj.name === "terminalObject").objects.find(obj => obj.name === "terminal");
-        console.log(this.terminalObj);
+        // console.log(this.terminalObj);
 
         this.terminalHitbox = this.physics.add.sprite(this.terminalObj.x, this.terminalObj.y);
         this.terminalHitbox.setSize(this.terminalObj.width, this.terminalObj.height);
@@ -41,7 +41,7 @@ export default class Hub extends BaseSceneTiled{
         this.terminalHitbox.body.setOffset(0);
         this.terminalHitbox.body.setAllowGravity(false);
         this.terminalHitbox.body.setImmovable(true);
-        console.log(this.terminalHitbox);
+        // console.log(this.terminalHitbox);
 
         this.terminalOverlap = this.physics.add.overlap(this.player, this.terminalHitbox, (player, terminal) => {this.terminalOn = true});
         this.terminalOn = false;
